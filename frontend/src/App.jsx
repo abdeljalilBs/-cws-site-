@@ -1,12 +1,24 @@
-import Hero from './components/Hero';
-
+import Navbar from './components/accueil/Navbar';
+import Hero from './components/accueil/Hero';
+import FloatingControls from './components/accueil/FloatingControls';
+import ClubSection from './components/accueil/ClubSection';
+import AboutSection from './components/accueil/AboutSection';
+import TestimonialsSection from './components/accueil/TestimonialsSection';
+import CoachesSection from './components/accueil/CoachesSection';
+import CtaSection from './components/accueil/CtaSection';
+import Footer from './components/accueil/Footer';
 function App() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans overflow-x-hidden">
-      {/* Section Vidéo Immersive (Page d'accueil) */}
+    <div className="bg-[#0a0a0a] min-h-screen">
+      <Navbar />
+      <FloatingControls />
       <Hero />
-      
-      {/* On ajoutera les autres sections ici plus tard (Philosophie, Offres, etc.) */}
+      <ClubSection />
+      <AboutSection />
+      <TestimonialsSection />
+      <CoachesSection />
+      <CtaSection />
+    <Footer />
     </div>
   );
 }
