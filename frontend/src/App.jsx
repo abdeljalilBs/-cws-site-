@@ -12,6 +12,7 @@ const Accueil = lazy(() => import('./pages/Accueil'));
 const ClubPage = lazy(() => import('./components/club/ClubPage'));
 const TarifsPage = lazy(() => import('./components/tarifs/TarifsPage'));
 const PlanningsPage = lazy(() => import('./components/plannings/PlanningsPage'));
+const ActivitesPage = lazy(() => import('./components/activites/ActivitesPage'));
 
 // ─── Loader pendant le chargement d'une page ──────────────────────
 const PageLoader = () => (
@@ -54,6 +55,7 @@ function App() {
             <Route path="/club" element={<ClubPage />} />
             <Route path="/tarifs" element={<TarifsPage />} />
             <Route path="/plannings" element={<PlanningsPage />} />
+            <Route path="/activites" element={<ActivitesPage />} />
           </Routes>
         </Suspense>
 
