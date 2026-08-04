@@ -22,16 +22,27 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative w-full h-screen overflow-hidden bg-[#0a0a0a]">
+    <section id="hero" className="relative w-full h-screen overflow-hidden bg-[#0a0a0a]">
 
       {/* ══════════════════════════════════════════
-          VIDÉO DE FOND
+          VIDÉO DE FOND — OPTIMISÉE
+          - preload="metadata" : ne charge pas toute la vidéo d'un coup
+          - poster : image placeholder pendant le chargement (évite écran noir)
+          - playsInline + muted : autoplay sans bloquer
       ══════════════════════════════════════════ */}
       <video
         id="hero-video"
-        autoPlay loop muted playsInline
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        poster="/hero-poster.jpg"
         className="absolute top-0 left-0 w-full h-full object-cover"
       >
+        {/* Format WebM en priorité (plus léger) — si tu as le fichier */}
+        <source src="/hero-video.webm" type="video/webm" />
+        {/* Fallback MP4 */}
         <source src="/hero-video.mp4" type="video/mp4" />
         Ton navigateur ne supporte pas la vidéo.
       </video>
@@ -48,7 +59,7 @@ const Hero = () => {
       ══════════════════════════════════════════ */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
 
-        {/* ── Citation ─ */}
+        {/* ── Citation  */}
         <motion.p
           variants={fadeUp}
           initial="hidden"
@@ -108,7 +119,7 @@ const Hero = () => {
           custom={3}
         >
           <a
-            href="#tarifs"
+            href="/tarifs"
             className="group relative inline-flex items-center justify-center rounded-full cursor-pointer"
           >
             {/* Couche 1 : Glow externe flouté au hover */}

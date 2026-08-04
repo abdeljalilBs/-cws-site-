@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { motion, useInView, useReducedMotion } from 'framer-motion';
+import { motion, useInView, useReducedMotion, AnimatePresence } from 'framer-motion';
 import { LuArrowRight } from 'react-icons/lu';
 
 // ─── Import des photos des coachs ────────────────────────────
@@ -8,6 +8,38 @@ import marionImg from "../../assets/MARION.png";
 import bilalImg from "../../assets/BILAL.png";
 
 const DISPLAY = "'Anton', sans-serif";
+
+/* ─── Composant LazyImage (fade-in + placeholder au chargement) ─── */
+const LazyImage = ({ src, alt, className, imgClassName }) => {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div className={`relative overflow-hidden ${className || ''}`}>
+      {/* Placeholder crème pulsé pendant le chargement */}
+      <AnimatePresence>
+        {!loaded && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="absolute inset-0 bg-[#d4cfc7]/15 animate-pulse"
+          />
+        )}
+      </AnimatePresence>
+
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"          // ⭐ lazy loading natif
+        decoding="async"        // ⭐ décodage asynchrone
+        onLoad={() => setLoaded(true)}
+        className={`w-full h-full transition-all duration-700 ease-out ${
+          loaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-105 blur-md'
+        } ${imgClassName || ''}`}
+      />
+    </div>
+  );
+};
 
 const coaches = [
   {
@@ -66,16 +98,17 @@ const CoachCard = ({ coach, index, isInView, reduce }) => {
           className="absolute bottom-[6%] right-[8%] z-[2] h-[82%] w-[78%] rounded-xl border border-[#d4cfc7]"
         />
 
-        {/* Photo principale — object-cover + object-top pour ne pas couper la tête */}
+        {/* Photo principale — LAZY LOADING */}
         <motion.div
           animate={isHovered && !reduce ? { y: -10, scale: 1.02 } : { y: 0, scale: 1 }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="group absolute left-[6%] top-[4%] z-[3] h-[84%] w-[80%] overflow-hidden rounded-xl shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)]"
         >
-          <img
+          <LazyImage
             src={coach.image}
             alt={coach.name}
-            className="h-full w-full object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-105"
+            className="h-full w-full"
+            imgClassName="object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-105"
           />
           {/* Overlay dégradé bas sur la photo */}
           <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#0a0a0a]/60 to-transparent" />
@@ -168,7 +201,7 @@ const CoachesSection = () => {
   const reduce = useReducedMotion();
 
   return (
-    <section ref={ref} className="relative w-full overflow-hidden bg-white py-24 md:py-32">
+    <section id="coachs" ref={ref} className="relative w-full overflow-hidden bg-white py-24 md:py-32">
       {/* ── Dégradé haut + grain ── */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-[#f5f4f1] to-transparent" />
       <div

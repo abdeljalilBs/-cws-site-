@@ -10,6 +10,38 @@ import coachingImg from '../../assets/COACHING_PERSONNALISÉ.png';
 import coursImg from '../../assets/COURS_COLLECTIFS.png';
 import hygieneImg from "../../assets/L'HYGIÈNE.png";
 
+/* ─── Composant LazyImage (fade-in + placeholder au chargement) ─── */
+const LazyImage = ({ src, alt, className, imgClassName }) => {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div className={`relative overflow-hidden ${className || ''}`}>
+      {/* Placeholder crème pulsé pendant le chargement */}
+      <AnimatePresence>
+        {!loaded && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="absolute inset-0 bg-[#d4cfc7]/15 animate-pulse"
+          />
+        )}
+      </AnimatePresence>
+
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"          // ⭐ lazy loading natif
+        decoding="async"        // ⭐ décodage asynchrone
+        onLoad={() => setLoaded(true)}
+        className={`w-full h-full transition-all duration-700 ease-out ${
+          loaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-105 blur-md'
+        } ${imgClassName || ''}`}
+      />
+    </div>
+  );
+};
+
 const ClubSection = () => {
   const scrollRef = useRef(null);
   const sectionRef = useRef(null);
@@ -344,11 +376,12 @@ const ClubSection = () => {
                 draggable={false}
               >
                 <div className="relative w-full h-52 sm:h-56 md:h-60 overflow-hidden">
-                  <img
+                  {/* ⭐ LAZY LOADING sur l'image de la carte */}
+                  <LazyImage
                     src={card.image}
                     alt={card.title}
-                    className={`w-full h-full object-cover ${isActive ? 'transition-transform duration-700 ease-out group-hover:scale-110' : ''}`}
-                    draggable={false}
+                    className="w-full h-full"
+                    imgClassName={`object-cover ${isActive ? 'transition-transform duration-700 ease-out group-hover:scale-110' : ''}`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-60" />
                 </div>
