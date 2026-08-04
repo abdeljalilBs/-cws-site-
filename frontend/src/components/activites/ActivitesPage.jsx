@@ -6,7 +6,7 @@ import {
   LuZap, LuBike, LuAward, LuSwords, LuTimer
 } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
-
+import LazyImage from "../LazyImage";
 // ─── Photos des cours ────────────────────────────────────────
 // Intensité 1
 import gymDosImg from '../../assets/GYM_DOS.png';
@@ -36,7 +36,7 @@ const levels = [
   { id: 3, label: 'Intensité 3', desc: 'Haute intensité & cardio', percent: 100, icon: <LuFlame size={20} />, accent: '#d4af37', glow: 'rgba(212,175,55,0.22)' },
 ];
 
-/* ─── Tous les cours (TOUTES les photos intégrées) ──────────── */
+/* ─── Tous les cours ────────────────────────────────────────── */
 const courses = [
   // ── INTENSITÉ 1 ──
   { level: 1, name: 'Gym Dos', icon: <LuMove size={30} strokeWidth={1.2} />, image: gymDosImg, short: 'Renforcez votre dos en douceur, inspiré du Yoga et du Pilates.', desc: "Inspirée du « Yoga » et du « Pilates », la Gym Dos vous permettra de renforcer en douceur vos muscles afin d'être plus fort.", duration: '45min', accessories: 'Serviette, chaussures propres et bouteille d\'eau', public: 'Pour tout public' },
@@ -88,7 +88,7 @@ const IntensityGauge = ({ percent, accent, isVisible }) => {
   );
 };
 
-/* ─── Carte cours ───────────────────────────────────────────── */
+/* ─── Carte cours (LazyImage + expandable) ──────────────────── */
 const CourseCard = ({ course, index, isVisible, accent, expanded, onToggle }) => {
   return (
     <motion.div
@@ -104,19 +104,23 @@ const CourseCard = ({ course, index, isVisible, accent, expanded, onToggle }) =>
         style={{ backgroundImage: `linear-gradient(to right, transparent, ${accent}66, transparent)` }}
       />
 
+      {/* ══════════════════════════════════════════
+          ZONE VISUELLE — LazyImage (photo) ou icône (fallback)
+      ══════════════════════════════════════════ */}
       <div className="relative h-48 overflow-hidden bg-[#111]">
         {course.image ? (
-          <>
-            <img
+          // --- PHOTO avec LazyImage (lazy + fade-in crème) ---
+          <div className="relative h-full w-full">
+            <LazyImage
               src={course.image}
               alt={course.name}
-              loading="lazy"
-              decoding="async"
-              className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              className="h-full w-full"
+              imgClassName="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent" />
-          </>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent" />
+          </div>
         ) : (
+          // --- ICÔNE (fallback) ---
           <div className={`h-full w-full flex items-center justify-center relative ${
             course.level === 1 ? 'bg-gradient-to-br from-[#d4cfc7]/[0.08] to-transparent' :
             course.level === 2 ? 'bg-gradient-to-br from-[#b3a996]/[0.10] to-transparent' :
@@ -135,6 +139,9 @@ const CourseCard = ({ course, index, isVisible, accent, expanded, onToggle }) =>
         )}
       </div>
 
+      {/* ══════════════════════════════════════════
+          CONTENU TEXTE
+      ══════════════════════════════════════════ */}
       <div className="relative p-6 md:p-7">
         <div className="flex items-start justify-between gap-4 mb-3">
           <h3
@@ -247,28 +254,28 @@ const ActivitesPage = () => {
       />
 
       {/* ══════════════════════════════════════════
-          1. HERO — NOUVEAU DESIGN (centré, immersif, WOW)
+          1. HERO — LazyImage eager (priorité + fade-in, pas de flash)
       ══════════════════════════════════════════ */}
       <section ref={heroRef} className="relative w-full min-h-[92vh] flex items-center justify-center overflow-hidden">
-        {/* Image de fond */}
         <motion.div
           initial={{ scale: 1.15 }}
           animate={heroVisible ? { scale: 1 } : {}}
           transition={{ duration: 2, ease: 'easeOut' }}
           className="absolute inset-0 z-0"
         >
-          <img src="/COURS_COLLECTIFS.png" alt="Cours collectifs CWS" className="w-full h-full object-cover opacity-45" onError={(e) => e.target.style.display='none'} />
+          <LazyImage
+            src="/COURS_COLLECTIFS.png"
+            alt="Cours collectifs CWS"
+            eager
+            className="w-full h-full opacity-45"
+            imgClassName="object-cover"
+          />
         </motion.div>
-        {/* Overlays */}
         <div className="absolute inset-0 z-[1] bg-[#0a0a0a]/70" />
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#0a0a0a]/70 via-[#0a0a0a]/40 to-[#0a0a0a]" />
-        {/* Halo central */}
         <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full bg-[#d4cfc7]/[0.06] blur-[130px] z-[2]" />
 
-        {/* Contenu CENTRÉ */}
         <div className="relative z-10 mx-auto max-w-[1100px] w-full px-6 sm:px-10 lg:px-16 pt-28 pb-24 flex flex-col items-center text-center">
-
-          {/* #TrainBetter — grand élément décoratif */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={heroVisible ? { opacity: 1, y: 0 } : {}}
@@ -279,7 +286,6 @@ const ActivitesPage = () => {
             #TrainBetter
           </motion.p>
 
-          {/* Titre géant centré */}
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={heroVisible ? { opacity: 1, y: 0 } : {}}
@@ -291,7 +297,6 @@ const ActivitesPage = () => {
             <span className="text-white block">collectifs</span>
           </motion.h1>
 
-          {/* Description centrée */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={heroVisible ? { opacity: 1, y: 0 } : {}}
@@ -301,7 +306,6 @@ const ActivitesPage = () => {
             Chez CWS, retrouvez plus de 37 cours variés avec des coachs diplômés et qualifiés pour corriger vos mouvements et pour vous donner l'énergie nécessaire afin d'atteindre vos objectifs.
           </motion.p>
 
-          {/* 3 points forts en PILLS horizontales */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={heroVisible ? { opacity: 1, y: 0 } : {}}
@@ -313,10 +317,7 @@ const ActivitesPage = () => {
               "Nombre de membres limité",
               "Matériel haut de gamme",
             ].map((point, i) => (
-              <div
-                key={i}
-                className="flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-sm px-5 py-2.5"
-              >
+              <div key={i} className="flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-sm px-5 py-2.5">
                 <span className="flex h-2 w-2 flex-shrink-0 items-center justify-center rounded-full bg-[#d4cfc7]" />
                 <span className="text-xs sm:text-sm font-medium tracking-wide text-white/75">{point}</span>
               </div>
@@ -324,7 +325,6 @@ const ActivitesPage = () => {
           </motion.div>
         </div>
 
-        {/* Indicateur de scroll */}
         <motion.a
           href="#selecteur"
           initial={{ opacity: 0 }}
@@ -332,10 +332,7 @@ const ActivitesPage = () => {
           transition={{ delay: 1.2, duration: 1 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 group cursor-pointer"
         >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
+          <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
             <LuChevronDown size={20} className="text-white/30 group-hover:text-[#d4cfc7] transition-colors duration-500" />
           </motion.div>
         </motion.a>
@@ -434,32 +431,32 @@ const ActivitesPage = () => {
             })}
           </motion.div>
 
-{/* Grille des Cours — dernière ligne centrée */}
-<div className="flex flex-wrap justify-center gap-5">
-  <AnimatePresence mode="wait">
-    <motion.div
-      key={activeLevel}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
-      className="contents"
-    >
-      {filteredCourses.map((course, i) => (
-        <div key={course.name} className="w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.84rem)]">
-          <CourseCard
-            course={course}
-            index={i}
-            isVisible={selectorVisible}
-            accent={currentLevel.accent}
-            expanded={expandedCard === course.name}
-            onToggle={() => setExpandedCard(expandedCard === course.name ? null : course.name)}
-          />
-        </div>
-      ))}
-    </motion.div>
-  </AnimatePresence>
-</div>
+          {/* Grille des Cours — flexbox + dernière ligne centrée + LazyImage */}
+          <div className="flex flex-wrap justify-center gap-5">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeLevel}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="contents"
+              >
+                {filteredCourses.map((course, i) => (
+                  <div key={course.name} className="w-full sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.84rem)]">
+                    <CourseCard
+                      course={course}
+                      index={i}
+                      isVisible={selectorVisible}
+                      accent={currentLevel.accent}
+                      expanded={expandedCard === course.name}
+                      onToggle={() => setExpandedCard(expandedCard === course.name ? null : course.name)}
+                    />
+                  </div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
 
           <motion.p
             initial={{ opacity: 0 }}
