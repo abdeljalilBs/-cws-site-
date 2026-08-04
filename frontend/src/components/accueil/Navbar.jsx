@@ -29,7 +29,7 @@ const Navbar = () => {
     { name: 'Accueil', to: '/' },
     { name: 'Le club', to: '/club' },
     { name: 'Les coachs', to: '/#coachs' },
-    { name: 'Les activités', to: '/#activites', hasDropdown: true },
+    { name: 'Les activités', to: '/activites', hasDropdown: true },
     { name: 'Les plannings', to: '/plannings' },
     { name: 'Tarifs', to: '/tarifs' },
   ];
