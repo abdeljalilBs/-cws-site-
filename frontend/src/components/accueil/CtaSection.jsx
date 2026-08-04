@@ -10,6 +10,7 @@ const CtaSection = () => {
 
   return (
     <section
+      id="tarifs"
       ref={ref}
       className="relative w-full overflow-hidden bg-white py-24 md:py-32"
     >
@@ -45,13 +46,13 @@ const CtaSection = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
             style={{ fontFamily: DISPLAY }}
-            className="mb-10 md:mb-12 text-[2.8rem] uppercase leading-[0.92] tracking-tight sm:text-6xl md:text-7xl lg:text-[6.5rem]"
+            className="mb-10 md:mb-12 text-[2rem] uppercase leading-[0.95] tracking-tight sm:text-4xl md:text-5xl lg:text-[3.8rem]"
           >
             <span
               className="block"
               style={{
                 color: 'transparent',
-                WebkitTextStroke: '2px #0a0a0a',
+                WebkitTextStroke: '1.5px #0a0a0a',
               }}
             >
               Coach Wellness
@@ -60,7 +61,7 @@ const CtaSection = () => {
               className="block"
               style={{
                 color: 'transparent',
-                WebkitTextStroke: '2px #0a0a0a',
+                WebkitTextStroke: '1.5px #0a0a0a',
               }}
             >
               Sports
@@ -76,7 +77,7 @@ const CtaSection = () => {
             transition={{ duration: 0.7, delay: 0.4 }}
           >
             <a
-              href="#tarifs"
+              href="/tarifs"
               className="group relative inline-flex items-center justify-center rounded-full cursor-pointer"
             >
               {/* Couche 1 : Glow externe au hover */}

@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { motion, useInView, useReducedMotion } from 'framer-motion';
+import { motion, useInView, useReducedMotion, AnimatePresence } from 'framer-motion';
 import { LuShieldCheck, LuGraduationCap, LuClock } from 'react-icons/lu';
 
 // ─── Images ──────────────────────────────────────────────────
@@ -7,6 +7,38 @@ import image3 from "../../assets/Image_3.png";
 import image10 from "../../assets/image_10.png";
 
 const DISPLAY = "'Anton', sans-serif";
+
+/* ─── Composant LazyImage (fade-in + placeholder au chargement) ─── */
+const LazyImage = ({ src, alt, className, imgClassName }) => {
+  const [loaded, setLoaded] = useState(false);
+
+  return (
+    <div className={`relative overflow-hidden ${className || ''}`}>
+      {/* Placeholder crème pulsé pendant le chargement */}
+      <AnimatePresence>
+        {!loaded && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="absolute inset-0 bg-[#d4cfc7]/15 animate-pulse"
+          />
+        )}
+      </AnimatePresence>
+
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"          // ⭐ lazy loading natif
+        decoding="async"        // ⭐ décodage asynchrone (ne bloque pas le rendu)
+        onLoad={() => setLoaded(true)}
+        className={`w-full h-full transition-all duration-700 ease-out ${
+          loaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-105 blur-md'
+        } ${imgClassName || ''}`}
+      />
+    </div>
+  );
+};
 
 const pillars = [
   {
@@ -52,7 +84,7 @@ const AboutSection = () => {
   const float = reduce ? {} : { y: [0, -16, 0], transition: { duration: 6, repeat: Infinity, ease: 'easeInOut' } };
 
   return (
-    <section ref={ref} className="relative w-full overflow-hidden bg-white py-24 md:py-32">
+    <section id="about" ref={ref} className="relative w-full overflow-hidden bg-white py-24 md:py-32">
       {/* dégradé haut + grain */}
       <div className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-[#f5f4f1] to-transparent" />
       <div
@@ -63,7 +95,7 @@ const AboutSection = () => {
         }}
       />
 
-      {/* ── HEADER ─ */}
+      {/* ── HEADER  */}
       <div className="relative mx-auto max-w-[1240px] px-6 sm:px-10 lg:px-16">
         <div className="mb-10 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
           <div>
@@ -160,21 +192,31 @@ const AboutSection = () => {
               À&nbsp;Propos
             </span>
 
-            {/* photo arrière — object-top pour ne pas zoomer/couper */}
+            {/* photo arrière — LAZY LOADING */}
             <div className="group absolute left-[8%] top-[6%] z-[2] h-[58%] w-[70%] overflow-hidden rounded-xl shadow-[0_22px_50px_-18px_rgba(0,0,0,0.55)]">
-              <img src={image3} alt="Coaching CWS" className="h-full w-full object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-105" />
+              <LazyImage
+                src={image3}
+                alt="Coaching CWS"
+                className="h-full w-full"
+                imgClassName="object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-105"
+              />
             </div>
 
             {/* cadre taupe */}
             <div className="absolute bottom-[8%] right-[6%] z-[2] h-[58%] w-[70%] rounded-xl border border-[#d4cfc7]" />
 
-            {/* photo avant flottante — object-top pour ne pas zoomer/couper */}
+            {/* photo avant flottante — LAZY LOADING */}
             <div className="absolute bottom-[6%] right-[4%] z-[3] h-[58%] w-[70%]">
               <motion.div
                 animate={float}
                 className="group h-full w-full overflow-hidden rounded-xl border-4 border-white shadow-[0_34px_60px_-22px_rgba(0,0,0,0.65)]"
               >
-                <img src={image10} alt="Ambiance CWS" className="h-full w-full object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-105" />
+                <LazyImage
+                  src={image10}
+                  alt="Ambiance CWS"
+                  className="h-full w-full"
+                  imgClassName="object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-105"
+                />
               </motion.div>
             </div>
 
