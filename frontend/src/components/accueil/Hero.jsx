@@ -41,15 +41,12 @@ const Hero = () => {
         loop
         muted
         playsInline
-        preload="metadata"
+        preload="auto"
         poster="/hero-poster.jpg"
         className="absolute top-0 left-0 w-full h-full object-cover"
       >
-        {/* Format WebM en priorité (plus léger) — si tu as le fichier */}
-        <source src="/hero-video.webm" type="video/webm" />
-        {/* Fallback MP4 */}
         <source src="/hero-video.mp4" type="video/mp4" />
-        Ton navigateur ne supporte pas la vidéo.
+        Ton navigateur ne supporte pas la lecture de la vidéo.
       </video>
 
       {/* Overlay */}
