@@ -6,9 +6,9 @@ import {
 import { Link } from 'react-router-dom';
 
 // ─── Images (noms vérifiés dans src/assets/) ─────────────────
-import histoireImg1 from '../../assets/Image_5.png';
-import histoireImg2 from '../../assets/Image_3.png';
-import engagementBg from '../../assets/LE MATÉRIEL.png';
+import histoireImg1 from '../../assets/image-5.png';
+import histoireImg2 from '../../assets/image-3.png';
+import engagementBg from '../../assets/materiel.png';
 
 const DISPLAY = "'Anton', sans-serif";
 const SERIF = "'Instrument Serif', Georgia, 'Times New Roman', serif";
