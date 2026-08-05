@@ -3,12 +3,12 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { LuArrowRight, LuArrowLeft } from 'react-icons/lu';
 
 // ─── Import des images depuis assets ─────────────────────────
-import materielImg from '../../assets/LE MATÉRIEL.png';
-import accesLibreImg from '../../assets/ACCES LIBRE.png';
-import ambianceImg from "../../assets/L'AMBIANCE.png";
-import coachingImg from '../../assets/COACHING_PERSONNALISÉ.png';
-import coursImg from '../../assets/COURS_COLLECTIFS.png';
-import hygieneImg from "../../assets/L'HYGIÈNE.png";
+import materielImg from '../../assets/materiel.png';
+import accesLibreImg from '../../assets/acces-libre.png';
+import ambianceImg from "../../assets/ambiance.png";
+import coachingImg from '../../assets/coaching-personnalise.png';
+import coursImg from '../../assets/cours-collectifs.png';
+import hygieneImg from "../../assets/hygiene.png";
 
 /* ─── Composant LazyImage (fade-in + placeholder au chargement) ─── */
 const LazyImage = ({ src, alt, className, imgClassName }) => {

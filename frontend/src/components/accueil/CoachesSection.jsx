@@ -3,9 +3,9 @@ import { motion, useInView, useReducedMotion, AnimatePresence } from 'framer-mot
 import { LuArrowRight } from 'react-icons/lu';
 
 // ─── Import des photos des coachs ────────────────────────────
-import justineImg from "../../assets/JUSTINE.png";
-import marionImg from "../../assets/MARION.png";
-import bilalImg from "../../assets/BILAL.png";
+import justineImg from "../../assets/justine.png";
+import marionImg from "../../assets/marion.png";
+import bilalImg from "../../assets/bilal.png";
 
 const DISPLAY = "'Anton', sans-serif";
 
