@@ -41,11 +41,13 @@ const Hero = () => {
         loop
         muted
         playsInline
-        preload="auto"
+        preload="metadata"
         poster="/hero-poster.jpg"
         className="absolute top-0 left-0 w-full h-full object-cover"
       >
-        {/* On garde uniquement le MP4 */}
+        {/* Format WebM en priorité (plus léger) — si tu as le fichier */}
+        <source src="/hero-video.webm" type="video/webm" />
+        {/* Fallback MP4 */}
         <source src="/hero-video.mp4" type="video/mp4" />
         Ton navigateur ne supporte pas la vidéo.
       </video>
