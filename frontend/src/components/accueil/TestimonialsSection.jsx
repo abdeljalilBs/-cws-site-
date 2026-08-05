@@ -3,6 +3,7 @@ import { motion, useInView, AnimatePresence, useReducedMotion } from 'framer-mot
 import { LuChevronLeft, LuChevronRight, LuQuote, LuStar } from 'react-icons/lu';
 
 const DISPLAY = "'Anton', sans-serif";
+const SERIF = "'Instrument Serif', Georgia, 'Times New Roman', serif";
 
 const TestimonialsSection = () => {
   const ref = useRef(null);
@@ -78,14 +79,14 @@ const TestimonialsSection = () => {
   return (
     <section
       ref={ref}
-      className="relative w-full overflow-hidden bg-white py-24 md:py-32"
+      className="relative w-full overflow-hidden bg-[#f8f7f5] py-24 md:py-32"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* ── Dégradé haut + grain (identique AboutSection) ── */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-[#f5f4f1] to-transparent" />
+      {/* ── Dégradé haut + grain ── */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-white to-transparent" />
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-multiply"
+        className="pointer-events-none absolute inset-0 opacity-[0.03] mix-blend-multiply"
         style={{
           backgroundImage:
             "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
@@ -95,47 +96,45 @@ const TestimonialsSection = () => {
       <div className="relative mx-auto max-w-[1240px] px-6 sm:px-10 lg:px-16">
 
         {/* ══════════════════════════════════════════
-            HEADER (titre + sous-titre)
+            HEADER (Centré, sans le trait)
         ══════════════════════════════════════════ */}
-        <div className="mb-12 md:mb-16 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
-              className="mb-5 flex items-center gap-3"
-            >
-              <span className="h-px w-8 bg-[#d4cfc7]" />
-              <em className="text-xs font-semibold tracking-[0.18em] uppercase text-[#b3a996] italic">
-                #TrainBetter
-              </em>
-            </motion.div>
+        <div className="mb-16 md:mb-20 flex flex-col items-center text-center gap-6">
 
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              style={{ fontFamily: DISPLAY }}
-              className="max-w-[14ch] text-[2.4rem] uppercase leading-[0.94] tracking-tight text-[#0a0a0a] sm:text-5xl md:text-6xl lg:text-[4.4rem]"
-            >
-              Ce qu'en pensent{' '}
-              <span className="relative inline-block whitespace-nowrap">
-                <span className="relative z-10">nos clients</span>
-                <motion.span
-                  initial={{ scaleX: 0 }}
-                  animate={isInView ? { scaleX: 1 } : {}}
-                  transition={{ duration: 0.8, delay: 0.5, ease: [0.65, 0, 0.35, 1] }}
-                  className="absolute -left-0.5 -right-0.5 bottom-[0.12em] z-0 h-[0.34em] origin-left bg-[#d4cfc7]"
-                />
-              </span>
-            </motion.h2>
-          </div>
+          {/* Le trait a été supprimé ici, on garde juste le texte */}
+          <motion.em
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6 }}
+            style={{ fontFamily: SERIF }}
+            className="text-lg tracking-[0.15em] uppercase text-[#b3a996] italic"
+          >
+            #TrainBetter
+          </motion.em>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            style={{ fontFamily: DISPLAY }}
+            className="max-w-[18ch] text-[2.8rem] uppercase leading-[0.95] tracking-tight text-[#0a0a0a] sm:text-6xl md:text-7xl lg:text-[5rem]"
+          >
+            Ce qu'en pensent{' '}
+            <span className="relative inline-block whitespace-nowrap">
+              <span className="relative z-10">nos clients</span>
+              <motion.span
+                initial={{ scaleX: 0 }}
+                animate={isInView ? { scaleX: 1 } : {}}
+                transition={{ duration: 0.8, delay: 0.5, ease: [0.65, 0, 0.35, 1] }}
+                className="absolute -left-0.5 -right-0.5 bottom-[0.12em] z-0 h-[0.34em] origin-left bg-[#d4cfc7]"
+              />
+            </span>
+          </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.25 }}
-            className="max-w-[34ch] pb-1 text-[1.02rem] font-light leading-relaxed text-[#565656]"
+            className="max-w-[45ch] text-[1.1rem] font-light leading-relaxed text-[#565656]"
           >
             Des histoires vraies, des résultats concrets. Découvrez pourquoi nos adhérents nous font confiance depuis des années.
           </motion.p>
@@ -196,18 +195,16 @@ const TestimonialsSection = () => {
                   aria-label={`Avis de ${t.name}`}
                 >
                   <span
-                    className={`block rounded-full transition-all duration-400 ${
-                      index === activeIndex
+                    className={`block rounded-full transition-all duration-400 ${index === activeIndex
                         ? 'w-3 h-3 bg-[#0a0a0a]'
                         : 'w-2.5 h-2.5 bg-[#0a0a0a]/15 group-hover:bg-[#d4cfc7]'
-                    }`}
+                      }`}
                   />
                   <span
-                    className={`text-xs font-semibold tracking-wide transition-colors duration-300 ${
-                      index === activeIndex
+                    className={`text-xs font-semibold tracking-wide transition-colors duration-300 ${index === activeIndex
                         ? 'text-[#0a0a0a]'
                         : 'text-[#0a0a0a]/25 group-hover:text-[#b3a996]'
-                    }`}
+                      }`}
                   >
                     {t.initials}
                   </span>

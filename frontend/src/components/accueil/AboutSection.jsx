@@ -7,6 +7,7 @@ import image3 from "../../assets/image-3.png";
 import image10 from "../../assets/image-10.png";
 
 const DISPLAY = "'Anton', sans-serif";
+const SERIF = "'Instrument Serif', Georgia, 'Times New Roman', serif";
 
 /* ─── Composant LazyImage (fade-in + placeholder au chargement) ─── */
 const LazyImage = ({ src, alt, className, imgClassName }) => {
@@ -14,7 +15,6 @@ const LazyImage = ({ src, alt, className, imgClassName }) => {
 
   return (
     <div className={`relative overflow-hidden ${className || ''}`}>
-      {/* Placeholder crème pulsé pendant le chargement */}
       <AnimatePresence>
         {!loaded && (
           <motion.div
@@ -29,12 +29,11 @@ const LazyImage = ({ src, alt, className, imgClassName }) => {
       <img
         src={src}
         alt={alt}
-        loading="lazy"          // ⭐ lazy loading natif
-        decoding="async"        // ⭐ décodage asynchrone (ne bloque pas le rendu)
+        loading="lazy"
+        decoding="async"
         onLoad={() => setLoaded(true)}
-        className={`w-full h-full transition-all duration-700 ease-out ${
-          loaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-105 blur-md'
-        } ${imgClassName || ''}`}
+        className={`w-full h-full transition-all duration-700 ease-out ${loaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-105 blur-md'
+          } ${imgClassName || ''}`}
       />
     </div>
   );
@@ -43,25 +42,23 @@ const LazyImage = ({ src, alt, className, imgClassName }) => {
 const pillars = [
   {
     icon: <LuShieldCheck size={24} strokeWidth={1.5} />,
-    title: 'Premium',
+    title: 'Premium & Sécurisé',
     description:
       "CWS est un club entièrement sécurisé, avec une ambiance conviviale et familiale, et des adhérents respectueux.",
   },
   {
     icon: <LuGraduationCap size={24} strokeWidth={1.5} />,
-    title: 'Coachs formés en continu',
+    title: 'Coachs Diplômés',
     description:
-      "La qualité de notre concept passe par le professionnalisme de nos coachs. Tous sont diplômés, passionnés et à l'écoute de vos besoins.",
+      "La qualité de notre concept passe par le professionnalisme de nos coachs. Tous sont diplômés, passionnés et à l'écoute.",
   },
   {
     icon: <LuClock size={24} strokeWidth={1.5} />,
     title: 'Ouvert 7j/7',
     description:
-      "Votre salle est ouverte 7j/7 en accès libre : du lundi au dimanche, de 7h30 à 21h30.",
+      "Votre salle est ouverte 7 jours sur 7 en accès libre : du lundi au dimanche, de 7h30 à 21h30.",
   },
 ];
-
-const MARQUEE = ['Discipline', 'Expertise', 'Coachs diplômés', 'Ouvert 7j/7', 'Ambiance premium', 'Résultats'];
 
 const AboutSection = () => {
   const ref = useRef(null);
@@ -84,99 +81,59 @@ const AboutSection = () => {
   const float = reduce ? {} : { y: [0, -16, 0], transition: { duration: 6, repeat: Infinity, ease: 'easeInOut' } };
 
   return (
-    <section id="about" ref={ref} className="relative w-full overflow-hidden bg-white py-24 md:py-32">
-      {/* dégradé haut + grain */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-[#f5f4f1] to-transparent" />
+    <section id="about" ref={ref} className="relative w-full overflow-hidden bg-[#f8f7f5] py-24 md:py-32">
+      {/* Dégradé haut subtil */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-44 bg-gradient-to-b from-white to-transparent" />
+
+      {/* Texture grain très légère pour le côté premium */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-multiply"
+        className="pointer-events-none absolute inset-0 opacity-[0.03] mix-blend-multiply"
         style={{
           backgroundImage:
             "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
         }}
       />
 
-      {/* ── HEADER  */}
       <div className="relative mx-auto max-w-[1240px] px-6 sm:px-10 lg:px-16">
-        <div className="mb-10 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
-          <div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6 }}
-              className="mb-5 flex items-center gap-3"
-            >
-              <span className="h-px w-8 bg-[#d4cfc7]" />
-              <em className="text-xs font-semibold tracking-[0.18em] uppercase text-[#b3a996] italic">
-                L'esprit CWS
-              </em>
-            </motion.div>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              style={{ fontFamily: DISPLAY }}
-              className="max-w-[15ch] text-[2.4rem] uppercase leading-[0.94] tracking-tight text-[#0a0a0a] sm:text-5xl md:text-6xl lg:text-[4.4rem]"
-            >
-              Ne confiez jamais votre corps à des{' '}
-              <span className="relative inline-block whitespace-nowrap">
-                <span className="relative z-10">amateurs</span>
-                <motion.span
-                  initial={{ scaleX: 0 }}
-                  animate={isInView ? { scaleX: 1 } : {}}
-                  transition={{ duration: 0.8, delay: 0.5, ease: [0.65, 0, 0.35, 1] }}
-                  className="absolute -left-0.5 -right-0.5 bottom-[0.12em] z-0 h-[0.34em] origin-left bg-[#d4cfc7]"
-                />
-              </span>
-            </motion.h2>
-          </div>
+        {/* ── HEADER CENTRÉ (Sans tiret, sans bandeau) ── */}
+        <div className="mb-16 md:mb-24 flex flex-col items-center text-center gap-6">
+
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            style={{ fontFamily: DISPLAY }}
+            className="max-w-[20ch] text-[2.8rem] uppercase leading-[0.95] tracking-tight text-[#0a0a0a] sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+          >
+            Ne confiez jamais votre corps à des{' '}
+            <span className="relative inline-block whitespace-nowrap">
+              <span className="relative z-10">amateurs</span>
+              <motion.span
+                initial={{ scaleX: 0 }}
+                animate={isInView ? { scaleX: 1 } : {}}
+                transition={{ duration: 0.8, delay: 0.5, ease: [0.65, 0, 0.35, 1] }}
+                className="absolute -left-0.5 -right-0.5 bottom-[0.12em] z-0 h-[0.34em] origin-left bg-[#d4cfc7]"
+              />
+            </span>
+          </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.25 }}
-            className="max-w-[34ch] pb-1 text-[1.02rem] font-light leading-relaxed text-[#565656]"
+            className="max-w-[45ch] text-[1.1rem] md:text-lg font-light leading-relaxed text-[#565656]"
           >
             Un club pensé pour progresser sereinement, encadré par des coachs qui
             connaissent leur métier. <b className="font-semibold text-[#0a0a0a]">Pas d'improvisation</b> —
             juste les bons conseils, au bon moment.
           </motion.p>
         </div>
-      </div>
 
-      {/* ── MARQUEE ── */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        className="group relative mb-14 overflow-hidden bg-[#0a0a0a]"
-      >
-        <div
-          className="flex w-max"
-          style={{ animation: reduce ? 'none' : 'cws-slide 26s linear infinite' }}
-        >
-          {[0, 1].map((k) => (
-            <div key={k} className="flex items-center">
-              {MARQUEE.map((word, i) => (
-                <span
-                  key={i}
-                  style={{ fontFamily: DISPLAY }}
-                  className="flex items-center whitespace-nowrap py-3 text-[0.95rem] uppercase tracking-[0.14em] text-white"
-                >
-                  {word}
-                  <span className="mx-6 text-[#d4cfc7]">✦</span>
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </motion.div>
+        {/* ── CONTENT (Images + Piliers) ── */}
+        <div className="grid items-center gap-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-[4.5rem]">
 
-      {/* ── CONTENT ─ */}
-      <div className="relative mx-auto max-w-[1240px] px-6 sm:px-10 lg:px-16">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-[4.5rem]">
-
-          {/* STAGE */}
+          {/* STAGE (Visuels) */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
@@ -184,15 +141,10 @@ const AboutSection = () => {
             className="relative mx-auto w-full max-w-[540px] lg:max-w-none"
             style={{ minHeight: 560 }}
           >
-            {/* panneau noir incliné */}
+            {/* Panneau noir incliné */}
             <div className="absolute inset-y-[2%] left-[2%] right-[-4%] rounded-2xl bg-[#0a0a0a]" style={{ transform: 'rotate(-2deg)' }} />
 
-            {/* label vertical */}
-            <span className="absolute left-[-6px] top-1/2 z-[5] -translate-y-1/2 -rotate-90 text-[0.62rem] font-semibold uppercase tracking-[0.4em] text-black/25 select-none">
-              À&nbsp;Propos
-            </span>
-
-            {/* photo arrière — LAZY LOADING */}
+            {/* Photo arrière */}
             <div className="group absolute left-[8%] top-[6%] z-[2] h-[58%] w-[70%] overflow-hidden rounded-xl shadow-[0_22px_50px_-18px_rgba(0,0,0,0.55)]">
               <LazyImage
                 src={image3}
@@ -202,10 +154,10 @@ const AboutSection = () => {
               />
             </div>
 
-            {/* cadre taupe */}
+            {/* Cadre beige/blanc cassé */}
             <div className="absolute bottom-[8%] right-[6%] z-[2] h-[58%] w-[70%] rounded-xl border border-[#d4cfc7]" />
 
-            {/* photo avant flottante — LAZY LOADING */}
+            {/* Photo avant flottante */}
             <div className="absolute bottom-[6%] right-[4%] z-[3] h-[58%] w-[70%]">
               <motion.div
                 animate={float}
@@ -220,7 +172,7 @@ const AboutSection = () => {
               </motion.div>
             </div>
 
-            {/* sceau */}
+            {/* Sceau / Badge 100% */}
             <motion.div
               initial={{ opacity: 0, scale: 0.6, rotate: -20 }}
               animate={isInView ? { opacity: 1, scale: 1, rotate: 0 } : {}}
@@ -243,7 +195,7 @@ const AboutSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* PILLARS */}
+          {/* PILLIERS (Textes) */}
           <div className="flex flex-col">
             {pillars.map((p, i) => (
               <motion.div
@@ -251,29 +203,26 @@ const AboutSection = () => {
                 initial={{ opacity: 0, y: 26 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.3 + i * 0.15 }}
-                className={`group relative grid grid-cols-[auto_1fr] items-start gap-[1.1rem] border-t border-black/10 py-6 transition-[padding] duration-300 hover:pl-3 ${
-                  i === pillars.length - 1 ? 'border-b' : ''
-                }`}
+                className={`group relative grid grid-cols-[auto_1fr] items-start gap-[1.1rem] border-t border-black/10 py-8 transition-[padding] duration-300 hover:pl-3 ${i === pillars.length - 1 ? 'border-b' : ''
+                  }`}
               >
-                {/* filet supérieur animé au survol */}
+                {/* Filet supérieur animé au survol */}
                 <span className="absolute left-0 top-[-1px] h-px w-0 bg-[#0a0a0a] transition-[width] duration-500 group-hover:w-full group-hover:bg-[#b3a996]" />
 
                 <div className="flex h-[46px] w-[46px] items-center justify-center rounded-[10px] border border-black/[0.12] text-[#0a0a0a] transition-all duration-300 group-hover:border-[#0a0a0a] group-hover:bg-[#0a0a0a] group-hover:text-white">
                   {p.icon}
                 </div>
                 <div>
-                  <h3 style={{ fontFamily: DISPLAY }} className="mb-2 text-[1.05rem] uppercase tracking-[0.03em] text-[#0a0a0a]">
+                  <h3 style={{ fontFamily: DISPLAY }} className="mb-2 text-[1.1rem] uppercase tracking-[0.03em] text-[#0a0a0a]">
                     {p.title}
                   </h3>
-                  <p className="text-[0.9rem] leading-relaxed text-[#565656]">{p.description}</p>
+                  <p className="text-[0.95rem] leading-relaxed text-[#565656]">{p.description}</p>
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
       </div>
-
-      <style>{`@keyframes cws-slide{to{transform:translateX(-50%)}}`}</style>
     </section>
   );
 };

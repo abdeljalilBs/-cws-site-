@@ -221,7 +221,6 @@ const ClubPage = () => {
         <div className="relative z-10 mx-auto max-w-[1240px] w-full px-6 sm:px-10 lg:px-16 pt-28 pb-20">
           <div className="max-w-3xl">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={heroVisible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="mb-6 flex items-center gap-3">
-              <span className="h-px w-8 bg-[#d4cfc7]" />
               <em style={{ fontFamily: SERIF }} className="text-base tracking-[0.14em] uppercase text-[#b3a996] italic">Le club</em>
             </motion.div>
 
@@ -269,7 +268,6 @@ const ClubPage = () => {
           <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-[4.5rem]">
             <div>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={storyVisible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="mb-5 flex items-center gap-3">
-                <span className="h-px w-8 bg-[#d4cfc7]" />
                 <em style={{ fontFamily: SERIF }} className="text-base tracking-[0.14em] uppercase text-[#b3a996] italic">CWS : Club de Sport Premium à La Ville-aux-Dames</em>
               </motion.div>
 
@@ -326,9 +324,7 @@ const ClubPage = () => {
         <div className="relative z-10 mx-auto max-w-[1240px] px-6 sm:px-10 lg:px-16">
           <div className="mb-14 md:mb-20 flex flex-col items-center text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={engageVisible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="mb-5 flex items-center gap-3">
-              <span className="h-px w-8 bg-[#d4cfc7]" />
               <em style={{ fontFamily: SERIF }} className="text-base tracking-[0.14em] uppercase text-[#b3a996] italic">Notre promesse</em>
-              <span className="h-px w-8 bg-[#d4cfc7]" />
             </motion.div>
 
             <motion.h2 initial={{ opacity: 0, y: 30 }} animate={engageVisible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.1 }} style={{ fontFamily: DISPLAY }} className="text-[2.4rem] uppercase leading-[0.94] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.2rem]">

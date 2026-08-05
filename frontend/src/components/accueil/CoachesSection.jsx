@@ -164,7 +164,6 @@ const CoachCard = ({ coach, index, isInView, reduce }) => {
           transition={{ duration: 0.6, delay: 0.3 + index * 0.2 }}
           className="mb-4 flex items-center gap-3"
         >
-          <span className="h-px w-8 bg-[#d4cfc7]" />
           <em className="text-xs font-semibold tracking-[0.18em] uppercase text-[#b3a996] italic">
             {coach.role}
           </em>
@@ -225,7 +224,6 @@ const CoachesSection = () => {
               transition={{ duration: 0.6 }}
               className="mb-5 flex items-center gap-3"
             >
-              <span className="h-px w-8 bg-[#d4cfc7]" />
               <em className="text-xs font-semibold tracking-[0.18em] uppercase text-[#b3a996] italic">
                 L'équipe
               </em>

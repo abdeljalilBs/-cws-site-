@@ -28,8 +28,8 @@ const Navbar = () => {
   const navLinks = [
     { name: 'Accueil', to: '/' },
     { name: 'Le club', to: '/club' },
-    { name: 'Les coachs', to: '/#coachs' },
-    { name: 'Les activités', to: '/activites', hasDropdown: true },
+    { name: 'Les coachs', to: '/coachs' },
+    { name: 'Les activités', to: '/activites' },
     { name: 'Les plannings', to: '/plannings' },
     { name: 'Tarifs', to: '/tarifs' },
   ];
@@ -66,7 +66,7 @@ const Navbar = () => {
               className="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300 flex items-center gap-1"
             >
               {link.name}
-              {link.hasDropdown && <LuChevronDown size={14} className="opacity-70" />}
+
             </Link>
           ))}
         </div>
@@ -110,7 +110,7 @@ const Navbar = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
-                  {link.hasDropdown && <LuChevronDown size={16} />}
+
                 </Link>
               ))}
               <Link

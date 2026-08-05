@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { LuChevronsRight } from 'react-icons/lu';
+import { Link } from 'react-router-dom';
 
 const DISPLAY = "'Anton', sans-serif";
 
@@ -34,7 +35,6 @@ const CtaSection = () => {
             transition={{ duration: 0.6 }}
             className="mb-6 flex items-center gap-3"
           >
-            <span className="h-px w-8 bg-[#d4cfc7]" />
             <em className="text-xs sm:text-sm font-bold tracking-[0.18em] uppercase text-[#b3a996] italic">
               Club de sport premium à La Ville aux Dames (37)
             </em>
@@ -76,8 +76,8 @@ const CtaSection = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.4 }}
           >
-            <a
-              href="/tarifs"
+            <Link
+              to="/contact"
               className="group relative inline-flex items-center justify-center rounded-full cursor-pointer"
             >
               {/* Couche 1 : Glow externe au hover */}
@@ -120,7 +120,7 @@ const CtaSection = () => {
               <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#0a0a0a]/0 group-hover:bg-[#0a0a0a]/40 transition-all duration-500 delay-300" />
               <span className="absolute top-1/2 -left-1.5 -translate-y-1/2 w-1 h-1 rounded-full bg-[#0a0a0a]/0 group-hover:bg-[#0a0a0a]/40 transition-all duration-500 delay-400" />
               <span className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-1 h-1 rounded-full bg-[#0a0a0a]/0 group-hover:bg-[#0a0a0a]/40 transition-all duration-500 delay-500" />
-            </a>
+            </Link>
           </motion.div>
 
         </div>

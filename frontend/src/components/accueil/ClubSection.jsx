@@ -34,9 +34,8 @@ const LazyImage = ({ src, alt, className, imgClassName }) => {
         loading="lazy"          // ⭐ lazy loading natif
         decoding="async"        // ⭐ décodage asynchrone
         onLoad={() => setLoaded(true)}
-        className={`w-full h-full transition-all duration-700 ease-out ${
-          loaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-105 blur-md'
-        } ${imgClassName || ''}`}
+        className={`w-full h-full transition-all duration-700 ease-out ${loaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-105 blur-md'
+          } ${imgClassName || ''}`}
       />
     </div>
   );
@@ -243,7 +242,7 @@ const ClubSection = () => {
     if (!hasInteracted) setHasInteracted(true);
   };
 
-  // ─── Drag ──────────────────────────────────────────────────
+  // ─── Drag ─────────────────────────────────────────────────
   const handleMouseDown = (e) => {
     isDraggingRef.current = true;
     setIsDragging(true);
@@ -294,15 +293,11 @@ const ClubSection = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.1 }}
           className="text-white font-black uppercase tracking-[0.08em] text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1] mb-4"
+          style={{ fontFamily: "'Anton', sans-serif" }}
         >
           Découvrir le Club
         </motion.h2>
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={isInView ? { scaleX: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="w-16 md:w-20 h-[1px] bg-[#d4cfc7]/40 mx-auto origin-center mb-6"
-        />
+
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -339,9 +334,8 @@ const ClubSection = () => {
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUp}
           onMouseLeave={handleMouseUp}
-          className={`flex items-center gap-10 overflow-x-auto scrollbar-hide px-6 sm:px-12 md:px-20 lg:px-32 py-8 ${
-            isDragging ? 'cursor-grabbing' : 'cursor-grab'
-          }`}
+          className={`flex items-center gap-10 overflow-x-auto scrollbar-hide px-6 sm:px-12 md:px-20 lg:px-32 py-8 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'
+            }`}
           style={{
             scrollSnapType: isDragging ? 'none' : 'x mandatory',
             WebkitOverflowScrolling: 'touch',
@@ -386,15 +380,15 @@ const ClubSection = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-60" />
                 </div>
                 <div className="relative p-6 md:p-7">
-                  <span
-                    className="absolute top-3 right-4 text-5xl font-black leading-none select-none"
-                    style={{ color: isActive ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.03)' }}
-                  >
-                    {String(card._realIndex + 1).padStart(2, '0')}
-                  </span>
+                  {/* Le span du numéro a été supprimé ici */}
+
                   <h3
-                    className="font-bold uppercase tracking-[0.12em] text-sm sm:text-base mb-3 pr-8"
-                    style={{ color: isActive ? '#ffffff' : 'rgba(255,255,255,0.4)' }}
+                    className="font-bold uppercase tracking-[0.12em] text-sm sm:text-base mb-3"
+                    style={{
+                      color: isActive ? '#ffffff' : 'rgba(255,255,255,0.4)',
+                      fontFamily: "'Anton', sans-serif",
+                      letterSpacing: '0.05em'
+                    }}
                   >
                     {card.title}
                   </h3>
@@ -402,10 +396,10 @@ const ClubSection = () => {
                     className="h-[1px] mb-4"
                     style={{
                       width: isActive ? '2rem' : '1.5rem',
-                      backgroundColor: isActive ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.05)',
+                      backgroundColor: isActive ? 'rgba(212, 207, 199, 0.4)' : 'rgba(255,255,255,0.05)',
                     }}
                   />
-                  <p className="text-sm leading-relaxed" style={{ color: isActive ? '#8a8279' : 'rgba(90,85,78,0.4)' }}>
+                  <p className="text-sm leading-relaxed" style={{ color: isActive ? '#b8b0a4' : 'rgba(90,85,78,0.4)' }}>
                     {card.description}
                   </p>
                 </div>
@@ -430,17 +424,14 @@ const ClubSection = () => {
               className="group flex items-center justify-center"
               aria-label={`Carte ${index + 1}`}
             >
-              <span className={`block rounded-full transition-all duration-400 ${
-                index === activeIndex ? 'w-8 h-2 bg-white/70' : 'w-2 h-2 bg-white/20 group-hover:bg-white/40'
-              }`} />
+              <span className={`block rounded-full transition-all duration-400 ${index === activeIndex ? 'w-8 h-2 bg-[#d4cfc7]' : 'w-2 h-2 bg-white/20 group-hover:bg-white/40'
+                }`} />
             </button>
           ))}
         </div>
-        <p className="text-white/20 text-[10px] sm:text-xs tracking-[0.3em] uppercase font-light">
-          {String(activeIndex + 1).padStart(2, '0')}
-          <span className="mx-2 text-white/10">/</span>
-          {String(N).padStart(2, '0')}
-        </p>
+
+        {/* Le compteur 01/06 a été supprimé ici */}
+
         <AnimatePresence>
           {!hasInteracted && (
             <motion.p

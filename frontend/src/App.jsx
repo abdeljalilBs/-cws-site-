@@ -4,7 +4,6 @@ import { useEffect, lazy, Suspense } from 'react';
 // Composants partagés (toujours visibles → import normal)
 import Navbar from './components/accueil/Navbar';
 import Footer from './components/accueil/Footer';
-import FloatingControls from './components/accueil/FloatingControls';
 import PageTitle from './components/PageTitle';
 
 // ─── Pages en LAZY LOADING (chargées uniquement à la demande) ─────
@@ -41,7 +40,7 @@ function App() {
       <div className="bg-[#0a0a0a] min-h-screen">
         <PageTitle />
         <Navbar />
-        <FloatingControls />
+
 
         {/* ══════════════════════════════════════════
             ROUTES avec Suspense (lazy loading)
