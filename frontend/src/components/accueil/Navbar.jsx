@@ -52,7 +52,7 @@ const Navbar = () => {
         {/* Logo CWS */}
         <Link to="/" className="flex-shrink-0 mr-8">
           <img
-            src="/Image_logo.png"
+            src="/image-logo.png"
             alt="Coach Wellness Sports Logo"
             className={`w-auto object-contain transition-all duration-300 ${isScrolled ? 'h-8' : 'h-10'}`}
           />

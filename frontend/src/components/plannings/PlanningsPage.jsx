@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 // ─── Images (noms vérifiés dans src/assets/) ─────────────────
 import planningImg from '../../assets/plannings.png';     // ✅ photo du planning
-import heroBg from '../../assets/Image_5.png';            // ✅ façade CWS sunset
+import heroBg from '../../assets/image-5.png';            // ✅ façade CWS sunset
 
 const DISPLAY = "'Anton', sans-serif";
 const SERIF = "'Instrument Serif', Georgia, 'Times New Roman', serif";

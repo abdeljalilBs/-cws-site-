@@ -1,16 +1,64 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LuVolume2, LuVolumeX, LuX, LuSettings2 } from 'react-icons/lu';
 
 const FloatingControls = () => {
   const [isMuted, setIsMuted] = useState(true);
   const [showControls, setShowControls] = useState(true);
+  const [hasAudio, setHasAudio] = useState(true);   // ⭐ sait si la vidéo a du son
 
-  const toggleMute = () => {
+  // ─── Au montage : vérifie la piste audio + synchronise l'état ───
+  useEffect(() => {
     const video = document.getElementById('hero-video');
-    if (video) {
-      video.muted = !isMuted;
-      setIsMuted(!isMuted);
+    if (!video) return;
+
+    const checkAudio = () => {
+      // Si aucune piste audio → on le signale
+      if (video.audioTracks && video.audioTracks.length === 0) {
+        setHasAudio(false);
+        console.warn('⚠️ La vidéo hero-video.mp4 n\'a AUCUNE piste audio. Le son ne pourra jamais sortir.');
+      } else {
+        console.log('✅ La vidéo a une piste audio. Le son devrait fonctionner.');
+      }
+    };
+
+    if (video.readyState >= 1) {
+      checkAudio();
+    } else {
+      video.addEventListener('loadedmetadata', checkAudio);
+    }
+
+    // Synchronise l'état React avec la vraie valeur muet de la vidéo
+    const syncMute = () => setIsMuted(video.muted);
+    video.addEventListener('volumechange', syncMute);
+
+    return () => {
+      video.removeEventListener('loadedmetadata', checkAudio);
+      video.removeEventListener('volumechange', syncMute);
+    };
+  }, []);
+
+  // ─── Toggle son FORCÉ (contourne le blocage navigateur) ─────
+  const toggleMute = async () => {
+    const video = document.getElementById('hero-video');
+    if (!video) return;
+
+    if (video.muted) {
+      // → Activer le son
+      video.muted = false;
+      video.volume = 1;              // ⭐ force le volume à 100%
+      try {
+        await video.play();          // ⭐ OBLIGATOIRE : débloque le son sur Chrome/Safari
+        setIsMuted(false);
+      } catch (err) {
+        console.error('❌ Le navigateur bloque le son :', err);
+        video.muted = true;
+        setIsMuted(true);
+      }
+    } else {
+      // → Couper le son
+      video.muted = true;
+      setIsMuted(true);
     }
   };
 
@@ -26,9 +74,8 @@ const FloatingControls = () => {
   return (
     <>
       {/* ══════════════════════════════════════════════════════
-          BOUTONS FLOTTANTS — FIXES sur toute la page d'accueil
-          z-[60] → au-dessus de la navbar (z-50)
-      ══════════════════════════════════════════════════════ */}
+          BOUTONS FLOTTANTS
+      ══════════════════════════════════════════ */}
       <AnimatePresence>
         {showControls && (
           <motion.div
@@ -38,16 +85,21 @@ const FloatingControls = () => {
             transition={{ duration: 0.4, ease: "easeOut" }}
             className="fixed bottom-10 right-10 z-[60] flex flex-col gap-4"
           >
-            {/* Bouton 1 : Activer / Couper le son */}
+            {/* Bouton 1 : Activer / Couper le son (grisé si pas de piste audio) */}
             <button
               onClick={toggleMute}
-              className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#f5f5dc] hover:bg-white text-[#0a0a0a] flex items-center justify-center shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-110 border border-white/20"
+              disabled={!hasAudio}
+              className={`w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center shadow-lg backdrop-blur-md transition-all duration-300 border ${!hasAudio
+                  ? 'bg-white/10 text-white/30 border-white/10 cursor-not-allowed'
+                  : 'bg-[#f5f5dc] hover:bg-white text-[#0a0a0a] border-white/20 hover:scale-110'
+                }`}
               aria-label={isMuted ? "Activer le son" : "Couper le son"}
+              title={!hasAudio ? "Cette vidéo n'a pas de piste audio" : ""}
             >
               {isMuted ? <LuVolumeX size={24} /> : <LuVolume2 size={24} />}
             </button>
 
-            {/* Bouton 2 : Croix (Coupe le son et ferme) */}
+            {/* Bouton 2 : Croix */}
             <button
               onClick={muteAndHide}
               className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#0a0a0a]/90 hover:bg-black text-[#f5f5dc] border border-white/20 hover:border-white/40 flex items-center justify-center shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-110"
@@ -59,7 +111,7 @@ const FloatingControls = () => {
         )}
       </AnimatePresence>
 
-      {/* ── Petit bouton discret (réapparaît après clic sur X) ── */}
+      {/* Petit bouton discret */}
       <AnimatePresence>
         {!showControls && (
           <motion.button

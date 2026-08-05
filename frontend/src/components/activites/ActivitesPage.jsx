@@ -9,22 +9,22 @@ import { Link } from 'react-router-dom';
 import LazyImage from "../LazyImage";
 // ─── Photos des cours ────────────────────────────────────────
 // Intensité 1
-import gymDosImg from '../../assets/GYM_DOS.png';
-import pilatesImg from '../../assets/PILATES.png';
-import yogaImg from '../../assets/YOGA.png';
-import stretchingImg from '../../assets/STRETCHING.png';
-import mobilityImg from '../../assets/MOBILITY.png';
+import gymDosImg from '../../assets/gym-dos.png';
+import pilatesImg from '../../assets/pilates.png';
+import yogaImg from '../../assets/yoga.png';
+import stretchingImg from '../../assets/stretching.png';
+import mobilityImg from '../../assets/mobility.png';
 // Intensité 2
-import cafImg from '../../assets/CAF.png';
-import trxImg from '../../assets/TRX TRAINING.png';
-import crossTrainingImg from '../../assets/CROSS TRAINING.png';
-import crossBikingImg from '../../assets/cross biking.png';
-import masterclassImg from '../../assets/MASTERCLASS.png';
-import openGymImg from '../../assets/open gym.png';
+import cafImg from '../../assets/caf.png';
+import trxImg from '../../assets/trx-training.png';
+import crossTrainingImg from '../../assets/cross-training.png';
+import crossBikingImg from '../../assets/cross-biking.png';
+import masterclassImg from '../../assets/masterclass.png';
+import openGymImg from '../../assets/open-gym.png';
 // Intensité 3
-import boxingBagImg from '../../assets/BOXING BAG.png';
-import cardioTrainingImg from '../../assets/CARDIO TRAINING.png';
-import sprintImg from '../../assets/SPRINT.png';
+import boxingBagImg from '../../assets/boxing-bag.png';
+import cardioTrainingImg from '../../assets/cardio-training.png';
+import sprintImg from '../../assets/sprint.png';
 
 const DISPLAY = "'Anton', sans-serif";
 const SERIF = "'Instrument Serif', Georgia, 'Times New Roman', serif";
@@ -264,7 +264,7 @@ const ActivitesPage = () => {
           className="absolute inset-0 z-0"
         >
           <LazyImage
-            src="/COURS_COLLECTIFS.png"
+            src="/cours-collectifs.png"
             alt="Cours collectifs CWS"
             eager
             className="w-full h-full opacity-45"

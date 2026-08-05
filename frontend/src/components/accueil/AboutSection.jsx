@@ -3,8 +3,8 @@ import { motion, useInView, useReducedMotion, AnimatePresence } from 'framer-mot
 import { LuShieldCheck, LuGraduationCap, LuClock } from 'react-icons/lu';
 
 // ─── Images ──────────────────────────────────────────────────
-import image3 from "../../assets/Image_3.png";
-import image10 from "../../assets/image_10.png";
+import image3 from "../../assets/image-3.png";
+import image10 from "../../assets/image-10.png";
 
 const DISPLAY = "'Anton', sans-serif";
 
