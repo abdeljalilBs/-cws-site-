@@ -318,7 +318,6 @@ const ActivitesPage = () => {
               "Matériel haut de gamme",
             ].map((point, i) => (
               <div key={i} className="flex items-center gap-2.5 rounded-full border border-white/10 bg-white/[0.03] backdrop-blur-sm px-5 py-2.5">
-                <span className="flex h-2 w-2 flex-shrink-0 items-center justify-center rounded-full bg-[#d4cfc7]" />
                 <span className="text-xs sm:text-sm font-medium tracking-wide text-white/75">{point}</span>
               </div>
             ))}
@@ -341,7 +340,7 @@ const ActivitesPage = () => {
       {/* ══════════════════════════════════════════
           2. SÉLECTEUR D'INTENSITÉ INTERACTIF
       ══════════════════════════════════════════ */}
-      <section id="selecteur" ref={selectorRef} className="relative w-full overflow-hidden py-24 md:py-32">
+      <section id="selecteur" ref={selectorRef} className="relative w-full overflow-hidden py-16 md:py-20">
         <div className="relative z-10 mx-auto max-w-[1240px] px-6 sm:px-10 lg:px-16">
 
           <div className="mb-12 flex flex-col items-start justify-between gap-10 lg:flex-row lg:items-end">
@@ -352,7 +351,6 @@ const ActivitesPage = () => {
                 transition={{ duration: 0.6 }}
                 className="mb-5 flex items-center gap-3"
               >
-                <span className="h-px w-8 bg-[#d4cfc7]" />
                 <em style={{ fontFamily: SERIF }} className="text-base tracking-[0.14em] uppercase text-[#b3a996] italic">
                   +<span style={{ fontFamily: DISPLAY }} className="not-italic text-white">{count}</span> cours variés
                 </em>
@@ -368,15 +366,8 @@ const ActivitesPage = () => {
                 <motion.span
                   animate={{ color: currentLevel.accent }}
                   transition={{ duration: 0.5 }}
-                  className="relative inline-block whitespace-nowrap"
                 >
-                  <span className="relative z-10">intensité</span>
-                  <motion.span
-                    animate={{ backgroundColor: currentLevel.accent }}
-                    transition={{ duration: 0.5 }}
-                    className="absolute -left-0.5 -right-0.5 bottom-[0.12em] z-0 h-[0.34em] origin-left"
-                    style={{ scaleX: selectorVisible ? 1 : 0 }}
-                  />
+                  intensité
                 </motion.span>
               </motion.h2>
             </div>
@@ -462,7 +453,7 @@ const ActivitesPage = () => {
             initial={{ opacity: 0 }}
             animate={selectorVisible ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-12 text-center text-xs italic tracking-wide text-white/30"
+            className="mt-10 text-center text-xs italic tracking-wide text-white/40 border-t border-white/[0.06] pt-6"
           >
             Cliquez sur un cours pour découvrir le détail · Tous nos cours sont encadrés par des coachs diplômés
           </motion.p>

@@ -193,7 +193,6 @@ const PlanCard = ({ plan, index, isInView }) => {
         ══════════════════════════════════════════════════════ */}
         {plan.badge && (
           <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 rounded-full bg-[#0a0a0a] px-4 py-1.5 shadow-lg shadow-black/30 whitespace-nowrap">
-            <LuStar size={11} className="text-[#d4cfc7] fill-[#d4cfc7]" />
             <span className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-[#d4cfc7]">
               {plan.badge}
             </span>
@@ -460,7 +459,6 @@ const TarifsPage = () => {
                 transition={{ duration: 0.6 }}
                 className="mb-5 flex items-center gap-3"
               >
-                <span className="h-px w-8 bg-[#d4cfc7]" />
                 <em
                   style={{ fontFamily: SERIF }}
                   className="text-base tracking-[0.14em] uppercase text-[#b3a996] italic"
@@ -479,15 +477,9 @@ const TarifsPage = () => {
                 Trouvez l'offre{' '}
                 <span
                   style={{ fontFamily: SERIF }}
-                  className="relative inline-block whitespace-nowrap normal-case italic tracking-normal font-normal"
+                  className="whitespace-nowrap normal-case italic tracking-normal font-normal"
                 >
-                  <span className="relative z-10">qui vous ressemble</span>
-                  <motion.span
-                    initial={{ scaleX: 0 }}
-                    animate={isInView ? { scaleX: 1 } : {}}
-                    transition={{ duration: 0.9, delay: 0.5, ease: [0.65, 0, 0.35, 1] }}
-                    className="absolute -left-0.5 -right-0.5 bottom-[0.12em] z-0 h-[0.30em] origin-left rounded-sm bg-[#d4cfc7]"
-                  />
+                  qui vous ressemble
                 </span>
               </motion.h1>
             </div>
@@ -514,37 +506,14 @@ const TarifsPage = () => {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-10 text-center text-xs tracking-wide text-white/30"
+            className="mt-10 text-center text-xs italic tracking-wide text-white/40 border-t border-white/[0.06] pt-6"
           >
-            Tous nos abonnements incluent un accompagnement humain et des coachs diplômés. Pas
-            d'amateurs.
+            Tous nos abonnements incluent un accompagnement humain et des coachs diplômés. Pas d'amateurs.
           </motion.p>
         </div>
       </section>
 
-      {/* ══════════ BANDEAU ══════════ */}
-      <div
-        aria-hidden="true"
-        className="tp-band relative z-[2] overflow-hidden border-y border-white/10 bg-white/[0.015] py-7"
-      >
-        <div className="tp-marquee">
-          {[0, 1].map((dup) => (
-            <div key={dup} className="flex items-center">
-              {bandWords.map((w, i) => (
-                <span key={`${dup}-${i}`} className="flex items-center">
-                  <span
-                    style={{ fontFamily: DISPLAY }}
-                    className="tp-stroke px-7 text-2xl uppercase tracking-wide whitespace-nowrap"
-                  >
-                    {w}
-                  </span>
-                  <span className="h-[7px] w-[7px] flex-shrink-0 rounded-full bg-[#d4cfc7]" />
-                </span>
-              ))}
-            </div>
-          ))}
-        </div>
-      </div>
+
 
       {/* ══════════ FAQ ══════════ */}
       <section id="faq" ref={faqRef} className="relative z-[2] w-full bg-[#0d0d0d] py-24 md:py-32">
@@ -557,7 +526,6 @@ const TarifsPage = () => {
                 transition={{ duration: 0.6 }}
                 className="mb-5 flex items-center gap-3"
               >
-                <span className="h-px w-8 bg-[#d4cfc7]" />
                 <em
                   style={{ fontFamily: SERIF }}
                   className="text-base tracking-[0.14em] uppercase text-[#b3a996] italic"

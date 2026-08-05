@@ -64,9 +64,7 @@ const Hero = () => {
           custom={0}
           className="mb-8 md:mb-10"
         >
-          <span className="text-[#d4cfc7] text-sm sm:text-base md:text-lg font-semibold italic tracking-[0.1em] uppercase drop-shadow-lg">
-            "Ne confiez jamais votre corps à des amateurs"
-          </span>
+
         </motion.p>
 
         <motion.div
@@ -97,12 +95,7 @@ const Hero = () => {
           </span>
         </motion.p>
 
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="w-16 md:w-20 h-[1px] bg-[#d4cfc7]/40 mb-10 md:mb-12 origin-center"
-        />
+
 
         <motion.div
           variants={fadeIn}

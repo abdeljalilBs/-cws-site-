@@ -108,11 +108,9 @@ const PlanningsPage = () => {
             transition={{ duration: 0.6 }}
             className="mb-6 flex items-center gap-3"
           >
-            <span className="h-px w-8 bg-[#d4cfc7]" />
             <em style={{ fontFamily: SERIF }} className="text-base tracking-[0.14em] uppercase text-[#b3a996] italic">
               +37 cours par semaine
             </em>
-            <span className="h-px w-8 bg-[#d4cfc7]" />
           </motion.div>
 
           <motion.h1
@@ -152,7 +150,6 @@ const PlanningsPage = () => {
               transition={{ duration: 0.6 }}
               className="mb-5 flex items-center gap-3"
             >
-              <LuCalendarDays size={18} className="text-[#d4cfc7]" />
               <em style={{ fontFamily: SERIF }} className="text-base tracking-[0.14em] uppercase text-[#b3a996] italic">
                 Cours collectifs
               </em>
@@ -269,10 +266,11 @@ const PlanningsPage = () => {
               <LuArrowRight size={14} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
             <Link
-              to="/#contact"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold uppercase tracking-[0.15em] text-[#0a0a0a]/70 hover:text-[#0a0a0a] transition-colors"
+              to="/contact"
+              className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full border border-[#0a0a0a]/20 px-10 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#0a0a0a] transition-all duration-500 hover:border-[#0a0a0a] hover:bg-[#0a0a0a] hover:text-white"
             >
-              Nous contacter <LuChevronRight size={15} />
+              <span className="relative z-10">Nous contacter</span>
+              <LuChevronRight size={14} className="relative z-10 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </motion.div>
         </div>
