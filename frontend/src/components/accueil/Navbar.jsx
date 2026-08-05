@@ -42,11 +42,10 @@ const Navbar = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className={`pointer-events-auto flex items-center justify-between w-full max-w-6xl px-6 py-3 rounded-full border transition-all duration-500 ${
-          isScrolled
-            ? 'bg-[#0a0a0a]/80 backdrop-blur-xl border-white/10 shadow-2xl py-2'
-            : 'bg-[#0a0a0a]/40 backdrop-blur-md border-white/5'
-        }`}
+        className={`pointer-events-auto flex items-center justify-between w-full max-w-6xl px-6 py-3 rounded-full border transition-all duration-500 ${isScrolled
+          ? 'bg-[#0a0a0a]/80 backdrop-blur-xl border-white/10 shadow-2xl py-2'
+          : 'bg-[#0a0a0a]/40 backdrop-blur-md border-white/5'
+          }`}
       >
 
         {/* Logo CWS */}
@@ -75,7 +74,7 @@ const Navbar = () => {
         {/* Bouton Contact (Style Pilule inversée - Blanc sur fond sombre) */}
         <div className="hidden lg:block ml-8">
           <Link
-            to="/#contact"
+            to="/contact"
             className="group flex items-center gap-2 bg-white hover:bg-gray-200 text-black px-5 py-2 rounded-full font-bold text-sm transition-all duration-300"
           >
             Contact
@@ -115,7 +114,7 @@ const Navbar = () => {
                 </Link>
               ))}
               <Link
-                to="/#contact"
+                to="/contact"
                 className="flex items-center justify-center gap-2 bg-white text-black px-6 py-3 rounded-full font-bold uppercase tracking-wider mt-4"
                 onClick={() => setIsMobileMenuOpen(false)}
               >

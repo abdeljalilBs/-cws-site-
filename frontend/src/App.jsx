@@ -13,7 +13,7 @@ const ClubPage = lazy(() => import('./components/club/ClubPage'));
 const TarifsPage = lazy(() => import('./components/tarifs/TarifsPage'));
 const PlanningsPage = lazy(() => import('./components/plannings/PlanningsPage'));
 const ActivitesPage = lazy(() => import('./components/activites/ActivitesPage'));
-
+const ContactPage = lazy(() => import('./components/Contact/Contact'));
 // ─── Loader pendant le chargement d'une page ──────────────────────
 const PageLoader = () => (
   <div className="flex min-h-[80vh] items-center justify-center bg-[#0a0a0a]">
@@ -56,6 +56,7 @@ function App() {
             <Route path="/tarifs" element={<TarifsPage />} />
             <Route path="/plannings" element={<PlanningsPage />} />
             <Route path="/activites" element={<ActivitesPage />} />
+            <Route path="/contact" element={<ContactPage />} />
           </Routes>
         </Suspense>
 
