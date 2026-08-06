@@ -10,8 +10,8 @@ const sendEmail = asyncHandler(async (data) => {
     port: 587,
     secure: false, 
     auth: {
-      user: process.env.EMAIL_USER,        
-      pass: process.env.EMAIL_PASS.replace(/\s/g, ""), // Enlève les espaces s'il y en a
+      user: process.env.EMAIL_USER ? process.env.EMAIL_USER.trim().replace(/^["']+|["']+$/g, '') : '',        
+      pass: process.env.EMAIL_PASS ? process.env.EMAIL_PASS.trim().replace(/^["']+|["']+$/g, '').replace(/\s/g, "") : '',
     },
   });
 
