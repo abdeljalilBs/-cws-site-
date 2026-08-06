@@ -1,15 +1,16 @@
-const otpStore = new Map();
+const redis = require('./redis');
 
-const saveOtp = (email, code, expires) => {
-    otpStore.set(email, { code, expires });
+const saveOtp = async (email, code, expiresInSeconds) => {
+    await redis.set(`otp:${email}`, code, { ex: expiresInSeconds });
 };
 
-const getOtp = (email) => {
-    return otpStore.get(email);
+const getOtp = async (email) => {
+    const code = await redis.get(`otp:${email}`);
+    return code;
 };
 
-const deleteOtp = (email) => {
-    otpStore.delete(email);
+const deleteOtp = async (email) => {
+    await redis.del(`otp:${email}`);
 };
 
 module.exports = { saveOtp, getOtp, deleteOtp };

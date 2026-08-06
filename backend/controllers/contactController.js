@@ -1,6 +1,6 @@
 // backend/controllers/contactController.js
 const asyncHandler = require("express-async-handler");
-const { sendEmail } = require('../services/mailer'); // On importe la fonction générique sendEmail
+const { sendEmail } = require('../services/mailer');
 const { saveOtp, getOtp, deleteOtp } = require('../store/otpStore');
 
 const generateOTP = () => Math.floor(100000 + Math.random() * 900000).toString();
@@ -15,9 +15,15 @@ exports.sendOtp = asyncHandler(async (req, res) => {
   }
 
   const otp = generateOTP();
-  const expiryTime = Date.now() + (process.env.OTP_EXPIRY_MINUTES * 60 * 1000);
 
-  saveOtp(email, otp, expiryTime);
+  // Calcul du temps d'expiration en SECONDES pour Redis (ex: 10 minutes = 600 secondes)
+  const expiryMinutes = process.env.OTP_EXPIRY_MINUTES || 10;
+  const expiryInSeconds = expiryMinutes * 60;
+
+  // Sauvegarde dans Redis
+  await saveOtp(email, otp, expiryInSeconds);
+
+  console.log(`[DEBUG] OTP sauvegardé pour ${email} : ${otp}`);
 
   // Template HTML pour l'email d'OTP (Design Premium CWS)
   const otpHtml = `
@@ -31,7 +37,7 @@ exports.sendOtp = asyncHandler(async (req, res) => {
       <div style="font-size: 36px; font-weight: bold; letter-spacing: 8px; background-color: #2a2a2a; padding: 20px; text-align: center; border-radius: 5px; margin: 30px 0; color: #e0d5c1; border: 1px solid #333;">
         ${otp}
       </div>
-      <p style="font-size: 13px; color: #888;">Ce code est valable pendant ${process.env.OTP_EXPIRY_MINUTES} minutes.</p>
+      <p style="font-size: 13px; color: #888;">Ce code est valable pendant ${expiryMinutes} minutes.</p>
       <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #333; text-align: center; font-size: 12px; color: #666;">
         <p>20, Rue Marie de Lorraine, 37700 La Ville-aux-Dames</p>
       </div>
@@ -50,28 +56,31 @@ exports.sendOtp = asyncHandler(async (req, res) => {
 // --- CONTRÔLEUR 2 : VÉRIFIER L'OTP ET NOTIFIER LE CLIENT ---
 exports.verifyContact = asyncHandler(async (req, res) => {
   const { email, otp, formData } = req.body;
-  // formData contient : { firstName, lastName, phone, requestType, message }
 
-  const storedData = getOtp(email);
+  // Récupération du code depuis Redis
+  const storedCode = await getOtp(email);
 
-  if (!storedData) {
+  // Logs de débogage pour voir ce qui se passe dans le terminal
+  console.log("--- DEBUG VERIFICATION ---");
+  console.log("Email reçu :", email);
+  console.log("Code dans Redis :", storedCode, typeof storedCode);
+  console.log("Code saisi (Postman) :", otp, typeof otp);
+  console.log("--------------------------");
+
+  // Avec Redis, si le code a expiré, il est supprimé automatiquement, donc storedCode sera null
+  if (!storedCode) {
     res.status(400);
-    throw new Error("Aucun code trouvé. Veuillez en demander un nouveau.");
+    throw new Error("Aucun code trouvé ou code expiré. Veuillez en demander un nouveau.");
   }
 
-  if (Date.now() > storedData.expires) {
-    deleteOtp(email);
-    res.status(400);
-    throw new Error("Le code a expiré. Veuillez en demander un nouveau.");
-  }
-
-  if (storedData.code !== otp) {
+  // ✅ CORRECTION ICI : On force la comparaison en String pour éviter les bugs de type
+  if (String(storedCode) !== String(otp)) {
     res.status(400);
     throw new Error("Le code saisi est incorrect.");
   }
 
-  // ✅ Le code est bon, on nettoie le store
-  deleteOtp(email);
+  // ✅ Le code est bon, on nettoie Redis
+  await deleteOtp(email);
 
   // --- 1. EMAIL DE CONFIRMATION POUR L'UTILISATEUR (Le Prospect) ---
   const userConfirmationHtml = `
@@ -121,7 +130,7 @@ exports.verifyContact = asyncHandler(async (req, res) => {
   `;
 
   await sendEmail({
-    to: process.env.CLIENT_EMAIL, // Envoie à teamonecws@gmail.com
+    to: process.env.CLIENT_EMAIL,
     subject: `🔥 Nouveau Prospect CWS : ${formData.firstName} ${formData.lastName}`,
     html: clientAlertHtml
   });
