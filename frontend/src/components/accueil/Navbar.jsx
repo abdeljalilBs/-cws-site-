@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { LuChevronDown, LuChevronRight, LuMenu, LuX } from 'react-icons/lu';
+import { LuChevronRight, LuMenu, LuX, LuLock } from 'react-icons/lu';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
@@ -23,8 +23,6 @@ const Navbar = () => {
   }, [location.pathname]);
 
   // ─── Liens de navigation ───────────────────────────────────
-  // to: destination. Pour les ancres de l'accueil → "/#id"
-  // Pour la page tarifs (séparée) → "/tarifs"
   const navLinks = [
     { name: 'Accueil', to: '/' },
     { name: 'Le club', to: '/club' },
@@ -66,13 +64,23 @@ const Navbar = () => {
               className="text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300 flex items-center gap-1"
             >
               {link.name}
-
             </Link>
           ))}
         </div>
 
-        {/* Bouton Contact (Style Pilule inversée - Blanc sur fond sombre) */}
-        <div className="hidden lg:block ml-8">
+        {/* Actions à droite (Admin + Contact) */}
+        <div className="hidden lg:flex items-center gap-4 ml-8">
+          {/* Lien Admin discret */}
+          <Link
+            to="/admin/login"
+            title="Espace administrateur"
+            className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wider text-gray-400 hover:text-[#d4cfc7] transition-colors duration-300"
+          >
+            <LuLock size={13} />
+            Admin
+          </Link>
+
+          {/* Bouton Contact (Style Pilule inversée - Blanc sur fond sombre) */}
           <Link
             to="/contact"
             className="group flex items-center gap-2 bg-white hover:bg-gray-200 text-black px-5 py-2 rounded-full font-bold text-sm transition-all duration-300"
@@ -110,9 +118,19 @@ const Navbar = () => {
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
-
                 </Link>
               ))}
+
+              {/* Lien Admin discret (mobile) */}
+              <Link
+                to="/admin/login"
+                className="flex items-center gap-2 text-gray-400 hover:text-[#d4cfc7] font-medium py-2 border-b border-white/5 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <LuLock size={15} />
+                Espace Admin
+              </Link>
+
               <Link
                 to="/contact"
                 className="flex items-center justify-center gap-2 bg-white text-black px-6 py-3 rounded-full font-bold uppercase tracking-wider mt-4"

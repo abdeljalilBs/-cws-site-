@@ -1,14 +1,12 @@
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
-
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser'); // <-- 1. AJOUT : Import de cookie-parser
 
 const contactRoutes = require('./routes/contact');
 const newsletterRoutes = require('./routes/newsletterRoutes');
-
+const adminRoutes = require('./routes/adminRoutes'); // <-- 2. AJOUT : Import des routes admin
 
 const app = express();
 
@@ -37,15 +35,18 @@ app.use(cors({
   },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
+  credentials: true, // Très important : permet au navigateur d'envoyer/recevoir les cookies
 }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser()); // <-- 3. AJOUT : Middleware pour parser les cookies (nécessaire pour le refreshToken)
 
 // --- Routes ---
 app.use('/api/contact', contactRoutes);
-app.use('/api/newsletter', newsletterRoutes); // <-- Route pour la newsletter CWS
+app.use('/api/newsletter', newsletterRoutes);
+app.use('/api/admin', adminRoutes); // <-- 4. AJOUT : Montage des routes admin
+
 // app.use('/api/otp', otpRoutes); // Décommente quand ta route OTP est prête
 
 app.get('/api/health', (req, res) => {
