@@ -8,8 +8,7 @@ import {
 import LazyImage from '../LazyImage';
 import ambianceImg from '../../assets/ambiance.png';
 
-const API_URL = '/api/contact';
-
+const API_URL = 'https://cws-backend-sandy.vercel.app/api/contact';
 const DISPLAY = "'Anton', sans-serif";
 const SERIF = "'Instrument Serif', Georgia, 'Times New Roman', serif";
 
@@ -190,7 +189,7 @@ const Contact = () => {
         setFormError('');
 
         try {
-            const response = await fetch(`${API_URL}/send-otp`, {
+            const response = await fetch(`${API_URL}/sendOtp`, {  // ← CHANGÉ ICI
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: form.email, firstName: form.prenom })
@@ -222,7 +221,7 @@ const Contact = () => {
                 message: form.message
             };
 
-            const response = await fetch(`${API_URL}/verify-contact`, {
+            const response = await fetch(`${API_URL}/verifyContact`, {  // ← CHANGÉ ICI
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
