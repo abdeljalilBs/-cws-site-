@@ -14,11 +14,17 @@
   "type": "commonjs",
   "dependencies": {
     "@upstash/redis": "^1.38.2",
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.3",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.8",
     "mongoose": "^9.9.1",
-    "nodemailer": "^9.0.4"
+    "nodemailer": "^9.0.4",
+    "nodemon": "^3.1.14"
   }
 }
