@@ -189,7 +189,7 @@ const Contact = () => {
         setFormError('');
 
         try {
-            const response = await fetch(`${API_URL}/sendOtp`, {  // ← CHANGÉ ICI
+            const response = await fetch(`${API_URL}/send-otp`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: form.email, firstName: form.prenom })
@@ -221,7 +221,7 @@ const Contact = () => {
                 message: form.message
             };
 
-            const response = await fetch(`${API_URL}/verifyContact`, {  // ← CHANGÉ ICI
+            const response = await fetch(`${API_URL}/verify-contact`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
