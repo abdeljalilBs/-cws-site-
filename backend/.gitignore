@@ -1,0 +1,19 @@
+# Dépendances
+node_modules/
+
+# Secrets — NE JAMAIS PUSHER
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Vercel local
+.vercel/
