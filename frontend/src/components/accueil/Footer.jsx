@@ -7,10 +7,14 @@ const DISPLAY = "'Anton', sans-serif";
 const Footer = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-60px' });
-  const [subscribed, setSubscribed] = useState(false);
+
+  // --- STATES NEWSLETTER ---
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState('idle'); // idle | loading | success | error
+  const [message, setMessage] = useState('');
 
   const phone = '06 77 88 44 69';
-  const email = 'teamonecws@gmail.com';
+  const emailContact = 'teamonecws@gmail.com';
   const address1 = '20, Rue Marie de Lorraine';
   const address2 = '37700 La Ville aux Dames';
   const instagram =
@@ -34,6 +38,52 @@ const Footer = () => {
     animate: isInView ? { opacity: 1, y: 0 } : {},
     transition: { duration: 0.6, delay },
   });
+
+  // --- FONCTION D'ENVOI NEWSLETTER ---
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+
+    // 🔍 LOGS DE DEBUG : à regarder dans la console (F12)
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+    console.log('📤 Newsletter : envoi en cours vers', `${API_URL}/api/newsletter/subscribe`);
+    console.log('📧 Email envoyé :', email);
+
+    setStatus('loading');
+    setMessage('');
+
+    try {
+      const response = await fetch(`${API_URL}/api/newsletter/subscribe`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      console.log('📥 Réponse reçue, status HTTP :', response.status);
+
+      const data = await response.json();
+      console.log('📦 Contenu de la réponse :', data);
+
+      if (response.ok) {
+        setStatus('success');
+        setMessage(data.message || "Merci, c'est noté ✓");
+        setEmail('');
+      } else {
+        setStatus('error');
+        setMessage(data.message || 'Une erreur est survenue');
+      }
+    } catch (err) {
+      console.error('❌ Erreur newsletter :', err);
+      setStatus('error');
+      setMessage('Erreur réseau. Vérifiez que le backend est bien lancé.');
+    } finally {
+      // Efface uniquement le message après 5s, mais garde le formulaire visible
+      setTimeout(() => {
+        setStatus('idle');
+        setMessage('');
+      }, 5000);
+    }
+  };
 
   const NavLink = ({ link }) => (
     <a
@@ -90,7 +140,6 @@ const Footer = () => {
 
       <div className="relative z-[2] mx-auto max-w-[1240px] px-6 pt-20 pb-10 sm:px-10 md:pt-24 lg:px-16">
 
-        {/* ══════════ GRILLE ══════════ */}
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-[3fr_2fr_3fr_4fr] lg:gap-8">
 
           {/* Marque */}
@@ -148,10 +197,10 @@ const Footer = () => {
                   {phone}
                 </a>
                 <a
-                  href={`mailto:${email}`}
+                  href={`mailto:${emailContact}`}
                   className="w-fit break-all text-[0.86rem] tracking-[0.05em] text-white/75 transition-colors duration-300 hover:text-white"
                 >
-                  {email}
+                  {emailContact}
                 </a>
                 <p className="pt-1 text-[0.82rem] uppercase leading-[1.7] tracking-[0.05em] text-white/40">
                   {address1}
@@ -161,34 +210,60 @@ const Footer = () => {
               </div>
             </div>
 
+            {/* ══════════ FORMULAIRE NEWSLETTER ══════════ */}
             <div>
               <p className="mb-3 max-w-[26ch] text-[0.68rem] uppercase leading-snug tracking-[0.16em] text-white/40">
                 Inscrivez-vous pour recevoir nos actualités
               </p>
-              {subscribed ? (
-                <p className="py-2 text-[0.95rem] italic text-[#d4cfc7]">Merci, c'est noté ✓</p>
-              ) : (
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    setSubscribed(true);
-                  }}
-                  className="flex max-w-[300px] items-center border-b border-white/20 transition-colors duration-300 focus-within:border-[#d4cfc7]"
+
+              {/* Le formulaire reste TOUJOURS visible (ne disparaît plus) */}
+              <form
+                onSubmit={handleSubscribe}
+                className="flex max-w-[300px] items-center border-b border-white/20 transition-colors duration-300 focus-within:border-[#d4cfc7]"
+              >
+                <input
+                  type="email"
+                  required
+                  placeholder="Votre email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  disabled={status === 'loading'}
+                  className="w-full min-w-0 bg-transparent py-2.5 text-sm tracking-wide text-white outline-none placeholder:text-white/30 disabled:opacity-50"
+                />
+                <button
+                  type="submit"
+                  aria-label="S'inscrire"
+                  disabled={status === 'loading'}
+                  className="flex flex-shrink-0 pl-3 text-white/50 transition-colors duration-300 hover:text-[#d4cfc7] disabled:cursor-wait disabled:opacity-50"
                 >
-                  <input
-                    type="email"
-                    required
-                    placeholder="Votre email"
-                    className="w-full min-w-0 bg-transparent py-2.5 text-sm tracking-wide text-white outline-none placeholder:text-white/30"
-                  />
-                  <button
-                    type="submit"
-                    aria-label="S'inscrire"
-                    className="flex flex-shrink-0 pl-3 text-white/50 transition-colors duration-300 hover:text-[#d4cfc7]"
-                  >
+                  {status === 'loading' ? (
+                    <span className="animate-pulse">...</span>
+                  ) : (
                     <LuArrowRight size={18} />
-                  </button>
-                </form>
+                  )}
+                </button>
+              </form>
+
+              {/* Message de succès affiché EN DESSOUS du formulaire */}
+              {status === 'success' && message && (
+                <motion.p
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mt-2 text-[0.9rem] italic text-[#d4cfc7]"
+                >
+                  {message}
+                </motion.p>
+              )}
+
+              {/* Message d'erreur affiché EN DESSOUS du formulaire */}
+              {status === 'error' && message && (
+                <motion.p
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="mt-2 text-[0.8rem] text-red-400/90"
+                >
+                  {message}
+                </motion.p>
               )}
             </div>
           </motion.div>

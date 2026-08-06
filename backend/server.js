@@ -1,26 +1,35 @@
-// Ne charger dotenv qu'en local. Sur Vercel, les variables viennent des Environment Variables du dashboard.
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
+
 const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
 
 const contactRoutes = require('./routes/contact');
-// Si tu as déjà créé tes routes OTP, décommente la ligne ci-dessous :
-// const otpRoutes = require('./routes/otp');
+const newsletterRoutes = require('./routes/newsletterRoutes');
+
 
 const app = express();
 
-// --- CORS explicite ---
+console.log('🔍 Vérification de MONGODB_URI...', process.env.MONGODB_URI ? '✅ Présente' : '❌ Absente');
+
+if (process.env.MONGODB_URI) {
+  mongoose.connect(process.env.MONGODB_URI)
+    .then(() => console.log('✅ Connecté à MongoDB Atlas'))
+    .catch((err) => console.error('❌ Erreur connexion MongoDB:', err.message));
+} else {
+  console.warn('⚠️  MONGODB_URI non défini dans les variables d\'environnement');
+}
+
 const allowedOrigins = [
   'https://cws-site.vercel.app',
-  'http://localhost:5173', // adapte au port de ton frontend en local
+  'http://localhost:5173',
   'http://localhost:3000',
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
-    // Autorise les requêtes sans origin (Postman, curl, health checks)
     if (!origin || allowedOrigins.includes(origin)) {
       return callback(null, true);
     }
@@ -31,13 +40,12 @@ app.use(cors({
   credentials: true,
 }));
 
-
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // --- Routes ---
 app.use('/api/contact', contactRoutes);
+app.use('/api/newsletter', newsletterRoutes); // <-- Route pour la newsletter CWS
 // app.use('/api/otp', otpRoutes); // Décommente quand ta route OTP est prête
 
 app.get('/api/health', (req, res) => {
