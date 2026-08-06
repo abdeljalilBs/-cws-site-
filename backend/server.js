@@ -15,8 +15,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/contact', contactRoutes);
 // app.use('/api/otp', otpRoutes); // Décommente quand ta route OTP est prête
 
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ status: 'ok', message: 'API CWS Backend is running smoothly.' });
+});
+
 app.get('/', (req, res) => {
-  res.status(200).json({ message: ' API CWS Backend is running smoothly.' });
+  res.status(200).json({ message: 'API CWS Backend is running smoothly.' });
 });
 
 app.use((err, req, res, next) => {
@@ -24,6 +28,7 @@ app.use((err, req, res, next) => {
   const statusCode = res.statusCode === 200 ? 500 : res.statusCode;
   res.status(statusCode).json({
     error: err.message || "Une erreur interne est survenue.",
+    message: err.message || "Une erreur interne est survenue.",
     stack: process.env.NODE_ENV === 'production' ? null : err.stack
   });
 });
