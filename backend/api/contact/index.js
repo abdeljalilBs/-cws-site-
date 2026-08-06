@@ -1,14 +1,8 @@
 // api/contact/index.js
-module.exports = async function handler(req, res) {
-    // CORS Headers - CORRIGÉ
-    res.setHeader('Access-Control-Allow-Origin', 'https://cws-site.vercel.app');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
+const { applyCors } = require('../_cors');
 
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
-    }
+module.exports = async function handler(req, res) {
+    if (applyCors(req, res)) return;
 
     res.status(200).json({
         status: "ok",
