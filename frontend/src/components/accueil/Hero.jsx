@@ -41,11 +41,15 @@ const Hero = () => {
         loop
         muted
         playsInline
-        preload="auto"
+        preload="metadata"
         poster="/hero-poster.jpg"
         className="absolute top-0 left-0 w-full h-full object-cover"
+        aria-hidden="true"
       >
+
+        <source src="/hero-video.webm" type="video/webm" />
         <source src="/hero-video.mp4" type="video/mp4" />
+
         Ton navigateur ne supporte pas la lecture de la vidéo.
       </video>
 
