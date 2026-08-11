@@ -36,7 +36,13 @@ const loginAdmin = async (req, res) => {
             res.status(401).json({ message: 'Email ou mot de passe invalide' });
         }
     } catch (error) {
-        res.status(500).json({ message: 'Erreur serveur lors du login', error: error.message });
+        console.error("LOGIN ERROR:", error);
+
+        res.status(500).json({
+            message: "Erreur serveur lors du login",
+            error: error.message,
+            stack: error.stack,
+        });
     }
 };
 
