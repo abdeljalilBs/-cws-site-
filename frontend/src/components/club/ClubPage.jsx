@@ -136,7 +136,7 @@ const PillarCard = ({ pillar, index, isInView }) => {
       </span>
 
       {/* ═══ Nouvelle icône : cercle avec anneau SVG custom + effet hover ═══ */}
-      <div className="relative z-10 mb-6 flex h-16 w-16 items-center justify-center">
+      <div className="relative z-10 mb-6 mx-auto flex h-16 w-16 items-center justify-center">
         {/* Anneau décoratif qui apparaît au hover */}
         <span className="absolute inset-0 rounded-full border border-[#d4cfc7]/0 transition-all duration-500 group-hover:border-[#d4cfc7]/30 group-hover:scale-110" />
         {/* Fond cercle */}
@@ -150,13 +150,13 @@ const PillarCard = ({ pillar, index, isInView }) => {
       {/* Titre */}
       <h3
         style={{ fontFamily: DISPLAY }}
-        className="relative z-10 mb-3 text-lg uppercase leading-tight tracking-tight text-white transition-colors duration-300 group-hover:text-[#d4cfc7]"
+        className="relative z-10 mb-3 text-center text-lg uppercase leading-tight tracking-tight text-white transition-colors duration-300 group-hover:text-[#d4cfc7]"
       >
         {pillar.title}
       </h3>
 
       {/* Texte */}
-      <p className="relative z-10 text-sm leading-relaxed text-white/55">
+      <p className="relative z-10 text-justify text-sm leading-relaxed text-white/55">
         {pillar.text}
       </p>
     </motion.div>
@@ -204,7 +204,7 @@ const ClubPage = () => {
       {/* ══════════════════════════════════════════
           1. HERO CLUB
       ══════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative w-full min-h-[88vh] flex items-center overflow-hidden">
+      <section ref={heroRef} className="relative w-full min-h-screen flex items-center overflow-hidden">
         <motion.div
           initial={{ scale: 1.12 }}
           animate={heroVisible ? { scale: 1 } : {}}
@@ -231,7 +231,10 @@ const ClubPage = () => {
 
             <motion.div initial={{ opacity: 0, y: 20 }} animate={heroVisible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, delay: 0.3 }} className="flex items-start gap-3 mb-10">
               <LuMapPin size={20} className="mt-1 flex-shrink-0 text-[#d4cfc7]" />
-              <p style={{ fontFamily: SERIF }} className="text-xl md:text-2xl italic text-[#d4cfc7]">20, Rue Marie de Lorraine — 37700 La Ville-aux-Dames</p>
+              <p style={{ fontFamily: SERIF }} className="text-xl md:text-2xl italic text-[#d4cfc7]">
+                20, Rue Marie de Lorraine<br />
+                37700 La Ville-aux-Dames
+              </p>
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 30 }} animate={heroVisible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.45 }} className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl">
@@ -268,7 +271,7 @@ const ClubPage = () => {
           <div className="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-[4.5rem]">
             <div>
               <motion.div initial={{ opacity: 0, y: 20 }} animate={storyVisible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6 }} className="mb-5 flex items-center gap-3">
-                <em style={{ fontFamily: SERIF }} className="text-base tracking-[0.14em] uppercase text-[#b3a996] italic">CWS : Club de Sport Premium à La Ville-aux-Dames</em>
+                <em style={{ fontFamily: SERIF }} className="text-base tracking-[0.14em] uppercase text-[#b3a996] italic">CWS : Un Club de Sport Premium à La Ville-aux-Dames</em>
               </motion.div>
 
               <motion.h2 initial={{ opacity: 0, y: 30 }} animate={storyVisible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.1 }} style={{ fontFamily: DISPLAY }} className="mb-7 text-[2.4rem] uppercase leading-[0.94] tracking-tight text-[#0a0a0a] sm:text-5xl md:text-6xl lg:text-[4rem]">
