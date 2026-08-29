@@ -189,23 +189,7 @@ const ClubSection = () => {
     };
   }, [handleScroll, computeStyles, MIDDLE_SET_START]);
 
-  // ─── Molette verticale → horizontale ───────────────────────
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const handleWheel = (e) => {
-      const rect = el.getBoundingClientRect();
-      if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
-        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-          e.preventDefault();
-          el.scrollLeft += e.deltaY * 1.5;
-          if (!hasInteracted) setHasInteracted(true);
-        }
-      }
-    };
-    el.addEventListener('wheel', handleWheel, { passive: false });
-    return () => el.removeEventListener('wheel', handleWheel);
-  }, [hasInteracted]);
+  // ─── Molette verticale → horizontale (Désactivée à la demande de l'utilisateur) ──
 
   // ─── Auto-scroll hint ──────────────────────────────────────
   useEffect(() => {

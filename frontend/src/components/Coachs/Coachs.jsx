@@ -14,39 +14,27 @@ const SERIF = "'Instrument Serif', Georgia, 'Times New Roman', serif";
 const coachesData = [
     {
         id: 1,
-        name: "JUSTINE",
-        role: "Directrice Générale et Coach Sportif",
-        image: justineImg,
-        bio: "Justine a 30 ans : elle saura vous transmettre son énergie, son savoir et sa passion pour le métier.",
-        quote: "PARTIR DE RIEN, FINIR AU SOMMET.",
-        sports: ["BasketBall", "Running", "Fitness", "Musculation"],
-        qualities: ["Ambitieuse", "Dynamique", "Organisée"],
-        formations: ["BPJEPS AGFF", "Pro Trainer BodyPump", "Pro Trainer RPM", "Formation Boxe", "Nutrition", "Préparation mentale"],
-        prestations: ["Perte de poids", "Prise de masse", "Réathlétisation", "Entretien"]
+        name: "UNE NOUVELLE ÉQUIPE",
+        role: "Bientôt disponible",
+        image: null,
+        bio: "Nous préparons l'arrivée d'une toute nouvelle équipe pour vous accompagner dans vos objectifs. Restez connectés pour découvrir ceux qui vous guideront vers le sommet !",
+        quote: "LE MEILLEUR RESTE À VENIR.",
+        sports: ["Fitness", "Musculation", "Cardio", "Cross-training"],
+        qualities: ["Passion", "Expertise", "Motivation"],
+        formations: ["Diplômés d'État", "Experts en coaching"],
+        prestations: ["Perte de poids", "Prise de masse", "Accompagnement"]
     },
     {
         id: 2,
-        name: "MARION",
-        role: "Coach Sportif",
-        image: marionImg,
-        bio: "Marion a 29 ans : vous ne pourrez qu'adorer cette passionnée de cours collectifs qui saura prendre soin de vous autant sur des cours doux, que sur des cours intensifs.",
-        quote: "IL N'EST JAMAIS TROP TARD POUR DEVENIR CE QUE TU AURAIS PU ÊTRE.",
-        sports: ["Running", "Fitness", "Musculation"],
-        qualities: ["Energique", "Méthodique", "Motivante"],
-        formations: ["BPJEPS AGFF", "Pro trainer Bodybalance", "Pilâtes/Yoga"],
-        prestations: ["Perte de poids", "Prise de masse", "Réathlétisation", "Entretien", "Bien-être"]
-    },
-    {
-        id: 3,
-        name: "BILAL",
-        role: "Coach Sportif",
-        image: bilalImg,
-        bio: "Bilal a 23 ans : il apporte une énergie nouvelle, une expertise pointue et incarne l'équilibre parfait entre puissance et délicatesse.",
-        quote: "PAS DE VICTOIRES SANS EFFORTS.",
-        sports: ["Boxe", "Karaté", "Kick boxing", "Fitness", "Musculation"],
-        qualities: ["Jovial", "Discipliné", "Polyvalent"],
-        formations: ["BPJEPS AGFF", "Formation Pilâtes", "Formation handisport"],
-        prestations: ["Perte de poids", "Prise de masse", "Réathlétisation", "Boxe"]
+        name: "DE NOUVEAUX COACHS",
+        role: "Prochainement",
+        image: null,
+        bio: "Des passionnés, experts dans leur domaine, rejoindront bientôt le club pour vous offrir un suivi sur-mesure et vous pousser à vous dépasser à chaque séance.",
+        quote: "PRÉPAREZ-VOUS À TRANSPIRER.",
+        sports: ["Boxe", "Pilates", "Yoga", "Réathlétisation"],
+        qualities: ["Dynamisme", "Écoute", "Rigueur"],
+        formations: ["BPJEPS", "Spécialistes santé"],
+        prestations: ["Bien-être", "Performance", "Entretien"]
     }
 ];
 
@@ -86,13 +74,19 @@ const CoachCard = ({ coach, index }) => {
             {/* ── Colonne Image ── */}
             <div className={`relative group ${isReversed ? 'lg:order-2' : 'lg:order-1'}`}>
                 <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#111] aspect-[4/5]">
-                    {/* Effet Noir & Blanc -> Couleur au survol + Zoom */}
-                    <motion.img
-                        src={coach.image}
-                        alt={coach.name}
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out"
-                        whileHover={{ scale: 1.03 }}
-                    />
+                    {/* Effet Noir & Blanc -> Couleur au survol + Zoom ou Placeholder */}
+                    {coach.image ? (
+                        <motion.img
+                            src={coach.image}
+                            alt={coach.name}
+                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out"
+                            whileHover={{ scale: 1.03 }}
+                        />
+                    ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-[#1a1a1a]">
+                            <span className="text-white/20 uppercase tracking-[0.3em] font-bold text-sm italic px-4 text-center">En cours de recrutement...</span>
+                        </div>
+                    )}
                     {/* Dégradé sombre en bas de l'image pour la lisibilité */}
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80" />
 

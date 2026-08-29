@@ -27,7 +27,7 @@ const Navbar = () => {
     { name: 'Accueil', to: '/' },
     { name: 'Le club', to: '/club' },
     { name: 'Les coachs', to: '/coachs' },
-    { name: 'Les activités', to: '/activites' },
+    { name: 'Les cours', to: '/activites' },
     { name: 'Les plannings', to: '/plannings' },
     { name: 'Tarifs', to: '/tarifs' },
   ];
@@ -68,9 +68,9 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Actions à droite (Admin + Contact) */}
+        {/* Actions à droite (Contact) */}
         <div className="hidden lg:flex items-center gap-4 ml-8">
-          {/* Lien Admin discret */}
+          {/* Lien Admin retiré temporairement
           <Link
             to="/admin/login"
             title="Espace administrateur"
@@ -79,6 +79,7 @@ const Navbar = () => {
             <LuLock size={13} />
             Admin
           </Link>
+          */}
 
           {/* Bouton Contact (Style Pilule inversée - Blanc sur fond sombre) */}
           <Link
@@ -121,7 +122,7 @@ const Navbar = () => {
                 </Link>
               ))}
 
-              {/* Lien Admin discret (mobile) */}
+              {/* Lien Admin discret (mobile) retiré temporairement
               <Link
                 to="/admin/login"
                 className="flex items-center gap-2 text-gray-400 hover:text-[#d4cfc7] font-medium py-2 border-b border-white/5 transition-colors"
@@ -130,6 +131,7 @@ const Navbar = () => {
                 <LuLock size={15} />
                 Espace Admin
               </Link>
+              */}
 
               <Link
                 to="/contact"
