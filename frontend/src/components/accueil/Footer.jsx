@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { LuInstagram, LuFacebook, LuArrowRight } from 'react-icons/lu';
+import { Link } from 'react-router-dom';
 
 const DISPLAY = "'Anton', sans-serif";
 
@@ -29,7 +30,7 @@ const Footer = () => {
   ];
   const legalLinks = [
     { label: 'Conditions générales de ventes', href: '#cgv' },
-    { label: 'Mentions légales', href: '#mentions' },
+    { label: 'Mentions légales', href: '/mentions-legales', isRoute: true },
     { label: 'Politique de confidentialité', href: '#privacy' },
   ];
 
@@ -85,17 +86,28 @@ const Footer = () => {
     }
   };
 
-  const NavLink = ({ link }) => (
-    <a
-      href={link.href}
-      className="group/l flex w-fit items-center gap-2 py-[5px] text-[0.86rem] tracking-[0.06em] text-white/55 transition-all duration-300 hover:translate-x-1 hover:text-white"
-    >
-      {link.label}
-      <span className="flex w-0 items-center overflow-hidden text-[#d4cfc7] opacity-0 transition-all duration-300 group-hover/l:w-4 group-hover/l:opacity-100">
-        <LuArrowRight size={13} />
-      </span>
-    </a>
-  );
+  const NavLink = ({ link }) =>
+    link.isRoute ? (
+      <Link
+        to={link.href}
+        className="group/l flex w-fit items-center gap-2 py-[5px] text-[0.86rem] tracking-[0.06em] text-white/55 transition-all duration-300 hover:translate-x-1 hover:text-white"
+      >
+        {link.label}
+        <span className="flex w-0 items-center overflow-hidden text-[#d4cfc7] opacity-0 transition-all duration-300 group-hover/l:w-4 group-hover/l:opacity-100">
+          <LuArrowRight size={13} />
+        </span>
+      </Link>
+    ) : (
+      <a
+        href={link.href}
+        className="group/l flex w-fit items-center gap-2 py-[5px] text-[0.86rem] tracking-[0.06em] text-white/55 transition-all duration-300 hover:translate-x-1 hover:text-white"
+      >
+        {link.label}
+        <span className="flex w-0 items-center overflow-hidden text-[#d4cfc7] opacity-0 transition-all duration-300 group-hover/l:w-4 group-hover/l:opacity-100">
+          <LuArrowRight size={13} />
+        </span>
+      </a>
+    );
 
   return (
     <footer
