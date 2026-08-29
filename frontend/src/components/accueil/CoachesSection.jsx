@@ -43,19 +43,14 @@ const LazyImage = ({ src, alt, className, imgClassName }) => {
 
 const coaches = [
   {
-    image: justineImg,
-    name: 'Justine',
-    role: 'Directrice Générale & Coach Sportif',
+    image: null,
+    name: 'NOUVELLE ÉQUIPE',
+    role: 'Bientôt disponible',
   },
   {
-    image: marionImg,
-    name: 'Marion',
-    role: 'Coach Sportif',
-  },
-  {
-    image: bilalImg,
-    name: 'Bilal',
-    role: 'Coach Sportif',
+    image: null,
+    name: 'NOUVEAUX COACHS',
+    role: 'Prochainement',
   },
 ];
 
@@ -98,18 +93,24 @@ const CoachCard = ({ coach, index, isInView, reduce }) => {
           className="absolute bottom-[6%] right-[8%] z-[2] h-[82%] w-[78%] rounded-xl border border-[#d4cfc7]"
         />
 
-        {/* Photo principale — LAZY LOADING */}
+        {/* Photo principale — LAZY LOADING ou Placeholder */}
         <motion.div
           animate={isHovered && !reduce ? { y: -10, scale: 1.02 } : { y: 0, scale: 1 }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
-          className="group absolute left-[6%] top-[4%] z-[3] h-[84%] w-[80%] overflow-hidden rounded-xl shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)]"
+          className="group absolute left-[6%] top-[4%] z-[3] h-[84%] w-[80%] overflow-hidden rounded-xl shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)] bg-[#111]"
         >
-          <LazyImage
-            src={coach.image}
-            alt={coach.name}
-            className="h-full w-full"
-            imgClassName="object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-105"
-          />
+          {coach.image ? (
+            <LazyImage
+              src={coach.image}
+              alt={coach.name}
+              className="h-full w-full"
+              imgClassName="object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-105"
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center p-6 text-center">
+               <span className="text-sm uppercase tracking-[0.2em] font-semibold text-white/30 italic">En cours de recrutement...</span>
+            </div>
+          )}
           {/* Overlay dégradé bas sur la photo */}
           <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#0a0a0a]/60 to-transparent" />
         </motion.div>

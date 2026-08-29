@@ -11,8 +11,8 @@ const Accueil = () => (
     <Hero />
     <ClubSection />
     <AboutSection />
-    <TestimonialsSection />
     <CoachesSection />
+    <TestimonialsSection />
     <CtaSection />
   </>
 );
