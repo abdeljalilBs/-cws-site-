@@ -378,7 +378,7 @@ const FaqItem = ({ faq, index, isOpen, onToggle, isInView }) => {
             transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="overflow-hidden"
           >
-            <p className="max-w-3xl pb-7 pl-10 text-sm sm:text-base leading-relaxed text-white/55">
+            <p className="max-w-5xl pb-7 pl-10 text-sm sm:text-base leading-relaxed text-white/55">
               {faq.a}
             </p>
           </motion.div>
@@ -490,7 +490,7 @@ const TarifsPage = () => {
               transition={{ duration: 0.6, delay: 0.25 }}
               className="max-w-[36ch] pb-1 text-[1.02rem] font-light leading-relaxed text-[#8a8279]"
             >
-              Des formules claires, sans surprise. Que vous veniez ponctuellement ou que vous vous
+              Des formules claires, sans surprise.<br /> Que vous veniez ponctuellement ou que vous vous
               engagiez sur la durée, il y a un abonnement pensé pour vous.
             </motion.p>
           </div>
