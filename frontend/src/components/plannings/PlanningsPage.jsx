@@ -206,7 +206,7 @@ const PlanningsPage = () => {
             >
               <a
                 href={planningImg}
-                download="planning-cws.png"
+                download="Planning cours collectifs CWS.png"
                 className="group/dl relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full bg-[#d4cfc7] px-9 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#0a0a0a] transition-all duration-500 hover:bg-white"
               >
                 <span className="absolute inset-0 overflow-hidden">
