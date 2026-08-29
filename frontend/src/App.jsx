@@ -16,6 +16,7 @@ const ActivitesPage = lazy(() => import('./components/activites/ActivitesPage'))
 const ContactPage = lazy(() => import('./components/Contact/Contact'));
 const CoachsPage = lazy(() => import('./components/Coachs/Coachs'));
 const MentionsLegales = lazy(() => import('./components/mentions/MentionsLegales'));
+const PolitiqueConfidentialite = lazy(() => import('./components/politique/PolitiqueConfidentialite'));
 
 // ─── Pages en LAZY LOADING (Admin) ─────
 const LoginPage = lazy(() => import('./pages/admin/LoginPage'));
@@ -98,6 +99,7 @@ function App() {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/coachs" element={<CoachsPage />} />
             <Route path="/mentions-legales" element={<MentionsLegales />} />
+            <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
 
             {/* ══════════════════════════════════════════
                 ROUTES ADMIN (Protégées)
