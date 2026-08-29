@@ -31,7 +31,7 @@ const Footer = () => {
   const legalLinks = [
     { label: 'Conditions générales de ventes', href: '#cgv' },
     { label: 'Mentions légales', href: '/mentions-legales', isRoute: true },
-    { label: 'Politique de confidentialité', href: '#privacy' },
+    { label: 'Politique de confidentialité', href: '/politique-confidentialite', isRoute: true },
   ];
 
   const fade = (delay) => ({
