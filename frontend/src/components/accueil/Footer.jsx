@@ -88,7 +88,7 @@ const Footer = () => {
   const NavLink = ({ link }) => (
     <a
       href={link.href}
-      className="group/l flex w-fit items-center gap-2 py-[5px] text-[0.86rem] uppercase tracking-[0.06em] text-white/55 transition-all duration-300 hover:translate-x-1 hover:text-white"
+      className="group/l flex w-fit items-center gap-2 py-[5px] text-[0.86rem] tracking-[0.06em] text-white/55 transition-all duration-300 hover:translate-x-1 hover:text-white"
     >
       {link.label}
       <span className="flex w-0 items-center overflow-hidden text-[#d4cfc7] opacity-0 transition-all duration-300 group-hover/l:w-4 group-hover/l:opacity-100">
@@ -138,30 +138,37 @@ const Footer = () => {
       />
       <div className="absolute top-0 left-0 right-0 z-[1] h-px bg-gradient-to-r from-transparent via-[#d4cfc7]/35 to-transparent" />
 
-      <div className="relative z-[2] mx-auto max-w-[1240px] px-6 pt-20 pb-10 sm:px-10 md:pt-24 lg:px-16">
+      <div className="relative z-[2] mx-auto max-w-[960px] px-6 pt-20 pb-10 sm:px-10 md:pt-24 lg:px-16">
 
+        {/* ── LOGO seul au-dessus de la grille ── */}
+        <motion.div {...fade(0.05)} className="mb-8">
+          <div
+            style={{ fontFamily: DISPLAY }}
+            className="text-5xl leading-none tracking-tight text-white md:text-6xl"
+          >
+            C<span className="text-[#d4cfc7]">W</span>S
+          </div>
+        </motion.div>
+
+        {/* ── GRILLE 4 colonnes ── */}
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-[3fr_2fr_3fr_4fr] lg:gap-8">
 
-          {/* Marque */}
-          <motion.div {...fade(0.05)}>
-            <div
-              style={{ fontFamily: DISPLAY }}
-              className="text-5xl leading-none tracking-tight text-white md:text-6xl"
-            >
-              C<span className="text-[#d4cfc7]">W</span>S
-            </div>
-            <div className="mt-3.5 text-[0.65rem] font-light uppercase tracking-[0.3em] text-white/40">
+          {/* Col 1 : Marque */}
+          <motion.div {...fade(0.1)}>
+            {/* En-tête aligné avec "Navigation", "Informations", "Contact" */}
+            <div className="mb-4 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[#b3a996]">
               Coach Wellness Sports
             </div>
-            <p className="mt-5 max-w-[26ch] text-[0.86rem] leading-relaxed text-[#8a8279]">
+            {/* Contenu aligné avec les liens des autres colonnes */}
+            <p className="max-w-[26ch] text-[0.86rem] leading-relaxed text-white/80">
               Un club à taille humaine, du matériel MATRIX et des coachs diplômés pour vous
               accompagner, séance après séance.
             </p>
           </motion.div>
 
-          {/* Navigation */}
-          <motion.div {...fade(0.12)}>
-            <div className="mb-5 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[#b3a996]">
+          {/* Col 2 : Navigation */}
+          <motion.div {...fade(0.14)}>
+            <div className="mb-4 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[#b3a996]">
               Navigation
             </div>
             <nav className="flex flex-col">
@@ -171,9 +178,9 @@ const Footer = () => {
             </nav>
           </motion.div>
 
-          {/* Informations */}
+          {/* Col 3 : Informations */}
           <motion.div {...fade(0.18)}>
-            <div className="mb-5 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[#b3a996]">
+            <div className="mb-4 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[#b3a996]">
               Informations
             </div>
             <nav className="flex flex-col">
@@ -183,26 +190,26 @@ const Footer = () => {
             </nav>
           </motion.div>
 
-          {/* Contact + newsletter */}
-          <motion.div {...fade(0.24)} className="flex flex-col gap-5">
+          {/* Col 4 : Contact + newsletter */}
+          <motion.div {...fade(0.22)} className="flex flex-col gap-5">
             <div>
-              <div className="mb-5 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[#b3a996]">
+              <div className="mb-4 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[#b3a996]">
                 Contact
               </div>
               <div className="flex flex-col gap-2">
                 <a
                   href={`tel:${phone.replace(/\s/g, '')}`}
-                  className="w-fit text-[0.86rem] tracking-[0.05em] text-white/60 transition-colors duration-300 hover:text-white"
+                  className="w-fit text-[0.86rem] tracking-[0.05em] text-white/80 transition-colors duration-300 hover:text-white"
                 >
                   {phone}
                 </a>
                 <a
                   href={`mailto:${emailContact}`}
-                  className="w-fit break-all text-[0.86rem] tracking-[0.05em] text-white/75 transition-colors duration-300 hover:text-white"
+                  className="w-fit break-all text-[0.86rem] tracking-[0.05em] text-white/80 transition-colors duration-300 hover:text-white"
                 >
                   {emailContact}
                 </a>
-                <p className="pt-1 text-[0.82rem] uppercase leading-[1.7] tracking-[0.05em] text-white/40">
+                <p className="pt-1 text-[0.82rem] leading-[1.7] tracking-[0.05em] text-white/80">
                   {address1}
                   <br />
                   {address2}
@@ -212,11 +219,10 @@ const Footer = () => {
 
             {/* ══════════ FORMULAIRE NEWSLETTER ══════════ */}
             <div>
-              <p className="mb-3 max-w-[26ch] text-[0.68rem] uppercase leading-snug tracking-[0.16em] text-white/40">
+              <p className="mb-3 max-w-[26ch] text-[0.68rem] uppercase leading-snug tracking-[0.16em] text-white/60">
                 Inscrivez-vous pour recevoir nos actualités
               </p>
 
-              {/* Le formulaire reste TOUJOURS visible (ne disparaît plus) */}
               <form
                 onSubmit={handleSubscribe}
                 className="flex max-w-[300px] items-center border-b border-white/20 transition-colors duration-300 focus-within:border-[#d4cfc7]"
@@ -244,7 +250,6 @@ const Footer = () => {
                 </button>
               </form>
 
-              {/* Message de succès affiché EN DESSOUS du formulaire */}
               {status === 'success' && message && (
                 <motion.p
                   initial={{ opacity: 0, y: 5 }}
@@ -255,7 +260,6 @@ const Footer = () => {
                 </motion.p>
               )}
 
-              {/* Message d'erreur affiché EN DESSOUS du formulaire */}
               {status === 'error' && message && (
                 <motion.p
                   initial={{ opacity: 0, y: 5 }}
@@ -276,7 +280,7 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/60 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#d4cfc7] hover:bg-[#d4cfc7] hover:text-[#1a1a1a]"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#d4cfc7] hover:bg-[#d4cfc7] hover:text-[#1a1a1a]"
           >
             <LuInstagram size={19} />
           </a>
@@ -285,7 +289,7 @@ const Footer = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
-            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/60 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#d4cfc7] hover:bg-[#d4cfc7] hover:text-[#1a1a1a]"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/70 transition-all duration-300 hover:-translate-y-0.5 hover:border-[#d4cfc7] hover:bg-[#d4cfc7] hover:text-[#1a1a1a]"
           >
             <LuFacebook size={19} />
           </a>
@@ -298,10 +302,10 @@ const Footer = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-12 flex flex-col items-start justify-between gap-2 border-t border-white/10 pt-7 sm:flex-row sm:items-center"
         >
-          <p className="text-[0.68rem] uppercase tracking-[0.12em] text-white/30">
+          <p className="text-[0.68rem] uppercase tracking-[0.12em] text-white/40">
             © CWS {new Date().getFullYear()}. Tous droits réservés.
           </p>
-          <p className="text-[0.68rem] uppercase tracking-[0.12em] text-white/30">
+          <p className="text-[0.68rem] uppercase tracking-[0.12em] text-white/40">
             La Ville aux Dames <span className="text-[#b3a996]">·</span> 37
           </p>
         </motion.div>

@@ -304,7 +304,7 @@ const Contact = () => {
                                 transition={{ duration: 0.6, delay: 0.2 }}
                                 className="group border-t border-white/10 py-10 transition-colors duration-500 hover:border-[#d4cfc7]/40"
                             >
-                                <span className="block text-xs font-bold uppercase tracking-[0.2em] text-white/40 mb-4 group-hover:text-[#d4cfc7] transition-colors">01 — Accueil Commercial</span>
+                                <span className="block text-xs font-bold uppercase tracking-[0.2em] text-white/40 mb-4 group-hover:text-[#d4cfc7] transition-colors">Accueil Commercial</span>
                                 <h3 style={{ fontFamily: DISPLAY }} className="text-3xl md:text-4xl uppercase text-white mb-4 tracking-tight">Sur Rendez-vous</h3>
                                 <p className="text-white/60 font-light mb-6 max-w-[40ch] leading-relaxed">
                                     Parce que chaque parcours est unique, nous prenons le temps de vous accueillir personnellement pour comprendre vos objectifs.
@@ -322,7 +322,7 @@ const Contact = () => {
                                 transition={{ duration: 0.6, delay: 0.3 }}
                                 className="group border-t border-white/10 py-10 transition-colors duration-500 hover:border-[#d4cfc7]/40"
                             >
-                                <span className="block text-xs font-bold uppercase tracking-[0.2em] text-white/40 mb-4 group-hover:text-[#d4cfc7] transition-colors">02 — Accès Libre</span>
+                                <span className="block text-xs font-bold uppercase tracking-[0.2em] text-white/40 mb-4 group-hover:text-[#d4cfc7] transition-colors"> Accès Libre</span>
                                 <h3 style={{ fontFamily: DISPLAY }} className="text-3xl md:text-4xl uppercase text-white mb-4 tracking-tight">7h30 — 21h30</h3>
                                 <p className="text-white/60 font-light max-w-[40ch] leading-relaxed">
                                     Du lundi au dimanche. Entraînez-vous à votre rythme dans un espace pensé pour la performance et le bien-être.
