@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, useInView, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { LuCheck, LuChevronDown, LuArrowRight, LuStar } from 'react-icons/lu';
+import { LuCheck, LuChevronDown, LuArrowRight, LuInfo, LuCreditCard, LuCalendar, LuClock } from 'react-icons/lu';
 
 const DISPLAY = "'Anton', sans-serif";
 // Pour le rendu exact de l'accent italique du titre, ajoute la police "Instrument Serif"
@@ -10,62 +11,58 @@ const SERIF = "'Instrument Serif', Georgia, 'Times New Roman', serif";
 /* ─── Les 3 offres ──────────────────────────────────────────── */
 const plans = [
   {
-    name: 'Abonnement sans engagement',
-    badge: null,
-    priceLabel: 'À partir de',
-    price: 39.9,
-    decimals: 2,
-    priceSuffix: '€ / mois',
-    ctaHref: '#contact',
-    featured: false,
-    durations: null,
+    name: 'Formules Courte Durée',
+    badge: 'Liberté absolue',
+    description: "Pour s'entraîner sur une période définie, sans renouvellement automatique ni prélèvement.",
+    durations: ['1 mois', '2 mois'],
+    priceLabel: 'Modalités d\'engagement',
+    priceCustom: 'Paiement Comptant',
     features: [
-      'Accès aux cours collectifs en illimité',
-      'Cours collectifs variés et adaptés à tous',
       'Accès libre au plateau musculation',
       'Accès libre au parc cardio',
-      'Ambiance chaleureuse et respectueuse',
-      'Événements régulièrement organisés',
-      'Matériel haut de gamme et de dernière génération',
+      'Accès aux cours collectifs en illimité',
+      'Vestiaires avec douches individuelles',
+      'Pas de tacite reconduction',
+      'Idéal pour s\'entraîner ponctuellement',
     ],
+    ctaHref: '/contact',
+    featured: false,
   },
   {
-    name: 'Abonnement avec engagement',
-    badge: 'Le plus avantageux',
-    priceLabel: 'Engagement dégressif',
-    price: null,
-    priceCustom: 'Contactez-nous',
-    ctaHref: '#contact',
+    name: 'Abonnements Longue Durée',
+    badge: 'Le plus populaire',
+    description: "Ancrez le sport dans votre quotidien avec des tarifs dégressifs selon votre engagement.",
+    durations: ['6 mois', '1 an'],
+    priceLabel: 'Modalités d\'engagement',
+    priceCustom: 'Prélèvement Mensuel ou Comptant',
+    features: [
+      'Accès libre au plateau musculation',
+      'Accès libre au parc cardio',
+      'Accès aux cours collectifs en illimité',
+      'Formules Solo, Duo et Étudiant',
+      'Engagement de 6 ou 12 mois minimum',
+      'Accompagnement par des coachs certifiés',
+      'Vestiaires avec douches individuelles',
+    ],
+    ctaHref: '/contact',
     featured: true,
-    durations: ['1 mois', '3 mois', '6 mois', '12 mois'],
-    features: [
-      'Accès aux cours collectifs en illimité',
-      'Cours collectifs variés et adaptés à tous',
-      'Accès libre au plateau musculation',
-      'Accès libre au parc cardio',
-      'Vestiaires avec douche individuelle',
-      'Ambiance chaleureuse et respectueuse',
-      'Événements régulièrement organisés',
-      'Matériel haut de gamme (MATRIX) et de dernière génération',
-    ],
   },
   {
-    name: 'Carte à la séance',
-    badge: null,
-    priceLabel: 'À partir de',
-    price: 120,
-    decimals: 0,
-    priceSuffix: '€',
-    ctaHref: '#contact',
-    featured: false,
-    durations: null,
+    name: 'Carte de Séances',
+    badge: 'À votre rythme',
+    description: "La solution flexible pour s'entraîner ponctuellement sans aucun engagement de durée.",
+    durations: ['10 séances (valable 4 mois)'],
+    priceLabel: 'Modalités d\'engagement',
+    priceCustom: 'Paiement unique à l\'achat',
     features: [
-      'Accès aux cours collectifs',
-      'Cours collectifs variés et adaptés à tous',
-      'Accès au plateau musculation',
+      'Accès libre au plateau musculation',
       'Accès libre au parc cardio',
-      'Carte de 10 séances',
+      'Accès aux cours collectifs sur réservation',
+      'Vestiaires avec douches individuelles',
+      'Utilisation à la carte selon votre planning',
     ],
+    ctaHref: '/contact',
+    featured: false,
   },
 ];
 
@@ -81,22 +78,12 @@ const faqs = [
   },
   {
     q: "Quel est le tarif d'un abonnement ?",
-    a: "Nos abonnements sans engagement démarrent à 39,90€ par mois. Pour les formules avec engagement (1, 3, 6 ou 12 mois), les tarifs sont dégressifs et personnalisés selon la durée choisie — contactez-nous pour obtenir un devis adapté à vos besoins.",
+    a: "Notre tarif d'appel débute à 39,90 € / mois (offre étudiant sous conditions d'engagement). Les tarifs de nos formules varient ensuite selon la durée choisie (1 mois, 2 mois, 6 mois ou 1 an) et les modalités de paiement (comptant ou prélèvement mensuel). Afin de vous proposer la formule la plus adaptée et vous détailler nos offres, nos prix et frais associés vous sont présentés directement par nos conseillers au club ou par e-mail sur simple demande.",
   },
   {
     q: 'Quelle est la démarche pour un coaching personnalisé ?',
-    a: "Prenez rendez-vous avec l'un de nos coachs diplômés (Justine, Marion ou Bilal). Lors d'un premier échange, nous définissons ensemble vos objectifs, votre niveau et vos disponibilités. Votre coach construit ensuite un programme sur-mesure et vous accompagne séance après séance.",
+    a: "Prenez rendez-vous avec l'un de nos coachs diplômés. Lors d'un premier échange, nous définissons ensemble vos objectifs, votre niveau et vos disponibilités. Votre coach construit ensuite un programme sur-mesure et vous accompagne séance après séance.",
   },
-];
-
-const bandWords = [
-  '+37 cours / semaine',
-  'Coachs diplômés',
-  'Matériel MATRIX',
-  'Sans surprise',
-  'Parc cardio',
-  'Plateau musculation',
-  'Ambiance chaleureuse',
 ];
 
 /* ─── Petit hook media-query ─────────────────────────────────── */
@@ -112,36 +99,12 @@ function useMedia(query) {
   return match;
 }
 
-/* ─── Compteur de prix animé ─────────────────────────────────── */
-function useCountUp(target, decimals, active) {
-  const [val, setVal] = useState(0);
-  useEffect(() => {
-    if (!active || target == null) return;
-    let raf;
-    const dur = 1100;
-    const t0 = performance.now();
-    const tick = (now) => {
-      const p = Math.min((now - t0) / dur, 1);
-      const e = 1 - Math.pow(1 - p, 3); // easeOutCubic
-      setVal(target * e);
-      if (p < 1) raf = requestAnimationFrame(tick);
-      else setVal(target);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [active, target]);
-  return decimals ? val.toFixed(2).replace('.', ',') : Math.round(val).toString();
-}
-
 /* ─── Carte d'offre ──────────────────────────────────────────── */
 const PlanCard = ({ plan, index, isInView }) => {
   const tiltRef = useRef(null);
   const reduce = useReducedMotion();
   const fine = useMedia('(hover: hover) and (pointer: fine)');
   const isLg = useMedia('(min-width: 1024px)');
-  const [durIndex, setDurIndex] = useState(3);
-
-  const priceStr = useCountUp(plan.price, plan.decimals, isInView);
 
   const baseTransform =
     plan.featured && isLg ? 'perspective(900px) scale(1.045)' : 'perspective(900px)';
@@ -188,9 +151,7 @@ const PlanCard = ({ plan, index, isInView }) => {
           <span className="tp-halo pointer-events-none absolute -inset-8 -z-10 rounded-[30px]" />
         )}
 
-        {/* ══════════════════════════════════════════════════════
-            BADGE — Placé AU-DESSUS de la carte (ne chevauche plus le titre)
-        ══════════════════════════════════════════════════════ */}
+        {/* BADGE */}
         {plan.badge && (
           <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 rounded-full bg-[#0a0a0a] px-4 py-1.5 shadow-lg shadow-black/30 whitespace-nowrap">
             <span className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-[#d4cfc7]">
@@ -212,81 +173,71 @@ const PlanCard = ({ plan, index, isInView }) => {
           {/* Nom */}
           <h3
             style={{ fontFamily: DISPLAY }}
-            className={`text-xl md:text-2xl uppercase leading-[0.95] tracking-tight mb-6 ${
+            className={`text-xl md:text-2xl uppercase leading-[0.95] tracking-tight mb-3 ${
               plan.featured ? 'text-[#0a0a0a]' : 'text-white'
             }`}
           >
             {plan.name}
           </h3>
 
-          {/* Prix */}
-          <div className="mb-7 min-h-[78px]">
-            <p
-              className={`text-[0.7rem] uppercase tracking-[0.18em] mb-2 ${
-                plan.featured ? 'text-[#0a0a0a]/50' : 'text-[#8a8279]'
-              }`}
-            >
+          {/* Description */}
+          <p className={`text-xs leading-relaxed mb-5 ${
+            plan.featured ? 'text-[#0a0a0a]/70' : 'text-white/60'
+          }`}>
+            {plan.description}
+          </p>
+
+          {/* Durées */}
+          <div className="mb-6">
+            <p className={`text-[0.65rem] uppercase tracking-[0.15em] mb-2 ${
+              plan.featured ? 'text-[#0a0a0a]/50' : 'text-[#8a8279]'
+            }`}>
+              Durées
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {plan.durations.map((d) => (
+                <span
+                  key={d}
+                  className={`rounded-full px-2.5 py-1 text-[0.68rem] font-semibold tracking-wide border ${
+                    plan.featured
+                      ? 'bg-[#0a0a0a]/5 border-[#0a0a0a]/15 text-[#0a0a0a]'
+                      : 'bg-white/5 border-white/10 text-[#d4cfc7]'
+                  }`}
+                >
+                  {d}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Modalité */}
+          <div className="mb-7">
+            <p className={`text-[0.65rem] uppercase tracking-[0.15em] mb-1.5 ${
+              plan.featured ? 'text-[#0a0a0a]/50' : 'text-[#8a8279]'
+            }`}>
               {plan.priceLabel}
             </p>
-
-            {plan.price != null ? (
-              <div className="flex items-baseline gap-1">
-                <span
-                  style={{ fontFamily: DISPLAY }}
-                  className={`text-5xl md:text-6xl leading-none tabular-nums ${
-                    plan.featured ? 'text-[#0a0a0a]' : 'text-white'
-                  }`}
-                >
-                  {priceStr}
-                </span>
-                <span
-                  className={`text-lg font-light ${
-                    plan.featured ? 'text-[#0a0a0a]/60' : 'text-[#8a8279]'
-                  }`}
-                >
-                  {plan.priceSuffix}
-                </span>
-              </div>
-            ) : (
-              <>
-                <p
-                  style={{ fontFamily: DISPLAY }}
-                  className="text-2xl md:text-3xl uppercase leading-none text-[#0a0a0a]"
-                >
-                  {plan.priceCustom}
-                </p>
-                {plan.durations && (
-                  <div className="mt-3.5 flex flex-wrap gap-2">
-                    {plan.durations.map((d, i) => (
-                      <button
-                        key={d}
-                        onClick={() => setDurIndex(i)}
-                        className={`rounded-full px-3 py-1.5 text-[0.72rem] font-semibold tracking-wide transition-all duration-300 ${
-                          durIndex === i
-                            ? 'bg-[#0a0a0a] text-[#f5f4f1] border border-[#0a0a0a]'
-                            : 'border border-[#0a0a0a]/20 text-[#0a0a0a]/70 hover:bg-[#0a0a0a] hover:text-[#f5f4f1] hover:border-[#0a0a0a]'
-                        }`}
-                      >
-                        {d}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </>
-            )}
+            <p
+              style={{ fontFamily: DISPLAY }}
+              className={`text-lg md:text-xl uppercase leading-none ${
+                plan.featured ? 'text-[#0a0a0a]' : 'text-white'
+              }`}
+            >
+              {plan.priceCustom}
+            </p>
           </div>
 
           {/* Séparateur */}
           <div className={`h-px w-full mb-7 ${plan.featured ? 'bg-[#0a0a0a]/10' : 'bg-white/10'}`} />
 
-          {/* Avantages (apparition en cascade) */}
-          <ul className="flex flex-col gap-3.5 mb-9 flex-1">
+          {/* Avantages */}
+          <ul className="flex flex-col gap-3 mb-8 flex-1">
             {plan.features.map((f, i) => (
               <motion.li
                 key={i}
                 initial={{ opacity: 0, x: -8 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.45, delay: 0.35 + index * 0.15 + i * 0.06 }}
+                transition={{ duration: 0.45, delay: 0.35 + index * 0.15 + i * 0.05 }}
                 className="flex items-start gap-3"
               >
                 <span
@@ -294,10 +245,10 @@ const PlanCard = ({ plan, index, isInView }) => {
                     plan.featured ? 'bg-[#0a0a0a]' : 'bg-[#d4cfc7]/15'
                   }`}
                 >
-                  <LuCheck size={12} className={plan.featured ? 'text-[#f5f4f1]' : 'text-[#d4cfc7]'} />
+                  <LuCheck size={11} className={plan.featured ? 'text-[#f5f4f1]' : 'text-[#d4cfc7]'} />
                 </span>
                 <span
-                  className={`text-sm leading-snug ${plan.featured ? 'text-[#0a0a0a]/75' : 'text-white/65'}`}
+                  className={`text-xs md:text-sm leading-snug ${plan.featured ? 'text-[#0a0a0a]/75' : 'text-white/65'}`}
                 >
                   {f}
                 </span>
@@ -306,9 +257,9 @@ const PlanCard = ({ plan, index, isInView }) => {
           </ul>
 
           {/* CTA */}
-          <a
-            href={plan.ctaHref}
-            className={`group/cta relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full px-8 py-4 text-xs font-semibold uppercase tracking-[0.2em] transition-all duration-500 ${
+          <Link
+            to={plan.ctaHref}
+            className={`group/cta relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] transition-all duration-500 ${
               plan.featured
                 ? 'bg-[#0a0a0a] text-[#f5f4f1] hover:bg-[#1a1a1a]'
                 : 'bg-[#f5f4f1] text-[#0a0a0a] hover:bg-white'
@@ -317,12 +268,12 @@ const PlanCard = ({ plan, index, isInView }) => {
             <span className="absolute inset-0 overflow-hidden">
               <span className="absolute inset-0 -translate-x-full group-hover/cta:translate-x-full bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 ease-in-out" />
             </span>
-            <span className="relative z-10">Je m'inscris</span>
+            <span className="relative z-10">Me renseigner</span>
             <LuArrowRight
-              size={14}
+              size={13}
               className="relative z-10 transition-transform duration-300 group-hover/cta:translate-x-1"
             />
-          </a>
+          </Link>
         </div>
       </div>
     </motion.div>
@@ -463,7 +414,7 @@ const TarifsPage = () => {
                   style={{ fontFamily: SERIF }}
                   className="text-base tracking-[0.14em] uppercase text-[#b3a996] italic"
                 >
-                  Nos offres
+                  Nos abonnements
                 </em>
               </motion.div>
 
@@ -490,30 +441,83 @@ const TarifsPage = () => {
               transition={{ duration: 0.6, delay: 0.25 }}
               className="max-w-[36ch] pb-1 text-[1.02rem] font-light leading-relaxed text-[#8a8279]"
             >
-              Des formules claires, sans surprise.<br /> Que vous veniez ponctuellement ou que vous vous
-              engagiez sur la durée, il y a un abonnement pensé pour vous.
+              Des formules adaptées à votre rythme et vos envies. Que vous veniez pour une séance ou pour vous entraîner toute l'année, nous avons l'offre idéale.
             </motion.p>
           </div>
 
+          {/* ══════════ MISE EN AVANT DU TARIF DE DÉPART ══════════ */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="relative mb-16 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] p-8 md:p-12 text-center backdrop-blur-xl"
+          >
+            {/* Halos lumineux internes décoratifs */}
+            <div className="pointer-events-none absolute -left-1/3 -top-1/2 h-96 w-96 rounded-full bg-[#d4cfc7]/10 blur-[80px]" />
+            <div className="pointer-events-none absolute -right-1/3 -bottom-1/2 h-96 w-96 rounded-full bg-[#d4cfc7]/5 blur-[80px]" />
+            
+            <span className="inline-block rounded-full bg-[#d4cfc7]/10 px-4 py-1.5 text-[0.7rem] font-bold uppercase tracking-[0.15em] text-[#d4cfc7] mb-6">
+              Tarif d'accès
+            </span>
+            
+            <p className="text-xs uppercase tracking-[0.2em] text-[#8a8279] mb-2">Nos formules débutent à</p>
+            
+            <div className="flex flex-col items-center justify-center sm:flex-row sm:items-baseline gap-2 mb-4">
+              <span style={{ fontFamily: DISPLAY }} className="text-6xl sm:text-7xl md:text-8xl leading-none text-white tracking-tight">
+                À partir de 39,90 €
+              </span>
+              <span className="text-lg sm:text-xl font-light text-[#b3a996]">/ mois</span>
+            </div>
+            
+            <p className="mx-auto max-w-2xl text-sm md:text-base font-light leading-relaxed text-white/70">
+              Accédez à nos équipements Matrix haut de gamme, à nos espaces de musculation et cardio ainsi qu'à plus de 37 cours collectifs hebdomadaires dispensés par des professionnels certifiés.
+            </p>
+          </motion.div>
+
           {/* Grille (pt-4 ajouté pour laisser la place au badge débordant) */}
-          <div className="grid grid-cols-1 gap-6 md:gap-7 lg:grid-cols-3 lg:items-center pt-4">
+          <div className="grid grid-cols-1 gap-6 md:gap-7 lg:grid-cols-3 lg:items-stretch pt-4">
             {plans.map((plan, index) => (
               <PlanCard key={plan.name} plan={plan} index={index} isInView={isInView} />
             ))}
           </div>
 
+          {/* ══════════ NOTE DE TRANSPARENCE / ACCÈS ══════════ */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mt-14 max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6 rounded-2xl border border-white/5 bg-white/[0.01] p-6 md:p-8 backdrop-blur-md"
+          >
+            <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#d4cfc7]/10 text-[#d4cfc7]">
+              <LuInfo size={22} />
+            </div>
+            <div className="flex-1 text-center md:text-left">
+              <h4 style={{ fontFamily: DISPLAY }} className="text-base md:text-lg uppercase tracking-wider text-white mb-2">
+                Détails des Tarifs & Accompagnement
+              </h4>
+              <p className="text-xs md:text-sm font-light leading-relaxed text-white/60">
+                Afin de vous orienter vers la formule la plus adaptée à vos objectifs et d'expliquer nos différentes options (frais d'inscription et de badge d'accès), l'ensemble de notre grille tarifaire détaillée vous sera communiqué directement par l'équipe CWS lors de votre visite ou sur simple demande.
+              </p>
+            </div>
+            <Link
+              to="/contact"
+              className="flex-shrink-0 group relative inline-flex items-center justify-center gap-2 rounded-full border border-white/10 hover:border-white/20 px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-white bg-[#0a0a0a] transition-all duration-300 hover:bg-[#111]"
+            >
+              <span>Demander les tarifs</span>
+              <LuArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
+          </motion.div>
+
           <motion.p
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-10 text-center text-xs italic tracking-wide text-white/40 border-t border-white/[0.06] pt-6"
+            className="mt-12 text-center text-[10px] sm:text-xs italic tracking-wide text-white/30 border-t border-white/[0.06] pt-6"
           >
             Tous nos abonnements incluent un accompagnement humain et des coachs diplômés. Pas d'amateurs.
           </motion.p>
         </div>
       </section>
-
-
 
       {/* ══════════ FAQ ══════════ */}
       <section id="faq" ref={faqRef} className="relative z-[2] w-full bg-[#0d0d0d] py-24 md:py-32">
