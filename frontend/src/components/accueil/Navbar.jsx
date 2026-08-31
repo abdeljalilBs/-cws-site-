@@ -49,7 +49,7 @@ const Navbar = () => {
         {/* Logo CWS */}
         <Link to="/" className="flex-shrink-0 mr-8">
           <img
-            src="/image-logo.png"
+            src="/image-logo.png?v=2"
             alt="Coach Wellness Sports Logo"
             className={`w-auto object-contain transition-all duration-300 ${isScrolled ? 'h-8' : 'h-10'}`}
           />
@@ -91,13 +91,16 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Bouton Menu Mobile */}
-        <button
-          className="lg:hidden text-white focus:outline-none ml-auto"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <LuX size={24} /> : <LuMenu size={24} />}
-        </button>
+        {/* Bouton Menu Mobile avec séparateur */}
+        <div className="lg:hidden flex items-center gap-4 ml-auto">
+          <span className="h-5 w-px bg-white/20" />
+          <button
+            className="text-white focus:outline-none flex items-center justify-center"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <LuX size={24} /> : <LuMenu size={24} />}
+          </button>
+        </div>
       </motion.nav>
 
       {/* MENU MOBILE (S'ouvre sous la pilule avec animation fluide) */}
