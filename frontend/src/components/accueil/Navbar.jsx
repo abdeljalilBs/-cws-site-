@@ -40,18 +40,18 @@ const Navbar = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className={`pointer-events-auto flex items-center justify-between w-full max-w-6xl px-6 py-3 rounded-full border transition-all duration-500 ${isScrolled
-          ? 'bg-[#0a0a0a]/80 backdrop-blur-xl border-white/10 shadow-2xl py-2'
+        className={`pointer-events-auto flex items-center justify-between w-full max-w-6xl px-6 py-2.5 rounded-full border transition-[background-color,border-color,box-shadow] duration-300 ${isScrolled
+          ? 'bg-[#0a0a0a]/80 backdrop-blur-xl border-white/10 shadow-2xl'
           : 'bg-[#0a0a0a]/40 backdrop-blur-md border-white/5'
           }`}
       >
 
         {/* Logo CWS */}
-        <Link to="/" className="flex-shrink-0 mr-8">
+        <Link to="/" className="flex-shrink-0 mr-6 md:mr-8 flex items-center">
           <img
             src="/image-logo.png?v=2"
             alt="Coach Wellness Sports Logo"
-            className={`w-auto object-contain transition-all duration-300 ${isScrolled ? 'h-8' : 'h-10'}`}
+            className="h-12 md:h-14 w-auto object-contain"
           />
         </Link>
 

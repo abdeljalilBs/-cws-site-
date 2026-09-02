@@ -131,9 +131,9 @@ const Footer = () => {
         className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden"
       >
         <motion.span
-          initial={{ opacity: 0, scale: 1.05 }}
-          animate={isInView ? { opacity: 1, scale: 1 } : {}}
-          transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
           className="foot-watermark select-none"
         >
           CWS
@@ -159,7 +159,7 @@ const Footer = () => {
             <img
               src="/image-logo.png"
               alt="Coach Wellness Sports Logo"
-              className="h-12 md:h-14 w-auto object-contain"
+              className="h-16 md:h-20 w-auto object-contain"
             />
           </Link>
         </motion.div>
