@@ -1,7 +1,47 @@
+import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { LuChevronDown, LuArrowRight } from 'react-icons/lu';
 
 const Hero = () => {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Safari iOS requiert explicitement muted et defaultMuted sur l'élément DOM
+    video.defaultMuted = true;
+    video.muted = true;
+
+    const attemptPlay = () => {
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // Autoplay bloqué (ex: mode économie d'énergie iOS)
+        });
+      }
+    };
+
+    attemptPlay();
+
+    // En cas de blocage strict (ex: mode économie d'énergie), lance dès la 1ère interaction
+    const handleInteraction = () => {
+      if (video && video.paused) {
+        video.play().catch(() => {});
+      }
+    };
+
+    window.addEventListener('touchstart', handleInteraction, { once: true, passive: true });
+    window.addEventListener('scroll', handleInteraction, { once: true, passive: true });
+    window.addEventListener('click', handleInteraction, { once: true, passive: true });
+
+    return () => {
+      window.removeEventListener('touchstart', handleInteraction);
+      window.removeEventListener('scroll', handleInteraction);
+      window.removeEventListener('click', handleInteraction);
+    };
+  }, []);
+
   // ─── Variants d'animation ──────────────────────────────────
   const fadeUp = {
     hidden: { opacity: 0, y: 30 },
@@ -36,20 +76,22 @@ const Hero = () => {
           VIDÉO DE FOND
       ══════════════════════════════════════════ */}
       <video
+        ref={videoRef}
         id="hero-video"
         autoPlay
         loop
         muted
         playsInline
-        preload="metadata"
-        poster="/hero-poster.jpg"
-        className="absolute top-0 left-0 w-full h-full object-cover"
+        webkit-playsinline="true"
+        x5-playsinline="true"
+        preload="auto"
+        disablePictureInPicture
+        controlsList="nodownload nofullscreen noremoteplayback"
+        className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
         aria-hidden="true"
       >
-
-        <source src="/hero-video.webm" type="video/webm" />
         <source src="/hero-video.mp4" type="video/mp4" />
-
+        <source src="/hero-video.webm" type="video/webm" />
         Ton navigateur ne supporte pas la lecture de la vidéo.
       </video>
 
