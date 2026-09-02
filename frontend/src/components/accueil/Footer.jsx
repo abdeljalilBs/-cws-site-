@@ -155,12 +155,13 @@ const Footer = () => {
 
         {/* ── LOGO seul au-dessus de la grille ── */}
         <motion.div {...fade(0.05)} className="mb-8">
-          <div
-            style={{ fontFamily: DISPLAY }}
-            className="text-5xl leading-none tracking-tight text-white md:text-6xl"
-          >
-            C<span className="text-[#d4cfc7]">W</span>S
-          </div>
+          <Link to="/" className="inline-block">
+            <img
+              src="/image-logo.png"
+              alt="Coach Wellness Sports Logo"
+              className="h-12 md:h-14 w-auto object-contain"
+            />
+          </Link>
         </motion.div>
 
         {/* ── GRILLE 4 colonnes ── */}
