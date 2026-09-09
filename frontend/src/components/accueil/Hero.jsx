@@ -1,6 +1,7 @@
 import { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { LuChevronDown, LuArrowRight } from 'react-icons/lu';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   const videoRef = useRef(null);
@@ -103,15 +104,28 @@ const Hero = () => {
       {/* Contenu */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
 
-        <motion.p
+        <motion.div
           variants={fadeUp}
           initial="hidden"
           animate="visible"
           custom={0}
-          className="mb-8 md:mb-10"
+          className="mb-6 md:mb-8"
         >
-
-        </motion.p>
+          <Link
+            to="/plannings"
+            id="hero-planning-tab"
+            className="group inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-[#0a0a0a]/60 hover:bg-black/90 backdrop-blur-xl border border-white/20 hover:border-[#d4cfc7]/60 text-white transition-all duration-300 shadow-[0_4px_25px_rgba(0,0,0,0.5)] cursor-pointer"
+          >
+            <span className="w-2 h-2 rounded-full bg-[#d4cfc7] animate-pulse" />
+            <span className="text-xs sm:text-sm font-bold uppercase tracking-[0.18em]">Planning</span>
+            <span className="text-white/30 font-light">·</span>
+            <span className="text-xs font-light text-[#d4cfc7] tracking-wide">+ de 30 cours / semaine</span>
+            <LuArrowRight
+              size={14}
+              className="text-[#d4cfc7] group-hover:translate-x-1 transition-transform"
+            />
+          </Link>
+        </motion.div>
 
         <motion.div
           variants={fadeUp}
@@ -148,42 +162,34 @@ const Hero = () => {
           initial="hidden"
           animate="visible"
           custom={3}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <a
-            href="/tarifs"
+          {/* Bouton Planning (accès direct prioritaire) */}
+          <Link
+            to="/plannings"
             className="group relative inline-flex items-center justify-center rounded-full cursor-pointer"
           >
             <span className="absolute -inset-2 rounded-full bg-white/0 group-hover:bg-white/15 blur-xl transition-all duration-700" />
-
-            <span className="absolute inset-0 rounded-full bg-[#0a0a0a]/70 backdrop-blur-md border border-white/20 group-hover:border-white/0 transition-all duration-500" />
-
-            <span className="absolute inset-0 rounded-full bg-white scale-0 group-hover:scale-100 transition-transform duration-500 origin-center" />
-
-            <span className="absolute inset-0 rounded-full overflow-hidden">
-              <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full bg-gradient-to-r from-transparent via-white/50 to-transparent transition-transform duration-700 delay-300" />
-            </span>
-
-            <span className="absolute -inset-[3px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 overflow-hidden">
-              <span
-                className="absolute inset-0 rounded-full"
-                style={{
-                  background:
-                    "conic-gradient(from 0deg, transparent 0%, rgba(255,255,255,0.6) 25%, transparent 50%)",
-                  animation: "spinSlow 3s linear infinite",
-                }}
-              />
-              <span className="absolute inset-[3px] rounded-full bg-[#0a0a0a] group-hover:bg-white transition-colors duration-500" />
-            </span>
-
-            <span className="relative z-10 flex items-center justify-center px-12 py-4 md:px-14 md:py-4 text-white text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] group-hover:text-[#0a0a0a] transition-colors duration-500">
-              Découvrir
-
+            <span className="absolute inset-0 rounded-full bg-white group-hover:bg-[#f5f4f1] transition-all duration-500 shadow-[0_0_35px_rgba(255,255,255,0.2)]" />
+            <span className="relative z-10 flex items-center justify-center px-10 py-3.5 md:px-12 md:py-4 text-[#0a0a0a] text-xs sm:text-sm font-bold uppercase tracking-[0.25em] transition-colors duration-500">
+              Planning
               <LuArrowRight
                 size={14}
-                className="absolute right-4 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-400"
+                className="ml-2 group-hover:translate-x-1 transition-transform duration-300"
               />
             </span>
-          </a>
+          </Link>
+
+          {/* Bouton Découvrir */}
+          <Link
+            to="/tarifs"
+            className="group relative inline-flex items-center justify-center rounded-full cursor-pointer"
+          >
+            <span className="absolute inset-0 rounded-full bg-[#0a0a0a]/70 backdrop-blur-md border border-white/20 group-hover:border-white/50 transition-all duration-300" />
+            <span className="relative z-10 flex items-center justify-center px-10 py-3.5 md:px-12 md:py-4 text-white text-xs sm:text-sm font-semibold uppercase tracking-[0.25em] group-hover:text-white transition-colors duration-300">
+              Découvrir
+            </span>
+          </Link>
         </motion.div>
       </div>
 

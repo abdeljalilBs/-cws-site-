@@ -108,7 +108,7 @@ const LazyImage = ({ src, alt, className, imgClassName, eager = false }) => {
 /* ─── Les 6 piliers (avec icônes SVG custom) ────────────────── */
 const pillars = [
   { icon: <IconPremium />, title: 'Club Premium', text: "Entraînez-vous dans un club entièrement sécurisé, dans une ambiance conviviale et familiale, avec des règles d'hygiène respectées, une désinfection du matériel et des adhérents respectueux, à l'image du club." },
-  { icon: <IconGroup />, title: 'Cours collectifs variés', text: "Plus de 37 cours variés avec des coachs diplômés et qualifiés pour corriger vos mouvements et vous donner l'énergie nécessaire afin d'atteindre vos objectifs." },
+  { icon: <IconGroup />, title: 'Cours collectifs variés', text: "Plus de 30 cours variés avec des coachs diplômés et qualifiés pour corriger vos mouvements et vous donner l'énergie nécessaire afin d'atteindre vos objectifs." },
   { icon: <IconCoaching />, title: 'Coaching personnalisé', text: "L'objectif est de vous faire progresser efficacement, sans risque. Nous vous proposons une activité adaptée à vos objectifs et à vos capacités physiques." },
   { icon: <IconQuality />, title: 'Qualité', text: "Soucieux de votre confort, le nombre de membres est volontairement limité sur l'ensemble des activités pour garantir la tranquillité, la qualité des prestations et l'écoute maximale lors de chacune de vos séances." },
   { icon: <IconMeal />, title: 'Espace repas', text: "Un espace snacking est à votre disposition pour vous restaurer (barres, viennoiseries, micro-ondes...). Cet espace servira notamment pour les collations conviviales de votre salle." },

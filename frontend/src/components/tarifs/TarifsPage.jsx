@@ -74,7 +74,7 @@ const faqs = [
   },
   {
     q: 'Comment réserver les cours collectifs ?',
-    a: "Une fois adhérent, vous accédez à notre planning de cours collectifs. La réservation se fait facilement en ligne ou directement à l'accueil du club. Avec plus de 37 cours variés par semaine, vous trouverez toujours un créneau qui vous convient.",
+    a: "Une fois adhérent, vous accédez à notre planning de cours collectifs. La réservation se fait facilement en ligne ou directement à l'accueil du club. Avec plus de 30 cours variés par semaine, vous trouverez toujours un créneau qui vous convient.",
   },
   {
     q: "Quel est le tarif d'un abonnement ?",
@@ -470,7 +470,7 @@ const TarifsPage = () => {
             </div>
             
             <p className="mx-auto max-w-2xl text-sm md:text-base font-light leading-relaxed text-white/70">
-              Accédez à nos équipements Matrix haut de gamme, à nos espaces de musculation et cardio ainsi qu'à plus de 37 cours collectifs hebdomadaires dispensés par des professionnels certifiés.
+              Accédez à nos équipements Matrix haut de gamme, à nos espaces de musculation et cardio ainsi qu'à plus de 30 cours collectifs hebdomadaires dispensés par des professionnels certifiés.
             </p>
           </motion.div>
 

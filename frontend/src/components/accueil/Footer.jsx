@@ -24,9 +24,10 @@ const Footer = () => {
 
   const navLinks = [
     { label: 'Accueil', href: '#' },
-    { label: 'Le club', href: '#club' },
-    { label: 'Les coachs', href: '#coachs' },
-    { label: 'Tarifs', href: '#tarifs' },
+    { label: 'Le club', href: '/club', isRoute: true },
+    { label: 'Les coachs', href: '/coachs', isRoute: true },
+    { label: 'Planning', href: '/plannings', isRoute: true },
+    { label: 'Tarifs', href: '/tarifs', isRoute: true },
   ];
   const legalLinks = [
     { label: 'Conditions générales de ventes', href: '#cgv' },
