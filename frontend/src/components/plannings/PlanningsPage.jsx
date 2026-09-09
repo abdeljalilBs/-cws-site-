@@ -109,7 +109,7 @@ const PlanningsPage = () => {
             className="mb-6 flex items-center gap-3"
           >
             <em style={{ fontFamily: SERIF }} className="text-base tracking-[0.14em] uppercase text-[#b3a996] italic">
-              +37 cours par semaine
+              + de 30 cours / semaine
             </em>
           </motion.div>
 
@@ -120,8 +120,7 @@ const PlanningsPage = () => {
             style={{ fontFamily: DISPLAY }}
             className="text-[2.8rem] uppercase leading-[0.92] tracking-tight sm:text-6xl md:text-7xl lg:text-[5.5rem]"
           >
-            <span className="pl-stroke block">Les</span>
-            <span className="text-white block">Plannings</span>
+            <span className="text-white block">Planning</span>
           </motion.h1>
 
           <motion.p
@@ -169,7 +168,7 @@ const PlanningsPage = () => {
               transition={{ duration: 0.6, delay: 0.25 }}
               className="mt-6 max-w-[44ch] text-[1rem] font-light leading-relaxed text-[#8a8279]"
             >
-              Plus de 37 cours variés chaque semaine, du lundi au dimanche. Intensité, douceur, cardio ou renforcement — il y en a pour tous les niveaux. Téléchargez le planning complet ci-dessous.
+              Plus de 30 cours variés chaque semaine, du lundi au dimanche. Intensité, douceur, cardio ou renforcement — il y en a pour tous les niveaux. Téléchargez le planning complet ci-dessous.
             </motion.p>
           </div>
 

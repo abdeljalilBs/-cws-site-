@@ -226,7 +226,7 @@ const ActivitesPage = () => {
   useEffect(() => {
     if (!selectorVisible) return;
     let v = 0;
-    const target = 37;
+    const target = 30;
     const stepTime = 1500 / target;
     const t = setInterval(() => {
       v += 1;
@@ -303,7 +303,7 @@ const ActivitesPage = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mb-12 max-w-[60ch] text-[1.05rem] md:text-lg font-light italic leading-relaxed text-white/75"
           >
-            Chez CWS, retrouvez plus de 37 cours variés avec des coachs diplômés et qualifiés pour corriger vos mouvements et pour vous donner l'énergie nécessaire afin d'atteindre vos objectifs.
+            Chez CWS, retrouvez plus de 30 cours variés avec des coachs diplômés et qualifiés pour corriger vos mouvements et pour vous donner l'énergie nécessaire afin d'atteindre vos objectifs.
           </motion.p>
 
           <motion.div
@@ -352,7 +352,7 @@ const ActivitesPage = () => {
                 className="mb-5 flex items-center gap-3"
               >
                 <em style={{ fontFamily: SERIF }} className="text-base tracking-[0.14em] uppercase text-[#b3a996] italic">
-                  +<span style={{ fontFamily: DISPLAY }} className="not-italic text-white">{count}</span> cours variés
+                  + de <span style={{ fontFamily: DISPLAY }} className="not-italic text-white">{count}</span> cours / semaine
                 </em>
               </motion.div>
               <motion.h2

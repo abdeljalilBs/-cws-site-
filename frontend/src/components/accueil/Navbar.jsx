@@ -28,7 +28,7 @@ const Navbar = () => {
     { name: 'Le club', to: '/club' },
     { name: 'Les coachs', to: '/coachs' },
     { name: 'Les cours', to: '/activites' },
-    { name: 'Les plannings', to: '/plannings' },
+    { name: 'Planning', to: '/plannings' },
     { name: 'Tarifs', to: '/tarifs' },
   ];
 
