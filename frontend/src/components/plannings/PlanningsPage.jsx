@@ -168,7 +168,7 @@ const PlanningsPage = () => {
               transition={{ duration: 0.6, delay: 0.25 }}
               className="mt-6 max-w-[44ch] text-[1rem] font-light leading-relaxed text-[#8a8279]"
             >
-              Plus de 30 cours variés chaque semaine, du lundi au dimanche. Intensité, douceur, cardio ou renforcement — il y en a pour tous les niveaux. Téléchargez le planning complet ci-dessous.
+              Plus de 30 cours variés chaque semaine. Intensité, douceur, cardio ou renforcement, il y en a pour tous les niveaux. Téléchargez le planning complet ci-dessous.
             </motion.p>
           </div>
 

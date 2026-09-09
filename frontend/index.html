@@ -3,14 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     
-    <!-- Favicon (le logo dans l'onglet) -->
-    <link rel="icon" type="image/png" href="/transparent.png" />
-    <link rel="shortcut icon" type="image/png" href="/transparent.png" />
-    <!-- Fallback pour anciens navigateurs -->
-    <link rel="apple-touch-icon" href="/transparent.png" />
+    <!-- Favicon (logo dans l'onglet) -->
+    <link rel="icon" type="image/png" href="/cws-logo-preview-white-v1.png" />
+    <link rel="shortcut icon" type="image/png" href="/cws-logo-preview-white-v1.png" />
+    <!-- Fallback pour appareils mobiles & Apple -->
+    <link rel="apple-touch-icon" href="/cws-logo-preview-white-v1.png" />
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Coach Wellness Sports — Club de sport premium à La Ville aux Dames (37). Coaching personnalisé, cours collectifs, accès 7j/7." />
+    
+    <!-- Image pour Google & Réseaux Sociaux (Open Graph) -->
+    <meta property="og:image" content="/imagelogo.png" />
+    <meta property="og:title" content="Coach Wellness Sports — Club de sport premium" />
+    <meta property="og:description" content="Club de sport premium à La Ville aux Dames (37). Coaching personnalisé, cours collectifs, accès 7j/7." />
+    <meta name="twitter:image" content="/imagelogo.png" />
+
+    <!-- Données structurées Google (Logo officiel du club) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SportsClub",
+      "name": "Coach Wellness Sports",
+      "url": "https://www.coach-wellness-sports.com",
+      "logo": "https://www.coach-wellness-sports.com/imagelogo.png",
+      "image": "https://www.coach-wellness-sports.com/imagelogo.png"
+    }
+    </script>
     
     <!-- Titre par défaut (sera changé dynamiquement par React) -->
     <title>Coach Wellness Sports — Salle de sport premium</title>
