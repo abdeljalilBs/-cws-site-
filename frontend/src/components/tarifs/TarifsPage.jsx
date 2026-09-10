@@ -74,7 +74,7 @@ const faqs = [
   },
   {
     q: 'Comment réserver les cours collectifs ?',
-    a: "Une fois adhérent, vous accédez à notre planning de cours collectifs. La réservation se fait facilement en ligne ou directement à l'accueil du club. Avec plus de 30 cours variés par semaine, vous trouverez toujours un créneau qui vous convient.",
+    a: "Une fois adhérent, réservez vos cours collectifs en quelques secondes grâce à notre application dédiée. Consultez le planning, choisissez votre cours et réservez votre place en un simple clic. Avec plus de 30 cours variés chaque semaine, trouvez facilement le créneau qui vous convient.",
   },
   {
     q: "Quel est le tarif d'un abonnement ?",
