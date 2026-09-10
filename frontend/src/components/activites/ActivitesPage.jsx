@@ -29,41 +29,205 @@ import sprintImg from '../../assets/sprint.png';
 const DISPLAY = "'Anton', sans-serif";
 const SERIF = "'Instrument Serif', Georgia, 'Times New Roman', serif";
 
-/* ─── Les 3 niveaux ─────────────────────────────────────────── */
-const levels = [
-  { id: 1, label: 'Intensité 1', desc: 'Douceur & mobilité', percent: 33, icon: <LuWind size={20} />, accent: '#d4cfc7', glow: 'rgba(212,207,199,0.18)' },
-  { id: 2, label: 'Intensité 2', desc: 'Renforcement & énergie', percent: 66, icon: <LuActivity size={20} />, accent: '#b3a996', glow: 'rgba(179,169,150,0.20)' },
-  { id: 3, label: 'Intensité 3', desc: 'Haute intensité & cardio', percent: 100, icon: <LuFlame size={20} />, accent: '#d4af37', glow: 'rgba(212,175,55,0.22)' },
+/* ─── Les 3 catégories ───────────────────────────────────────── */
+const categories = [
+  {
+    id: 1,
+    label: 'Wellness Training',
+    subtitle: 'Des cours doux et techniques pour retrouver équilibre, mobilité et bien-être.',
+    desc: "Cette gamme est dédiée au travail postural, à la mobilité, à la souplesse et au renforcement en profondeur. Elle contribue à améliorer votre qualité de mouvement, réduire les tensions musculaires, prévenir les blessures et retrouver un meilleur équilibre entre le corps et l'esprit.",
+    icon: <LuWind size={20} />,
+    accent: '#d4cfc7',
+    glow: 'rgba(212,207,199,0.18)'
+  },
+  {
+    id: 2,
+    label: 'Performance Training',
+    subtitle: 'Des cours de renforcement musculaire conçus pour développer votre force, votre tonicité et vos capacités physiques.',
+    desc: "Cette gamme s'adresse à celles et ceux qui souhaitent gagner en force, sculpter leur silhouette et améliorer leurs performances grâce à des méthodes d'entraînement variées, progressives et encadrées par nos coachs.",
+    icon: <LuDumbbell size={20} />,
+    accent: '#b3a996',
+    glow: 'rgba(179,169,150,0.20)'
+  },
+  {
+    id: 3,
+    label: 'Cardio Training',
+    subtitle: 'Des entraînements dynamiques pour développer votre endurance, repousser vos limites et améliorer durablement votre condition physique.',
+    desc: "Cette gamme est dédiée au développement des capacités cardiovasculaires et respiratoires. Grâce à des méthodes d'entraînement variées et évolutives, améliorez votre endurance, augmentez votre dépense énergétique et progressez quel que soit votre niveau.",
+    icon: <LuFlame size={20} />,
+    accent: '#d4af37',
+    glow: 'rgba(212,175,55,0.22)'
+  },
 ];
 
 /* ─── Tous les cours ────────────────────────────────────────── */
 const courses = [
-  // ── INTENSITÉ 1 ──
-  { level: 1, name: 'Gym Dos', icon: <LuMove size={30} strokeWidth={1.2} />, image: gymDosImg, short: 'Renforcez votre dos en douceur, inspiré du Yoga et du Pilates.', desc: "Inspirée du « Yoga » et du « Pilates », la Gym Dos vous permettra de renforcer en douceur vos muscles afin d'être plus fort.", duration: '45min', accessories: 'Serviette, chaussures propres et bouteille d\'eau', public: 'Pour tout public' },
-  { level: 1, name: 'Pilates', icon: <LuTarget size={30} strokeWidth={1.2} />, image: pilatesImg, short: 'Renforcement du maintien de la colonne vertébrale.', desc: "Le Pilates est un cours doux qui a pour objectif de renforcer le maintien de la colonne vertébrale. Grâce à des exercices simples, avec ou sans petit matériel, cet entraînement agira sur votre mobilité et votre posture.", duration: '45min', accessories: 'Serviette, chaussures propres et bouteille d\'eau', public: 'Pour tout public' },
-  { level: 1, name: 'Yoga', icon: <LuWind size={30} strokeWidth={1.2} />, image: yogaImg, short: 'Harmonie du corps et de l\'esprit.', desc: "Notre Yoga combine le renforcement profond, l'équilibre et l'assouplissement. Ce qui a pour but de conduire votre corps et votre esprit vers une parfaite harmonie.", duration: '45min', accessories: 'Serviette + bouteille d\'eau', public: 'Tout public' },
-  { level: 1, name: 'Stretching', icon: <LuHeartPulse size={30} strokeWidth={1.2} />, image: stretchingImg, short: 'Assouplissement et mobilité au quotidien.', desc: "Le stretching est un cours d'assouplissement qui permet d'améliorer votre mobilité indispensable à votre quotidien.", duration: '45min', accessories: 'Serviette et bouteille d\'eau', public: 'Pour tout public' },
-  { level: 1, name: 'Mobility', icon: <LuMove size={30} strokeWidth={1.2} />, image: mobilityImg, short: 'Utilisez 100% de la capacité de votre corps.', desc: "Ce cours est idéal pour pouvoir utiliser la capacité de votre corps à 100%. Il vous permettra d'améliorer vos mouvements et donc vos performances.", duration: '45min', accessories: 'Serviette et bouteille d\'eau', public: 'Pour tout public' },
+  // ── 1. WELLNESS TRAINING ──
+  {
+    category: 1,
+    name: 'Wellness Pilates',
+    icon: <LuTarget size={30} strokeWidth={1.2} />,
+    image: pilatesImg,
+    short: "Renforcez votre corps de l'intérieur.",
+    desc: "Inspiré de la méthode Pilates, ce cours développe les muscles profonds, améliore la posture, la stabilité du tronc et la coordination. Idéal pour renforcer durablement son corps tout en douceur.",
+    duration: '45min',
+    accessories: "Serviette, chaussures propres et bouteille d'eau",
+    public: 'Pour tout public'
+  },
+  {
+    category: 1,
+    name: 'Wellness Yoga',
+    icon: <LuWind size={30} strokeWidth={1.2} />,
+    image: yogaImg,
+    short: 'Force, mobilité et sérénité.',
+    desc: "Un yoga dynamique alternant postures, respiration et enchaînements fluides pour développer souplesse, équilibre, gainage et concentration tout en procurant une véritable sensation de bien-être.",
+    duration: '45min',
+    accessories: "Serviette + bouteille d'eau",
+    public: 'Tout public'
+  },
+  {
+    category: 1,
+    name: 'Wellness Move',
+    icon: <LuMove size={30} strokeWidth={1.2} />,
+    image: gymDosImg,
+    short: 'Bouger mieux au quotidien.',
+    desc: "Un cours mêlant renforcement musculaire doux, travail postural, équilibre et coordination. Inspiré notamment de la Gym Dos, il aide à améliorer les gestes du quotidien tout en limitant les douleurs et les déséquilibres musculaires.",
+    duration: '45min',
+    accessories: "Serviette, chaussures propres et bouteille d'eau",
+    public: 'Pour tout public'
+  },
+  {
+    category: 1,
+    name: 'Wellness Mobility',
+    icon: <LuMove size={30} strokeWidth={1.2} />,
+    image: mobilityImg,
+    short: 'Retrouvez votre liberté de mouvement.',
+    desc: "Développez votre mobilité articulaire et musculaire grâce à des exercices ciblés favorisant l'amplitude des mouvements, la fluidité gestuelle et la prévention des raideurs.",
+    duration: '45min',
+    accessories: "Serviette et bouteille d'eau",
+    public: 'Pour tout public'
+  },
+  {
+    category: 1,
+    name: 'Wellness Stretch',
+    icon: <LuHeartPulse size={30} strokeWidth={1.2} />,
+    image: stretchingImg,
+    short: 'Relâchez les tensions. Gagnez en souplesse.',
+    desc: "Un cours consacré aux étirements musculaires et à la récupération permettant de diminuer les tensions, d'améliorer la souplesse, de préserver l'amplitude articulaire et de réduire le risque de blessures.",
+    duration: '45min',
+    accessories: "Serviette et bouteille d'eau",
+    public: 'Pour tout public'
+  },
 
-  // ── INTENSITÉ 2 ──
-  { level: 2, name: 'CAF', icon: <LuZap size={30} strokeWidth={1.2} />, image: cafImg, short: 'Cuisses-abdos-fessiers en interval training.', desc: "Le traditionnel « cuisses-abdos-fessiers » sous forme d'interval training, qui assure un renforcement ciblé du bas et du centre du corps.", duration: '45min', accessories: 'Serviette, chaussures propres et bouteille d\'eau', public: 'Pour tout public' },
-  { level: 2, name: 'TRX Training', icon: <LuTarget size={30} strokeWidth={1.2} />, image: trxImg, short: 'Renforcement aux sangles, poids du corps.', desc: "Ce cours de renforcement musculaire avec des sangles (TRX) vous permettra de déstabiliser l'ensemble de votre musculature au poids du corps.", duration: '45min', accessories: 'Serviette, chaussures propres et bouteille d\'eau', public: 'Pour tout public' },
-  { level: 2, name: 'Cross Training', icon: <LuDumbbell size={30} strokeWidth={1.2} />, image: crossTrainingImg, short: 'Entraînement fonctionnel complet et ludique.', desc: "Entraînement croisé avec du matériel (kettlebell, battle rope, haltères, TRX, assault bike...). C'est un entraînement fonctionnel complet, ludique et varié avec une grande dépense énergétique afin de sculpter votre corps.", duration: '45min', accessories: 'Serviette, chaussures propres et bouteille d\'eau', public: 'Pour tout public' },
-  { level: 2, name: 'Cross Biking', icon: <LuBike size={30} strokeWidth={1.2} />, image: crossBikingImg, short: 'Cross Training + Bike, ambiance de feu.', desc: "C'est un mélange de 2 cours (Cross Training + Bike) à grandes dépenses énergétiques. Le cours fonctionnel et complet saura sculpter votre corps dans une ambiance de feu.", duration: '45min', accessories: 'Serviette, chaussures propres et bouteille d\'eau', public: 'Pour tout public' },
-  { level: 2, name: 'Masterclass', icon: <LuAward size={30} strokeWidth={1.2} />, image: masterclassImg, short: 'Force + endurance, devenez un athlète complet.', desc: "C'est un cours de préparation physique qui combine la force et l'endurance pour offrir un mélange de challenges et de défis stimulants, il vous permettra de devenir un athlète complet.", duration: '45min', accessories: 'Serviette, chaussures propres et bouteille d\'eau', public: 'Pour tout public' },
-  { level: 2, name: 'Open Gym', icon: <LuUsers size={30} strokeWidth={1.2} />, image: openGymImg, short: 'Musculation autonome, conseils d\'un coach.', desc: "L'Open Gym est l'occasion idéale pour s'entraîner en musculation afin de travailler en autonomie aux groupes musculaires tout en bénéficiant des conseils d'un coach.", duration: '45min', accessories: '—', public: 'Pour tout public' },
+  // ── 2. PERFORMANCE TRAINING ──
+  {
+    category: 2,
+    name: 'TRX Training',
+    icon: <LuTarget size={30} strokeWidth={1.2} />,
+    image: trxImg,
+    short: 'Le renforcement musculaire dans sa version la plus complète.',
+    desc: "Un entraînement alternant le travail avec les sangles TRX, des exercices au poids du corps ainsi que des mouvements avec barres, disques et petits matériels. Un cours complet qui développe force, stabilité, gainage et condition physique.",
+    duration: '45min',
+    accessories: "Serviette, chaussures propres et bouteille d'eau",
+    public: 'Pour tout public'
+  },
+  {
+    category: 2,
+    name: 'CAF',
+    icon: <LuZap size={30} strokeWidth={1.2} />,
+    image: cafImg,
+    short: 'Tonifiez et renforcez le bas du corps.',
+    desc: "Le grand classique du renforcement musculaire ciblé sur les cuisses, les abdominaux et les fessiers. Un cours accessible à tous pour gagner en tonicité, améliorer son maintien et sculpter durablement sa silhouette.",
+    duration: '45min',
+    accessories: "Serviette, chaussures propres et bouteille d'eau",
+    public: 'Pour tout public'
+  },
+  {
+    category: 2,
+    name: 'Workshop Gym',
+    icon: <LuUsers size={30} strokeWidth={1.2} />,
+    image: openGymImg,
+    short: 'Apprenez à vous entraîner efficacement.',
+    desc: "Un cours pédagogique permettant de maîtriser les bases de la musculation. Découvrez les bonnes techniques sur les machines guidées, avec les haltères et les principaux exercices afin de gagner en autonomie et en confiance dans vos entraînements.",
+    duration: '45min',
+    accessories: "Serviette, chaussures propres et bouteille d'eau",
+    public: 'Pour tout public'
+  },
+  {
+    category: 2,
+    name: 'Cross Training Force',
+    icon: <LuDumbbell size={30} strokeWidth={1.2} />,
+    image: crossTrainingImg,
+    short: 'Développez votre force fonctionnelle.',
+    desc: "Un entraînement en circuits alternant différents ateliers de musculation fonctionnelle et de préparation physique. Grâce à des charges adaptées au niveau de chacun, améliorez votre force, votre puissance et votre endurance musculaire dans une ambiance dynamique et motivante.",
+    duration: '45min',
+    accessories: "Serviette, chaussures propres et bouteille d'eau",
+    public: 'Pour tout public'
+  },
 
-  // ── INTENSITÉ 3 ──
-  { level: 3, name: 'Boxing Bag', icon: <LuSwords size={30} strokeWidth={1.2} />, image: boxingBagImg, short: 'Boxe éducatrice sur sacs de frappe dédiés.', desc: "Boxe éducatrice, bénéficiez de tous les avantages de la boxe sans les inconvénients, sur de véritables sacs de frappe avec une structure dédiée.", duration: '45min', accessories: 'Serviette, gants et bouteille d\'eau', public: 'Pour tout public' },
-  { level: 3, name: 'Cardio Training', icon: <LuHeartPulse size={30} strokeWidth={1.2} />, image: cardioTrainingImg, short: 'Développez le muscle le plus important : le cœur.', desc: "Entraînement croisé avec du matériel cardio (vélo, rameur, assault bike, ski erg...) et du poids du corps. C'est un entraînement qui va vous permettre de développer le muscle le plus important de votre corps : le cœur.", duration: '45min', accessories: 'Serviette, gants et bouteille d\'eau', public: 'Pour tout public' },
-  { level: 3, name: 'Sprint', icon: <LuTimer size={30} strokeWidth={1.2} />, image: sprintImg, short: 'Haute intensité sur vélo dernière génération.', desc: "C'est un entraînement à haute intensité sur un vélo de dernière génération. Ce cours vous permettra de dépasser vos limites et d'atteindre plus rapidement vos objectifs.", duration: '30min', accessories: 'Serviette, chaussures propres et bouteille d\'eau', public: 'Pour tout public' },
+  // ── 3. CARDIO TRAINING ──
+  {
+    category: 3,
+    name: 'Cardio Training',
+    icon: <LuHeartPulse size={30} strokeWidth={1.2} />,
+    image: cardioTrainingImg,
+    short: 'Développez votre moteur.',
+    desc: "Un entraînement spécifiquement conçu pour améliorer vos capacités cardiovasculaires et respiratoires grâce à l'utilisation d'ergomètres (rameur, SkiErg, Bike...) et d'exercices cardio variés. Idéal pour développer son endurance et brûler un maximum de calories.",
+    duration: '45min',
+    accessories: "Serviette, gants et bouteille d'eau",
+    public: 'Pour tout public'
+  },
+  {
+    category: 3,
+    name: 'Boxing Bag',
+    icon: <LuSwords size={30} strokeWidth={1.2} />,
+    image: boxingBagImg,
+    short: 'Puissance, technique et explosivité.',
+    desc: "Un cours sur sac de frappe inspiré de la boxe anglaise et du Muay Thaï. Accessible à tous, il permet d'apprendre les techniques de frappe tout en développant coordination, endurance, explosivité et condition physique dans une ambiance énergique.",
+    duration: '45min',
+    accessories: "Serviette, gants et bouteille d'eau",
+    public: 'Pour tout public'
+  },
+  {
+    category: 3,
+    name: 'Masterclass',
+    icon: <LuAward size={30} strokeWidth={1.2} />,
+    image: masterclassImg,
+    short: "L'entraînement ultime.",
+    desc: "Inspiré de l'univers Hyrox®, ce cours associe course, ergomètres, exercices fonctionnels et ateliers de préparation physique. Que votre objectif soit le loisir ou la compétition, développez votre endurance, votre force fonctionnelle et votre capacité à enchaîner les efforts.",
+    duration: '45min',
+    accessories: "Serviette, chaussures propres et bouteille d'eau",
+    public: 'Pour tout public'
+  },
+  {
+    category: 3,
+    name: 'Cross Biking',
+    icon: <LuBike size={30} strokeWidth={1.2} />,
+    image: crossBikingImg,
+    short: 'Pédalez. Renforcez. Dépassez-vous.',
+    desc: "Un cours rythmé alternant des séquences de biking en musique avec des exercices de renforcement du haut du corps et du centre du corps. Une séance complète permettant de solliciter l'ensemble de l'organisme tout en maximisant la dépense calorique.",
+    duration: '45min',
+    accessories: "Serviette, chaussures propres et bouteille d'eau",
+    public: 'Pour tout public'
+  },
+  {
+    category: 3,
+    name: 'Cross Training Cardio',
+    icon: <LuTimer size={30} strokeWidth={1.2} />,
+    image: sprintImg,
+    short: "L'intensité au service de votre endurance.",
+    desc: "Un entraînement en circuits alternant différents ateliers cardio et fonctionnels, avec un accent particulier sur le développement de l'endurance cardiovasculaire. Les exercices et les charges sont adaptés à chacun afin de progresser efficacement tout en maintenant une intensité élevée.",
+    duration: '45min',
+    accessories: "Serviette, chaussures propres et bouteille d'eau",
+    public: 'Pour tout public'
+  },
 ];
 
 /* ─── Jauge circulaire SVG animée ───────────────────────────── */
-const IntensityGauge = ({ percent, accent, isVisible }) => {
+const CategoryGauge = ({ count, accent, isVisible }) => {
   const radius = 52;
   const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (percent / 100) * circumference;
+  const offset = circumference * 0.25;
 
   return (
     <div className="relative h-32 w-32">
@@ -81,8 +245,8 @@ const IntensityGauge = ({ percent, accent, isVisible }) => {
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
-        <span style={{ fontFamily: DISPLAY }} className="text-2xl leading-none text-white">{percent}%</span>
-        <span className="mt-1 text-[0.55rem] uppercase tracking-[0.15em] text-white/40">intensité</span>
+        <span style={{ fontFamily: DISPLAY }} className="text-3xl leading-none text-white">{count}</span>
+        <span className="mt-1 text-[0.55rem] uppercase tracking-[0.15em] text-white/40">cours</span>
       </div>
     </div>
   );
@@ -122,8 +286,8 @@ const CourseCard = ({ course, index, isVisible, accent, expanded, onToggle }) =>
         ) : (
           // --- ICÔNE (fallback) ---
           <div className={`h-full w-full flex items-center justify-center relative ${
-            course.level === 1 ? 'bg-gradient-to-br from-[#d4cfc7]/[0.08] to-transparent' :
-            course.level === 2 ? 'bg-gradient-to-br from-[#b3a996]/[0.10] to-transparent' :
+            course.category === 1 ? 'bg-gradient-to-br from-[#d4cfc7]/[0.08] to-transparent' :
+            course.category === 2 ? 'bg-gradient-to-br from-[#b3a996]/[0.10] to-transparent' :
             'bg-gradient-to-br from-[#d4af37]/[0.12] to-transparent'
           }`}>
             <span style={{ fontFamily: DISPLAY }} className="pointer-events-none absolute -top-4 -right-2 text-[6rem] leading-none text-white/[0.03] select-none">
@@ -216,11 +380,11 @@ const ActivitesPage = () => {
   const selectorVisible = isSelectorInView || mounted;
   const ctaVisible = isCtaInView || mounted;
 
-  const [activeLevel, setActiveLevel] = useState(1);
+  const [activeCategory, setActiveCategory] = useState(1);
   const [expandedCard, setExpandedCard] = useState(null);
 
-  const currentLevel = levels.find(l => l.id === activeLevel);
-  const filteredCourses = useMemo(() => courses.filter(c => c.level === activeLevel), [activeLevel]);
+  const currentCategory = categories.find(c => c.id === activeCategory);
+  const filteredCourses = useMemo(() => courses.filter(c => c.category === activeCategory), [activeCategory]);
 
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -236,7 +400,7 @@ const ActivitesPage = () => {
     return () => clearInterval(t);
   }, [selectorVisible]);
 
-  useEffect(() => { setExpandedCard(null); }, [activeLevel]);
+  useEffect(() => { setExpandedCard(null); }, [activeCategory]);
 
   return (
     <div className="relative w-full overflow-hidden bg-[#0a0a0a]">
@@ -248,7 +412,7 @@ const ActivitesPage = () => {
       `}</style>
 
       <motion.div
-        animate={{ background: currentLevel.glow }}
+        animate={{ background: currentCategory.glow }}
         transition={{ duration: 0.8 }}
         className="ac-glow pointer-events-none fixed top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full blur-[140px] z-0"
       />
@@ -338,7 +502,7 @@ const ActivitesPage = () => {
       </section>
 
       {/* ══════════════════════════════════════════
-          2. SÉLECTEUR D'INTENSITÉ INTERACTIF
+          2. SÉLECTEUR DE CATÉGORIE INTERACTIF
       ══════════════════════════════════════════ */}
       <section id="selecteur" ref={selectorRef} className="relative w-full overflow-hidden py-16 md:py-20">
         <div className="relative z-10 mx-auto max-w-[1240px] px-6 sm:px-10 lg:px-16">
@@ -364,10 +528,10 @@ const ActivitesPage = () => {
               >
                 Choisissez votre{' '}
                 <motion.span
-                  animate={{ color: currentLevel.accent }}
+                  animate={{ color: currentCategory.accent }}
                   transition={{ duration: 0.5 }}
                 >
-                  intensité
+                  catégorie
                 </motion.span>
               </motion.h2>
             </div>
@@ -379,54 +543,66 @@ const ActivitesPage = () => {
               className="flex items-center gap-6 self-start lg:self-auto"
             >
               <div className="text-right hidden sm:block">
-                <motion.p animate={{ color: currentLevel.accent }} style={{ fontFamily: DISPLAY }} className="text-xl uppercase leading-none">{currentLevel.label}</motion.p>
-                <p className="mt-1 text-sm italic text-white/50">{currentLevel.desc}</p>
+                <motion.p animate={{ color: currentCategory.accent }} style={{ fontFamily: DISPLAY }} className="text-xl uppercase leading-none">{currentCategory.label}</motion.p>
+                <p className="mt-1 text-sm italic text-white/50 max-w-[320px]">{currentCategory.subtitle}</p>
               </div>
-              <IntensityGauge percent={currentLevel.percent} accent={currentLevel.accent} isVisible={selectorVisible} />
+              <CategoryGauge count={filteredCourses.length} accent={currentCategory.accent} isVisible={selectorVisible} />
             </motion.div>
           </div>
 
-          {/* Sélecteur 3 Niveaux */}
+          {/* Sélecteur 3 Catégories */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={selectorVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.35 }}
-            className="mb-12 grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4"
+            className="mb-8 grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4"
           >
-            {levels.map((lvl) => {
-              const isActive = activeLevel === lvl.id;
+            {categories.map((cat) => {
+              const isActive = activeCategory === cat.id;
               return (
                 <button
-                  key={lvl.id}
-                  onClick={() => setActiveLevel(lvl.id)}
-                  className="group relative overflow-hidden rounded-2xl border px-5 py-5 md:px-6 md:py-6 text-left transition-all duration-500"
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  className="group relative overflow-hidden rounded-2xl border px-5 py-5 md:px-6 md:py-6 text-left transition-all duration-500 cursor-pointer"
                   style={{
-                    borderColor: isActive ? lvl.accent : 'rgba(255,255,255,0.08)',
-                    background: isActive ? `${lvl.accent}14` : 'rgba(255,255,255,0.02)',
+                    borderColor: isActive ? cat.accent : 'rgba(255,255,255,0.08)',
+                    background: isActive ? `${cat.accent}14` : 'rgba(255,255,255,0.02)',
                   }}
                 >
                   <motion.div
-                    animate={{ width: isActive ? '100%' : '0%', backgroundColor: lvl.accent }}
+                    animate={{ width: isActive ? '100%' : '0%', backgroundColor: cat.accent }}
                     transition={{ duration: 0.6 }}
                     className="absolute bottom-0 left-0 h-1"
                   />
                   <div className="flex items-center gap-3 mb-1.5">
-                    <span style={{ color: isActive ? lvl.accent : 'rgba(255,255,255,0.4)' }} className="transition-colors duration-300">{lvl.icon}</span>
+                    <span style={{ color: isActive ? cat.accent : 'rgba(255,255,255,0.4)' }} className="transition-colors duration-300">{cat.icon}</span>
                     <span style={{ fontFamily: DISPLAY, color: isActive ? '#fff' : 'rgba(255,255,255,0.5)' }} className="text-base md:text-lg uppercase tracking-tight transition-colors duration-300">
-                      {lvl.label}
+                      {cat.label}
                     </span>
                   </div>
-                  <p className="text-[0.75rem] md:text-sm italic text-white/40 pl-9">{lvl.desc}</p>
+                  <p className="text-[0.75rem] md:text-xs italic text-white/40 pl-8 line-clamp-2 leading-relaxed">{cat.subtitle}</p>
                 </button>
               );
             })}
+          </motion.div>
+
+          {/* Description complète de la gamme */}
+          <motion.div
+            key={activeCategory}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="mb-12 border-l-2 pl-4 py-1 text-sm md:text-base leading-relaxed text-white/60 italic max-w-3xl"
+            style={{ borderColor: currentCategory.accent }}
+          >
+            {currentCategory.desc}
           </motion.div>
 
           {/* Grille des Cours — flexbox + dernière ligne centrée + LazyImage */}
           <div className="flex flex-wrap justify-center gap-5">
             <AnimatePresence mode="wait">
               <motion.div
-                key={activeLevel}
+                key={activeCategory}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -439,7 +615,7 @@ const ActivitesPage = () => {
                       course={course}
                       index={i}
                       isVisible={selectorVisible}
-                      accent={currentLevel.accent}
+                      accent={currentCategory.accent}
                       expanded={expandedCard === course.name}
                       onToggle={() => setExpandedCard(expandedCard === course.name ? null : course.name)}
                     />
