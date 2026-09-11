@@ -238,21 +238,38 @@ const ClubPage = () => {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, y: 30 }} animate={heroVisible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.45 }} className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl">
-              <div className="rounded-2xl border border-white/10 bg-[#0a0a0a]/50 backdrop-blur-md p-6">
-                <div className="flex items-center gap-2.5 mb-3">
-                  <LuClock size={18} className="text-[#d4cfc7]" />
-                  <span className="text-xs font-bold uppercase tracking-[0.18em] text-white/80">Horaires du club</span>
+              <div className="rounded-2xl border border-white/10 bg-[#0a0a0a]/50 backdrop-blur-md p-6 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2.5 mb-4">
+                    <LuClock size={18} className="text-[#d4cfc7]" />
+                    <span className="text-xs font-bold uppercase tracking-[0.18em] text-white/80">Horaires du club</span>
+                  </div>
+                  <div className="space-y-2 text-sm">
+                    <div className="flex items-center justify-between gap-3 border-b border-white/5 pb-1.5">
+                      <span className="text-white/70 font-light">Lundi au jeudi</span>
+                      <span style={{ fontFamily: DISPLAY }} className="text-base text-[#d4cfc7] tracking-wide">7h30 – 21h00</span>
+                    </div>
+                    <div className="flex items-center justify-between gap-3 border-b border-white/5 pb-1.5">
+                      <span className="text-white/70 font-light">Vendredi</span>
+                      <span style={{ fontFamily: DISPLAY }} className="text-base text-[#d4cfc7] tracking-wide">8h30 – 21h00</span>
+                    </div>
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-white/70 font-light">Samedi & Dimanche</span>
+                      <span style={{ fontFamily: DISPLAY }} className="text-base text-[#d4cfc7] tracking-wide">8h30 – 20h00</span>
+                    </div>
+                  </div>
                 </div>
-                <p className="text-white text-lg font-light">Lundi – Dimanche</p>
-                <p style={{ fontFamily: DISPLAY }} className="text-2xl text-[#d4cfc7] mt-1">7h30 – 21h30</p>
               </div>
-              <div className="rounded-2xl border border-white/10 bg-[#0a0a0a]/50 backdrop-blur-md p-6">
-                <div className="flex items-center gap-2.5 mb-3">
-                  <LuCalendarCheck size={18} className="text-[#d4cfc7]" />
-                  <span className="text-xs font-bold uppercase tracking-[0.18em] text-white/80">Accueil commercial</span>
+              <div className="rounded-2xl border border-white/10 bg-[#0a0a0a]/50 backdrop-blur-md p-6 flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-2.5 mb-4">
+                    <LuCalendarCheck size={18} className="text-[#d4cfc7]" />
+                    <span className="text-xs font-bold uppercase tracking-[0.18em] text-white/80">Accueil commercial</span>
+                  </div>
+                  <p className="text-white text-lg font-light">Sur rendez-vous</p>
+                  <p className="text-white/50 text-xs mt-1">Pour vos inscriptions, bilans ou visites du club</p>
                 </div>
-                <p className="text-white text-lg font-light">Sur rendez-vous</p>
-                <Link to="/#contact" className="inline-flex items-center gap-1.5 text-sm text-[#d4cfc7] hover:text-white mt-2 transition-colors">
+                <Link to="/#contact" className="inline-flex items-center gap-1.5 text-sm text-[#d4cfc7] hover:text-white mt-4 transition-colors">
                   Prendre rendez-vous <LuChevronRight size={14} />
                 </Link>
               </div>

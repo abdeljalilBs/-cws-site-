@@ -56,7 +56,7 @@ const pillars = [
     icon: <LuClock size={24} strokeWidth={1.5} />,
     title: 'Ouvert 7j/7',
     description:
-      "Votre salle est ouverte 7 jours sur 7 en accès libre : du lundi au dimanche, de 7h30 à 21h30.",
+      "Votre salle est ouverte 7 jours sur 7 en accès libre : lun–jeu de 7h30 à 21h00, ven de 8h30 à 21h00, sam & dim de 8h30 à 20h00.",
   },
 ];
 

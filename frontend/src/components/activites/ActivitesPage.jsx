@@ -246,7 +246,7 @@ const CategoryGauge = ({ count, accent, isVisible }) => {
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center">
         <span style={{ fontFamily: DISPLAY }} className="text-3xl leading-none text-white">{count}</span>
-        <span className="mt-1 text-[0.55rem] uppercase tracking-[0.15em] text-white/40">cours</span>
+        <span className="mt-1 text-[0.55rem] uppercase tracking-[0.15em] text-white/40">{count > 1 ? 'thèmes' : 'thème'}</span>
       </div>
     </div>
   );
