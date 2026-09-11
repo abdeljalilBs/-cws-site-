@@ -322,10 +322,23 @@ const Contact = () => {
                                 transition={{ duration: 0.6, delay: 0.3 }}
                                 className="group border-t border-white/10 py-10 transition-colors duration-500 hover:border-[#d4cfc7]/40"
                             >
-                                <span className="block text-xs font-bold uppercase tracking-[0.2em] text-white/40 mb-4 group-hover:text-[#d4cfc7] transition-colors"> Accès Libre</span>
-                                <h3 style={{ fontFamily: DISPLAY }} className="text-3xl md:text-4xl uppercase text-white mb-4 tracking-tight">7h30 — 21h30</h3>
+                                <span className="block text-xs font-bold uppercase tracking-[0.2em] text-white/40 mb-4 group-hover:text-[#d4cfc7] transition-colors"> Accès Libre 7j/7</span>
+                                <div className="space-y-2 mb-4">
+                                    <div className="flex items-center justify-between max-w-[320px] border-b border-white/5 pb-1">
+                                        <span className="text-white/70 font-light text-sm">Lundi au jeudi</span>
+                                        <span style={{ fontFamily: DISPLAY }} className="text-lg text-white">7h30 — 21h00</span>
+                                    </div>
+                                    <div className="flex items-center justify-between max-w-[320px] border-b border-white/5 pb-1">
+                                        <span className="text-white/70 font-light text-sm">Vendredi</span>
+                                        <span style={{ fontFamily: DISPLAY }} className="text-lg text-white">8h30 — 21h00</span>
+                                    </div>
+                                    <div className="flex items-center justify-between max-w-[320px]">
+                                        <span className="text-white/70 font-light text-sm">Samedi & Dimanche</span>
+                                        <span style={{ fontFamily: DISPLAY }} className="text-lg text-white">8h30 — 20h00</span>
+                                    </div>
+                                </div>
                                 <p className="text-white/60 font-light max-w-[40ch] leading-relaxed">
-                                    Du lundi au dimanche. Entraînez-vous à votre rythme dans un espace pensé pour la performance et le bien-être.
+                                    Entraînez-vous à votre rythme dans un espace pensé pour la performance et le bien-être.
                                 </p>
                             </motion.div>
 

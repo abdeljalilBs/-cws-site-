@@ -53,7 +53,7 @@ const ClubSection = () => {
 
   const realCards = [
     { image: materielImg, title: "Le Matériel", description: "Chez CWS, le matériel est de qualité professionnelle, et de dernière génération (MATRIX)." },
-    { image: accesLibreImg, title: "Accès Libre", description: "Au parc cardio et au plateau musculation, 7 jours sur 7 de 7h30 à 21h30." },
+    { image: accesLibreImg, title: "Accès Libre", description: "Au parc cardio et au plateau musculation, 7 jours sur 7 avec de larges amplitudes horaires." },
     { image: ambianceImg, title: "L'Ambiance", description: "Une ambiance conviviale, familiale, et chaleureuse pour devenir la meilleure version de soi-même." },
     { image: coachingImg, title: "Coaching Personnalisé", description: "Les coachs CWS sont diplômés, passionnés et experts dans leur métier. Ils sauront vous motiver et vous faire atteindre vos objectifs." },
     { image: coursImg, title: "Cours Collectifs", description: "Chez CWS, retrouvez plus de 30 cours variés avec des coachs diplômés et qualifiés pour corriger vos mouvements." },
