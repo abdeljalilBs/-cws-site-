@@ -104,7 +104,7 @@ const AboutSection = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             style={{ fontFamily: DISPLAY }}
-            className="max-w-[20ch] text-[2.8rem] uppercase leading-[0.95] tracking-tight text-[#0a0a0a] sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+            className="max-w-[20ch] text-[clamp(2.2rem,8vw,2.8rem)] uppercase leading-[0.95] tracking-tight text-[#0a0a0a] sm:text-6xl md:text-7xl lg:text-[5.5rem]"
           >
             Ne confiez jamais votre corps à des{' '}
             <span className="relative inline-block whitespace-nowrap">

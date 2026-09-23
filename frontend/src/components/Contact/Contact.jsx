@@ -245,7 +245,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="relative w-full overflow-hidden bg-[#0a0a0a] min-h-screen pt-24 pb-20">
+        <div className="relative w-full overflow-hidden bg-[#0a0a0a] min-h-[100dvh] pt-24 pb-20">
 
             <style>{`
                 .ct-select{appearance:none;-webkit-appearance:none;background-image:none;}
@@ -286,7 +286,7 @@ const Contact = () => {
                             animate={formVisible ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.7, delay: 0.1 }}
                             style={{ fontFamily: DISPLAY }}
-                            className="relative text-[2.8rem] uppercase leading-[0.94] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[5rem]"
+                            className="relative text-[clamp(2.2rem,8vw,2.8rem)] uppercase leading-[0.94] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[5rem]"
                         >
                             Contactez-<span className="text-[#d4cfc7]">nous</span>
                         </motion.h2>

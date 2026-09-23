@@ -118,7 +118,7 @@ const PlanningsPage = () => {
             animate={heroVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
             style={{ fontFamily: DISPLAY }}
-            className="text-[2.8rem] uppercase leading-[0.92] tracking-tight sm:text-6xl md:text-7xl lg:text-[5.5rem]"
+            className="text-[clamp(2.2rem,8vw,2.8rem)] uppercase leading-[0.92] tracking-tight sm:text-6xl md:text-7xl lg:text-[5.5rem]"
           >
             <span className="text-white block">Planning</span>
           </motion.h1>
@@ -238,7 +238,7 @@ const PlanningsPage = () => {
             style={{ fontFamily: DISPLAY }}
             className="mb-5 text-[2.2rem] uppercase leading-[0.95] tracking-tight text-[#0a0a0a] sm:text-4xl md:text-5xl"
           >
-            Prêt à réserver votre place ?
+            Prêt à réserver votre place&nbsp;?
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}

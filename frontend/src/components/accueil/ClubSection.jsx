@@ -336,7 +336,7 @@ const ClubSection = () => {
                 key={`${card.title}-${index}`}
                 data-card
                 onClick={() => !isActive && goToCard(card._realIndex)}
-                className="group relative flex-shrink-0 w-[300px] sm:w-[340px] md:w-[380px] rounded-2xl overflow-hidden bg-[#111111] cursor-pointer"
+                className="group relative flex-shrink-0 w-[80vw] max-w-[300px] sm:max-w-none sm:w-[340px] md:w-[380px] rounded-2xl overflow-hidden bg-[#111111] cursor-pointer"
                 style={{
                   scrollSnapAlign: 'center',
                   transform: `translate3d(0,0,0) scale(${s.scale})`,

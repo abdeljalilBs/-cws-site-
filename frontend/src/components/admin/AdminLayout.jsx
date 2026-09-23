@@ -12,7 +12,7 @@ const AdminLayout = () => {
     };
 
     return (
-        <div className="flex min-h-screen bg-[#111] text-white">
+        <div className="flex min-h-[100dvh] bg-[#111] text-white">
             {/* Sidebar */}
             <aside className="hidden w-64 flex-col border-r border-white/10 bg-[#1a1a1a] md:flex">
                 <div className="flex h-16 items-center border-b border-white/10 px-6">

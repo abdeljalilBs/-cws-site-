@@ -204,7 +204,7 @@ const ClubPage = () => {
       {/* ══════════════════════════════════════════
           1. HERO CLUB
       ══════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative w-full min-h-screen flex items-center overflow-hidden">
+      <section ref={heroRef} className="relative w-full min-h-[100dvh] flex items-center overflow-hidden">
         <motion.div
           initial={{ scale: 1.12 }}
           animate={heroVisible ? { scale: 1 } : {}}
@@ -224,7 +224,7 @@ const ClubPage = () => {
               <em style={{ fontFamily: SERIF }} className="text-base tracking-[0.14em] uppercase text-[#b3a996] italic">Le club</em>
             </motion.div>
 
-            <motion.h1 initial={{ opacity: 0, y: 40 }} animate={heroVisible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }} style={{ fontFamily: DISPLAY }} className="mb-7 text-[2.8rem] uppercase leading-[0.92] tracking-tight sm:text-6xl md:text-7xl lg:text-[5.5rem]">
+            <motion.h1 initial={{ opacity: 0, y: 40 }} animate={heroVisible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }} style={{ fontFamily: DISPLAY }} className="mb-7 text-[clamp(2.2rem,8vw,2.8rem)] uppercase leading-[0.92] tracking-tight sm:text-6xl md:text-7xl lg:text-[5.5rem]">
               <span className="cp-stroke block">Coach Wellness</span>
               <span className="text-white block">Sports</span>
             </motion.h1>
@@ -291,7 +291,7 @@ const ClubPage = () => {
                 <em style={{ fontFamily: SERIF }} className="text-base tracking-[0.14em] uppercase text-[#b3a996] italic">CWS : Un Club de Sport Premium à La Ville-aux-Dames</em>
               </motion.div>
 
-              <motion.h2 initial={{ opacity: 0, y: 30 }} animate={storyVisible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.1 }} style={{ fontFamily: DISPLAY }} className="mb-7 text-[2.4rem] uppercase leading-[0.94] tracking-tight text-[#0a0a0a] sm:text-5xl md:text-6xl lg:text-[4rem]">
+              <motion.h2 initial={{ opacity: 0, y: 30 }} animate={storyVisible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.1 }} style={{ fontFamily: DISPLAY }} className="mb-7 text-[clamp(2rem,7vw,2.4rem)] uppercase leading-[0.94] tracking-tight text-[#0a0a0a] sm:text-5xl md:text-6xl lg:text-[4rem]">
                 L'histoire{' '}
                 <span className="relative inline-block whitespace-nowrap">
                   <span className="relative z-10">du club</span>
@@ -347,7 +347,7 @@ const ClubPage = () => {
               <em style={{ fontFamily: SERIF }} className="text-base tracking-[0.14em] uppercase text-[#b3a996] italic">Notre promesse</em>
             </motion.div>
 
-            <motion.h2 initial={{ opacity: 0, y: 30 }} animate={engageVisible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.1 }} style={{ fontFamily: DISPLAY }} className="text-[2.4rem] uppercase leading-[0.94] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.2rem]">
+            <motion.h2 initial={{ opacity: 0, y: 30 }} animate={engageVisible ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.7, delay: 0.1 }} style={{ fontFamily: DISPLAY }} className="text-[clamp(2rem,7vw,2.4rem)] uppercase leading-[0.94] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.2rem]">
               L'engagement{' '}
               <span className="relative inline-block whitespace-nowrap">
                 <span className="relative z-10">CWS</span>

@@ -91,14 +91,14 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Bouton Menu Mobile avec séparateur */}
         <div className="lg:hidden flex items-center gap-4 ml-auto">
           <span className="h-5 w-px bg-white/20" />
           <button
-            className="text-white focus:outline-none flex items-center justify-center"
+            className="text-white focus:outline-none flex items-center justify-center p-2 -mr-2 relative z-50 cursor-pointer touch-manipulation"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Menu"
           >
-            {isMobileMenuOpen ? <LuX size={24} /> : <LuMenu size={24} />}
+            {isMobileMenuOpen ? <LuX size={26} /> : <LuMenu size={26} />}
           </button>
         </div>
       </motion.nav>

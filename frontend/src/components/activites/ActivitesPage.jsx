@@ -455,7 +455,7 @@ const ActivitesPage = () => {
             animate={heroVisible ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
             style={{ fontFamily: DISPLAY }}
-            className="mb-8 text-[3rem] uppercase leading-[0.9] tracking-tight sm:text-6xl md:text-7xl lg:text-[6.5rem]"
+            className="mb-8 text-[clamp(2.2rem,8vw,3rem)] uppercase leading-[0.9] tracking-tight sm:text-6xl md:text-7xl lg:text-[6.5rem]"
           >
             <span className="block" style={{ color: 'transparent', WebkitTextStroke: '1.5px rgba(212,207,199,0.7)' }}>Les cours</span>
             <span className="text-white block">collectifs</span>

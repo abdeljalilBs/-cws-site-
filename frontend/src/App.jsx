@@ -64,7 +64,7 @@ const MainLayout = ({ children }) => {
   const isAdminRoute = location.pathname.startsWith('/admin');
 
   return (
-    <div className="bg-[#0a0a0a] min-h-screen flex flex-col">
+    <div className="bg-[#0a0a0a] min-h-[100dvh] flex flex-col overflow-x-hidden w-full max-w-[100vw]">
       <PageTitle />
 
       {/* On n'affiche PAS la Navbar si on est sur /admin */}

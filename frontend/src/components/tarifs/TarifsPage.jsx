@@ -423,12 +423,12 @@ const TarifsPage = () => {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.1 }}
                 style={{ fontFamily: DISPLAY }}
-                className="max-w-[13ch] text-[2.7rem] uppercase leading-[0.92] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.4rem]"
+                className="max-w-[13ch] text-[clamp(2.2rem,8vw,2.7rem)] uppercase leading-[0.92] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.4rem]"
               >
                 Trouvez l'offre{' '}
                 <span
                   style={{ fontFamily: SERIF }}
-                  className="whitespace-nowrap normal-case italic tracking-normal font-normal"
+                  className="sm:whitespace-nowrap whitespace-normal normal-case italic tracking-normal font-normal"
                 >
                   qui vous ressemble
                 </span>
@@ -463,7 +463,7 @@ const TarifsPage = () => {
             <p className="text-xs uppercase tracking-[0.2em] text-[#8a8279] mb-2">Nos formules débutent à</p>
             
             <div className="flex flex-col items-center justify-center sm:flex-row sm:items-baseline gap-2 mb-4">
-              <span style={{ fontFamily: DISPLAY }} className="text-6xl sm:text-7xl md:text-8xl leading-none text-white tracking-tight">
+              <span style={{ fontFamily: DISPLAY }} className="text-[clamp(3rem,10vw,3.75rem)] sm:text-7xl md:text-8xl leading-none text-white tracking-tight">
                 À partir de 39,90 €
               </span>
               <span className="text-lg sm:text-xl font-light text-[#b3a996]">/ mois</span>
@@ -543,7 +543,7 @@ const TarifsPage = () => {
                 animate={isFaqInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.1 }}
                 style={{ fontFamily: DISPLAY }}
-                className="text-[2.2rem] uppercase leading-[0.94] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-[3.6rem]"
+                className="text-[clamp(1.8rem,7vw,2.2rem)] uppercase leading-[0.94] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-[3.6rem]"
               >
                 On répond à vos questions
               </motion.h2>

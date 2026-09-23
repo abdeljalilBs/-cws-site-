@@ -71,7 +71,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative w-full h-screen overflow-hidden bg-[#0a0a0a]"
+      className="relative w-full h-[100dvh] min-h-[500px] overflow-hidden bg-[#0a0a0a]"
     >
       {/* ══════════════════════════════════════════
           VIDÉO DE FOND
@@ -134,11 +134,11 @@ const Hero = () => {
           custom={1}
           className="mb-3 md:mb-4"
         >
-          <h1 className="text-white font-black uppercase leading-[1] tracking-[0.08em] text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
+          <h1 className="text-white font-black uppercase leading-[1] tracking-[0.08em] text-[clamp(2rem,8vw,4rem)] md:text-[clamp(3rem,6vw,5rem)] lg:text-6xl">
             Coach Wellness
           </h1>
 
-          <h1 className="text-white font-black uppercase leading-[1] tracking-[0.08em] text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-1">
+          <h1 className="text-white font-black uppercase leading-[1] tracking-[0.08em] text-[clamp(2rem,8vw,4rem)] md:text-[clamp(3rem,6vw,5rem)] lg:text-6xl mt-1">
             Sports
           </h1>
         </motion.div>

@@ -34,7 +34,7 @@ const MentionsLegales = () => {
   const contentInView = useInView(contentRef, { once: true, margin: '-60px' });
 
   return (
-    <div className="relative w-full min-h-screen bg-[#0a0a0a]">
+    <div className="relative w-full min-h-[100dvh] bg-[#0a0a0a]">
 
       {/* ── Atmosphère de fond ── */}
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">

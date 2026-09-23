@@ -106,7 +106,7 @@ const CoachCard = ({ coach, index }) => {
 
                 {/* Nom & Citation */}
                 <div className="mb-8">
-                    <h3 style={{ fontFamily: DISPLAY }} className="text-5xl md:text-6xl lg:text-7xl uppercase text-white leading-none mb-6 tracking-tight">
+                    <h3 style={{ fontFamily: DISPLAY }} className="text-[clamp(2.5rem,8vw,3rem)] md:text-6xl lg:text-7xl uppercase text-white leading-none mb-6 tracking-tight">
                         {coach.name}
                     </h3>
                     <div className="flex items-start gap-4 p-4 border-l-2 border-[#d4cfc7]/50 bg-white/[0.02] rounded-r-lg">
@@ -188,7 +188,7 @@ const Coachs = () => {
     const isHeaderInView = useInView(headerRef, { once: true, margin: "-50px" });
 
     return (
-        <div className="relative w-full overflow-hidden bg-[#0a0a0a] min-h-screen pt-32 pb-20">
+        <div className="relative w-full overflow-hidden bg-[#0a0a0a] min-h-[100dvh] pt-32 pb-20">
             <FloatingOrbs />
 
             <div className="relative z-10 mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16">
@@ -210,7 +210,7 @@ const Coachs = () => {
                         animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.7, delay: 0.1 }}
                         style={{ fontFamily: DISPLAY }}
-                        className="text-4xl sm:text-6xl md:text-7xl uppercase leading-[0.94] tracking-tight text-white"
+                        className="text-[clamp(2rem,8vw,2.25rem)] sm:text-6xl md:text-7xl uppercase leading-[0.94] tracking-tight text-white"
                     >
                         Les Coachs <span className="text-[#d4cfc7]">CWS</span>
                     </motion.h2>
