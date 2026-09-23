@@ -116,7 +116,7 @@ const TestimonialsSection = () => {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.7, delay: 0.1 }}
             style={{ fontFamily: DISPLAY }}
-            className="max-w-[18ch] text-[2.8rem] uppercase leading-[0.95] tracking-tight text-[#0a0a0a] sm:text-6xl md:text-7xl lg:text-[5rem]"
+            className="max-w-[18ch] text-[clamp(1.9rem,8vw,2.8rem)] uppercase leading-[0.95] tracking-tight text-[#0a0a0a] sm:text-6xl md:text-7xl lg:text-[5rem]"
           >
             Ce qu'en pensent{' '}
             <span className="relative inline-block whitespace-nowrap">

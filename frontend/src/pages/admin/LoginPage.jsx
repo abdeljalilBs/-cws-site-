@@ -29,7 +29,7 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="flex min-h-screen w-full bg-[#0a0a0a] text-white">
+        <div className="flex min-h-[100dvh] w-full bg-[#0a0a0a] text-white">
 
             {/* ══════════════════════════════════════════
           PARTIE GAUCHE : VISUEL & BRANDING (Centré verticalement)

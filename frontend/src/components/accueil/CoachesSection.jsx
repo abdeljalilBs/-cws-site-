@@ -235,7 +235,7 @@ const CoachesSection = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: 0.1 }}
               style={{ fontFamily: DISPLAY }}
-              className="max-w-[12ch] text-[2.4rem] uppercase leading-[0.94] tracking-tight text-[#0a0a0a] sm:text-5xl md:text-6xl lg:text-[4.4rem]"
+              className="max-w-[12ch] text-[clamp(2rem,7vw,2.4rem)] uppercase leading-[0.94] tracking-tight text-[#0a0a0a] sm:text-5xl md:text-6xl lg:text-[4.4rem]"
             >
               Les coachs{' '}
               <span className="relative inline-block whitespace-nowrap">
@@ -282,7 +282,7 @@ const CoachesSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.9 }}
-          className="mt-20 md:mt-28 flex justify-end"
+          className="mt-20 md:mt-28 flex justify-center md:justify-end"
         >
           <a
             href="#team"
