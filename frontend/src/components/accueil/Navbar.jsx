@@ -54,7 +54,7 @@ const Navbar = () => {
             width={600}
             eager={true}
             alt="Logo CWS"
-            className="h-7 md:h-8 w-auto aspect-[3/2]"
+            className="h-9 md:h-10 w-auto aspect-[3/2]"
             imgClassName="object-contain"
           />
         </Link>
