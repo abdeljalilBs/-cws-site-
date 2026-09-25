@@ -1,45 +1,9 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, useReducedMotion, AnimatePresence } from 'framer-motion';
 import { LuArrowRight } from 'react-icons/lu';
-
-// ─── Import des photos des coachs ────────────────────────────
-import justineImg from "../../assets/justine.png";
-import marionImg from "../../assets/marion.png";
-import bilalImg from "../../assets/bilal.png";
+import LazyImage from '../LazyImage';
 
 const DISPLAY = "'Anton', sans-serif";
-
-/* ─── Composant LazyImage (fade-in + placeholder au chargement) ─── */
-const LazyImage = ({ src, alt, className, imgClassName }) => {
-  const [loaded, setLoaded] = useState(false);
-
-  return (
-    <div className={`relative overflow-hidden ${className || ''}`}>
-      {/* Placeholder crème pulsé pendant le chargement */}
-      <AnimatePresence>
-        {!loaded && (
-          <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="absolute inset-0 bg-[#d4cfc7]/15 animate-pulse"
-          />
-        )}
-      </AnimatePresence>
-
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"          // ⭐ lazy loading natif
-        decoding="async"        // ⭐ décodage asynchrone
-        onLoad={() => setLoaded(true)}
-        className={`w-full h-full transition-all duration-700 ease-out ${
-          loaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-105 blur-md'
-        } ${imgClassName || ''}`}
-      />
-    </div>
-  );
-};
 
 const coaches = [
   {
@@ -99,9 +63,11 @@ const CoachCard = ({ coach, index, isInView, reduce }) => {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="group absolute left-[6%] top-[4%] z-[3] h-[84%] w-[80%] overflow-hidden rounded-xl shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)] bg-[#111]"
         >
-          {coach.image ? (
+          {(coach.publicId || coach.image) ? (
             <LazyImage
+              publicId={coach.publicId}
               src={coach.image}
+              width={800}
               alt={coach.name}
               className="h-full w-full"
               imgClassName="object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-105"

@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { LuInstagram, LuFacebook, LuArrowRight } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
+import LazyImage from '../LazyImage';
 
 const DISPLAY = "'Anton', sans-serif";
 
@@ -157,10 +158,12 @@ const Footer = () => {
         {/* ── LOGO seul au-dessus de la grille ── */}
         <motion.div {...fade(0.05)} className="mb-8">
           <Link to="/" className="inline-block">
-            <img
-              src="/image-logo.png"
-              alt="Coach Wellness Sports Logo"
-              className="h-16 md:h-20 w-auto object-contain"
+            <LazyImage
+              publicId="cws-site/image-logo"
+              width={150}
+              alt="Logo CWS"
+              className="h-16 md:h-20 w-auto"
+              imgClassName="object-contain"
             />
           </Link>
         </motion.div>

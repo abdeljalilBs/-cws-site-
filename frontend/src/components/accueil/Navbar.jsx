@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { LuChevronRight, LuMenu, LuX, LuLock } from 'react-icons/lu';
 import { Link, useLocation } from 'react-router-dom';
+import LazyImage from '../LazyImage';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -48,10 +49,12 @@ const Navbar = () => {
 
         {/* Logo CWS */}
         <Link to="/" className="flex-shrink-0 mr-6 md:mr-8 flex items-center">
-          <img
-            src="/image-logo.png?v=2"
-            alt="Coach Wellness Sports Logo"
-            className="h-12 md:h-14 w-auto object-contain"
+          <LazyImage
+            publicId="cws-site/image-logo"
+            width={150}
+            alt="Logo CWS"
+            className="h-12 md:h-14 w-auto"
+            imgClassName="object-contain"
           />
         </Link>
 

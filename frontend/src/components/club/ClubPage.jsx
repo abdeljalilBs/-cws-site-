@@ -4,11 +4,7 @@ import {
   LuClock, LuCalendarCheck, LuArrowRight, LuMapPin, LuChevronRight
 } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
-
-// ─── Images (noms vérifiés dans src/assets/) ─────────────────
-import histoireImg1 from '../../assets/image-5.png';
-import histoireImg2 from '../../assets/image-3.png';
-import engagementBg from '../../assets/materiel.png';
+import LazyImage from '../LazyImage';
 
 const DISPLAY = "'Anton', sans-serif";
 const SERIF = "'Instrument Serif', Georgia, 'Times New Roman', serif";
@@ -79,31 +75,6 @@ const IconEquipment = () => (
     <rect x="25" y="12" width="4" height="8" rx="1" />
   </svg>
 );
-
-/* ─── Composant LazyImage ───────────────────────────────────── */
-const LazyImage = ({ src, alt, className, imgClassName, eager = false }) => {
-  const [loaded, setLoaded] = useState(false);
-  return (
-    <div className={`relative overflow-hidden ${className || ''}`}>
-      <AnimatePresence>
-        {!loaded && (
-          <motion.div
-            initial={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }}
-            className="absolute inset-0 bg-[#d4cfc7]/15 animate-pulse"
-          />
-        )}
-      </AnimatePresence>
-      <img
-        src={src} alt={alt}
-        loading={eager ? 'eager' : 'lazy'} decoding="async"
-        onLoad={() => setLoaded(true)}
-        className={`w-full h-full transition-all duration-700 ease-out ${
-          loaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-105 blur-md'
-        } ${imgClassName || ''}`}
-      />
-    </div>
-  );
-};
 
 /* ─── Les 6 piliers (avec icônes SVG custom) ────────────────── */
 const pillars = [
@@ -211,7 +182,7 @@ const ClubPage = () => {
           transition={{ duration: 1.8, ease: 'easeOut' }}
           className="absolute inset-0 z-0"
         >
-          <LazyImage src={engagementBg} alt="Salle CWS" eager className="w-full h-full" imgClassName="object-cover" />
+          <LazyImage publicId="cws-site/materiel" width={1600} alt="Salle CWS" eager className="w-full h-full" imgClassName="object-cover" />
         </motion.div>
         <div className="absolute inset-0 z-[1] bg-[#0a0a0a]/75" />
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#0a0a0a]/60 via-transparent to-[#0a0a0a]" />
@@ -317,12 +288,12 @@ const ClubPage = () => {
             <motion.div initial={{ opacity: 0, x: 50 }} animate={storyVisible ? { opacity: 1, x: 0 } : {}} transition={{ duration: 0.8, delay: 0.3, ease: [0.25, 0.46, 0.45, 0.94] }} className="relative mx-auto w-full max-w-[520px] lg:max-w-none" style={{ minHeight: 520 }}>
               <div className="absolute inset-y-[3%] left-[3%] right-[-3%] rounded-2xl bg-[#0a0a0a]" style={{ transform: 'rotate(2deg)' }} />
               <div className="group absolute left-[6%] top-[5%] z-[2] h-[62%] w-[68%] overflow-hidden rounded-xl shadow-[0_22px_50px_-18px_rgba(0,0,0,0.5)]">
-                <LazyImage src={histoireImg2} alt="Coach CWS" className="h-full w-full" imgClassName="object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-105" />
+                <LazyImage publicId="cws-site/image-3" width={800} alt="Coach CWS" className="h-full w-full" imgClassName="object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-105" />
               </div>
               <div className="absolute bottom-[7%] right-[5%] z-[2] h-[62%] w-[68%] rounded-xl border border-[#d4cfc7]" />
               <div className="absolute bottom-[5%] right-[3%] z-[3] h-[62%] w-[68%]">
                 <motion.div animate={float} className="group h-full w-full overflow-hidden rounded-xl border-4 border-white shadow-[0_34px_60px_-22px_rgba(0,0,0,0.6)]">
-                  <LazyImage src={histoireImg1} alt="Façade CWS" className="h-full w-full" imgClassName="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105" />
+                  <LazyImage publicId="cws-site/image-5" width={800} alt="Façade CWS" className="h-full w-full" imgClassName="object-cover transition-transform duration-[900ms] ease-out group-hover:scale-105" />
                 </motion.div>
               </div>
             </motion.div>
@@ -335,7 +306,7 @@ const ClubPage = () => {
       ══════════════════════════════════════════ */}
       <section ref={engageRef} className="relative w-full overflow-hidden bg-[#0a0a0a] py-24 md:py-32">
         <div className="absolute inset-0 z-0 opacity-[0.12]">
-          <LazyImage src={engagementBg} alt="" className="w-full h-full" imgClassName="object-cover" />
+          <LazyImage publicId="cws-site/materiel" width={1200} alt="" className="w-full h-full" imgClassName="object-cover" />
         </div>
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#0a0a0a] via-[#0a0a0a]/85 to-[#0a0a0a]" />
         <span className="cp-a1 pointer-events-none absolute top-[-120px] left-1/2 -translate-x-1/2 h-[480px] w-[680px] rounded-full bg-[#d4cfc7] opacity-[0.04] blur-[120px] z-[2]" />

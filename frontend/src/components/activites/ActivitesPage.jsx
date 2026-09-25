@@ -7,24 +7,6 @@ import {
 } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
 import LazyImage from "../LazyImage";
-// ─── Photos des cours ────────────────────────────────────────
-// Intensité 1
-import gymDosImg from '../../assets/gym-dos.png';
-import pilatesImg from '../../assets/pilates.png';
-import yogaImg from '../../assets/yoga.png';
-import stretchingImg from '../../assets/stretching.png';
-import mobilityImg from '../../assets/mobility.png';
-// Intensité 2
-import cafImg from '../../assets/caf.png';
-import trxImg from '../../assets/trx-training.png';
-import crossTrainingImg from '../../assets/cross-training.png';
-import crossBikingImg from '../../assets/cross-biking.png';
-import masterclassImg from '../../assets/masterclass.png';
-import openGymImg from '../../assets/open-gym.png';
-// Intensité 3
-import boxingBagImg from '../../assets/boxing-bag.png';
-import cardioTrainingImg from '../../assets/cardio-training.png';
-import sprintImg from '../../assets/sprint.png';
 
 const DISPLAY = "'Anton', sans-serif";
 const SERIF = "'Instrument Serif', Georgia, 'Times New Roman', serif";
@@ -67,7 +49,7 @@ const courses = [
     category: 1,
     name: 'Wellness Pilates',
     icon: <LuTarget size={30} strokeWidth={1.2} />,
-    image: pilatesImg,
+    publicId: "cws-site/pilates",
     short: "Renforcez votre corps de l'intérieur.",
     desc: "Inspiré de la méthode Pilates, ce cours développe les muscles profonds, améliore la posture, la stabilité du tronc et la coordination. Idéal pour renforcer durablement son corps tout en douceur.",
     duration: '45min',
@@ -78,7 +60,7 @@ const courses = [
     category: 1,
     name: 'Wellness Yoga',
     icon: <LuWind size={30} strokeWidth={1.2} />,
-    image: yogaImg,
+    publicId: "cws-site/yoga",
     short: 'Force, mobilité et sérénité.',
     desc: "Un yoga dynamique alternant postures, respiration et enchaînements fluides pour développer souplesse, équilibre, gainage et concentration tout en procurant une véritable sensation de bien-être.",
     duration: '45min',
@@ -89,7 +71,7 @@ const courses = [
     category: 1,
     name: 'Wellness Move',
     icon: <LuMove size={30} strokeWidth={1.2} />,
-    image: gymDosImg,
+    publicId: "cws-site/gym-dos",
     short: 'Bouger mieux au quotidien.',
     desc: "Un cours mêlant renforcement musculaire doux, travail postural, équilibre et coordination. Inspiré notamment de la Gym Dos, il aide à améliorer les gestes du quotidien tout en limitant les douleurs et les déséquilibres musculaires.",
     duration: '45min',
@@ -100,7 +82,7 @@ const courses = [
     category: 1,
     name: 'Wellness Mobility',
     icon: <LuMove size={30} strokeWidth={1.2} />,
-    image: mobilityImg,
+    publicId: "cws-site/mobility",
     short: 'Retrouvez votre liberté de mouvement.',
     desc: "Développez votre mobilité articulaire et musculaire grâce à des exercices ciblés favorisant l'amplitude des mouvements, la fluidité gestuelle et la prévention des raideurs.",
     duration: '45min',
@@ -111,7 +93,7 @@ const courses = [
     category: 1,
     name: 'Wellness Stretch',
     icon: <LuHeartPulse size={30} strokeWidth={1.2} />,
-    image: stretchingImg,
+    publicId: "cws-site/stretching",
     short: 'Relâchez les tensions. Gagnez en souplesse.',
     desc: "Un cours consacré aux étirements musculaires et à la récupération permettant de diminuer les tensions, d'améliorer la souplesse, de préserver l'amplitude articulaire et de réduire le risque de blessures.",
     duration: '45min',
@@ -124,7 +106,7 @@ const courses = [
     category: 2,
     name: 'TRX Training',
     icon: <LuTarget size={30} strokeWidth={1.2} />,
-    image: trxImg,
+    publicId: "cws-site/trx-training",
     short: 'Le renforcement musculaire dans sa version la plus complète.',
     desc: "Un entraînement alternant le travail avec les sangles TRX, des exercices au poids du corps ainsi que des mouvements avec barres, disques et petits matériels. Un cours complet qui développe force, stabilité, gainage et condition physique.",
     duration: '45min',
@@ -135,7 +117,7 @@ const courses = [
     category: 2,
     name: 'CAF',
     icon: <LuZap size={30} strokeWidth={1.2} />,
-    image: cafImg,
+    publicId: "cws-site/caf",
     short: 'Tonifiez et renforcez le bas du corps.',
     desc: "Le grand classique du renforcement musculaire ciblé sur les cuisses, les abdominaux et les fessiers. Un cours accessible à tous pour gagner en tonicité, améliorer son maintien et sculpter durablement sa silhouette.",
     duration: '45min',
@@ -146,7 +128,7 @@ const courses = [
     category: 2,
     name: 'Workshop Gym',
     icon: <LuUsers size={30} strokeWidth={1.2} />,
-    image: openGymImg,
+    publicId: "cws-site/open-gym",
     short: 'Apprenez à vous entraîner efficacement.',
     desc: "Un cours pédagogique permettant de maîtriser les bases de la musculation. Découvrez les bonnes techniques sur les machines guidées, avec les haltères et les principaux exercices afin de gagner en autonomie et en confiance dans vos entraînements.",
     duration: '45min',
@@ -157,7 +139,7 @@ const courses = [
     category: 2,
     name: 'Cross Training Force',
     icon: <LuDumbbell size={30} strokeWidth={1.2} />,
-    image: crossTrainingImg,
+    publicId: "cws-site/cross-training",
     short: 'Développez votre force fonctionnelle.',
     desc: "Un entraînement en circuits alternant différents ateliers de musculation fonctionnelle et de préparation physique. Grâce à des charges adaptées au niveau de chacun, améliorez votre force, votre puissance et votre endurance musculaire dans une ambiance dynamique et motivante.",
     duration: '45min',
@@ -170,7 +152,7 @@ const courses = [
     category: 3,
     name: 'Cardio Training',
     icon: <LuHeartPulse size={30} strokeWidth={1.2} />,
-    image: cardioTrainingImg,
+    publicId: "cws-site/cardio-training",
     short: 'Développez votre moteur.',
     desc: "Un entraînement spécifiquement conçu pour améliorer vos capacités cardiovasculaires et respiratoires grâce à l'utilisation d'ergomètres (rameur, SkiErg, Bike...) et d'exercices cardio variés. Idéal pour développer son endurance et brûler un maximum de calories.",
     duration: '45min',
@@ -181,7 +163,7 @@ const courses = [
     category: 3,
     name: 'Boxing Bag',
     icon: <LuSwords size={30} strokeWidth={1.2} />,
-    image: boxingBagImg,
+    publicId: "cws-site/boxing-bag",
     short: 'Puissance, technique et explosivité.',
     desc: "Un cours sur sac de frappe inspiré de la boxe anglaise et du Muay Thaï. Accessible à tous, il permet d'apprendre les techniques de frappe tout en développant coordination, endurance, explosivité et condition physique dans une ambiance énergique.",
     duration: '45min',
@@ -192,7 +174,7 @@ const courses = [
     category: 3,
     name: 'Masterclass',
     icon: <LuAward size={30} strokeWidth={1.2} />,
-    image: masterclassImg,
+    publicId: "cws-site/masterclass",
     short: "L'entraînement ultime.",
     desc: "Inspiré de l'univers Hyrox®, ce cours associe course, ergomètres, exercices fonctionnels et ateliers de préparation physique. Que votre objectif soit le loisir ou la compétition, développez votre endurance, votre force fonctionnelle et votre capacité à enchaîner les efforts.",
     duration: '45min',
@@ -203,7 +185,7 @@ const courses = [
     category: 3,
     name: 'Cross Biking',
     icon: <LuBike size={30} strokeWidth={1.2} />,
-    image: crossBikingImg,
+    publicId: "cws-site/cross-biking",
     short: 'Pédalez. Renforcez. Dépassez-vous.',
     desc: "Un cours rythmé alternant des séquences de biking en musique avec des exercices de renforcement du haut du corps et du centre du corps. Une séance complète permettant de solliciter l'ensemble de l'organisme tout en maximisant la dépense calorique.",
     duration: '45min',
@@ -214,9 +196,9 @@ const courses = [
     category: 3,
     name: 'Cross Training Cardio',
     icon: <LuTimer size={30} strokeWidth={1.2} />,
-    image: sprintImg,
+    publicId: "cws-site/sprint",
     short: "L'intensité au service de votre endurance.",
-    desc: "Un entraînement en circuits alternant différents ateliers cardio et fonctionnels, avec un accent particulier sur le développement de l'endurance cardiovasculaire. Les exercices et les charges sont adaptés à chacun afin de progresser efficacement tout en maintenant une intensité élevée.",
+    desc: "Un entraînement en circuits alternant différents ateliers cardio et fonctionnels, avec un accent particulier sur le développement de l'endurance cardiovasculaire. Les exercices et les charges sont adaptés à chacun afin de progresser efficacement tout en maintaining une intensité élevée.",
     duration: '45min',
     accessories: "Serviette, chaussures propres et bouteille d'eau",
     public: 'Pour tout public'
@@ -272,11 +254,13 @@ const CourseCard = ({ course, index, isVisible, accent, expanded, onToggle }) =>
           ZONE VISUELLE — LazyImage (photo) ou icône (fallback)
       ══════════════════════════════════════════ */}
       <div className="relative h-48 overflow-hidden bg-[#111]">
-        {course.image ? (
+        {(course.publicId || course.image) ? (
           // --- PHOTO avec LazyImage (lazy + fade-in crème) ---
           <div className="relative h-full w-full">
             <LazyImage
+              publicId={course.publicId}
               src={course.image}
+              width={800}
               alt={course.name}
               className="h-full w-full"
               imgClassName="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
@@ -428,7 +412,8 @@ const ActivitesPage = () => {
           className="absolute inset-0 z-0"
         >
           <LazyImage
-            src="/cours-collectifs.png"
+            publicId="cws-site/cours-collectifs"
+            width={1600}
             alt="Cours collectifs CWS"
             eager
             className="w-full h-full opacity-45"
