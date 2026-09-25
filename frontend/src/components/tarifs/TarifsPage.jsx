@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useInView, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { LuCheck, LuChevronDown, LuArrowRight, LuInfo, LuCreditCard, LuCalendar, LuClock } from 'react-icons/lu';
+import { LuCheck, LuChevronDown, LuArrowRight, LuInfo } from 'react-icons/lu';
 
 const DISPLAY = "'Anton', sans-serif";
 // Pour le rendu exact de l'accent italique du titre, ajoute la police "Instrument Serif"
@@ -131,7 +131,7 @@ const PlanCard = ({ plan, index, isInView }) => {
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay: 0.15 + index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className={`relative ${
+      className={`relative w-full max-w-md mx-auto lg:max-w-none ${
         plan.featured ? 'z-10 lg:-my-2 drop-shadow-[0_44px_90px_rgba(0,0,0,0.55)]' : ''
       }`}
     >
@@ -140,7 +140,7 @@ const PlanCard = ({ plan, index, isInView }) => {
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         style={{ transform: baseTransform, transformStyle: 'preserve-3d' }}
-        className={`tp-card group relative flex flex-col rounded-[22px] overflow-visible transition-[border-color,box-shadow] duration-500 ${
+        className={`tp-card group relative flex flex-col w-full max-w-full rounded-[22px] overflow-hidden sm:overflow-visible box-border transition-[border-color,box-shadow] duration-500 ${
           plan.featured
             ? 'tp-featured bg-[#f5f4f1] border border-[#d4cfc7]'
             : 'bg-[#111] border border-white/[0.06] hover:border-white/15'
@@ -148,12 +148,12 @@ const PlanCard = ({ plan, index, isInView }) => {
       >
         {/* Halo crème pulsé (carte vedette) */}
         {plan.featured && (
-          <span className="tp-halo pointer-events-none absolute -inset-8 -z-10 rounded-[30px]" />
+          <span className="tp-halo pointer-events-none absolute -inset-3 sm:-inset-8 -z-10 rounded-[30px]" />
         )}
 
         {/* BADGE */}
         {plan.badge && (
-          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 rounded-full bg-[#0a0a0a] px-4 py-1.5 shadow-lg shadow-black/30 whitespace-nowrap">
+          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 rounded-full bg-[#0a0a0a] px-3.5 py-1.5 shadow-lg shadow-black/30 whitespace-nowrap max-w-[90vw]">
             <span className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-[#d4cfc7]">
               {plan.badge}
             </span>
@@ -169,11 +169,11 @@ const PlanCard = ({ plan, index, isInView }) => {
           }`}
         />
 
-        <div className="relative z-10 flex flex-col h-full p-7 md:p-9">
+        <div className="relative z-10 flex flex-col h-full w-full p-5 sm:p-7 md:p-9 box-border overflow-hidden">
           {/* Nom */}
           <h3
             style={{ fontFamily: DISPLAY }}
-            className={`text-xl md:text-2xl uppercase leading-[0.95] tracking-tight mb-3 ${
+            className={`text-lg sm:text-xl md:text-2xl uppercase leading-[0.95] tracking-tight mb-3 break-words ${
               plan.featured ? 'text-[#0a0a0a]' : 'text-white'
             }`}
           >
@@ -181,7 +181,7 @@ const PlanCard = ({ plan, index, isInView }) => {
           </h3>
 
           {/* Description */}
-          <p className={`text-xs leading-relaxed mb-5 ${
+          <p className={`text-xs leading-relaxed mb-5 break-words ${
             plan.featured ? 'text-[#0a0a0a]/70' : 'text-white/60'
           }`}>
             {plan.description}
@@ -194,7 +194,7 @@ const PlanCard = ({ plan, index, isInView }) => {
             }`}>
               Durées
             </p>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-1.5 max-w-full">
               {plan.durations.map((d) => (
                 <span
                   key={d}
@@ -219,7 +219,7 @@ const PlanCard = ({ plan, index, isInView }) => {
             </p>
             <p
               style={{ fontFamily: DISPLAY }}
-              className={`text-lg md:text-xl uppercase leading-none ${
+              className={`text-base sm:text-lg md:text-xl uppercase leading-none break-words ${
                 plan.featured ? 'text-[#0a0a0a]' : 'text-white'
               }`}
             >
@@ -231,14 +231,14 @@ const PlanCard = ({ plan, index, isInView }) => {
           <div className={`h-px w-full mb-7 ${plan.featured ? 'bg-[#0a0a0a]/10' : 'bg-white/10'}`} />
 
           {/* Avantages */}
-          <ul className="flex flex-col gap-3 mb-8 flex-1">
+          <ul className="flex flex-col gap-3 mb-8 flex-1 w-full">
             {plan.features.map((f, i) => (
               <motion.li
                 key={i}
                 initial={{ opacity: 0, x: -8 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.45, delay: 0.35 + index * 0.15 + i * 0.05 }}
-                className="flex items-start gap-3"
+                className="flex items-start gap-3 w-full"
               >
                 <span
                   className={`mt-0.5 flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full ${
@@ -248,7 +248,7 @@ const PlanCard = ({ plan, index, isInView }) => {
                   <LuCheck size={11} className={plan.featured ? 'text-[#f5f4f1]' : 'text-[#d4cfc7]'} />
                 </span>
                 <span
-                  className={`text-xs md:text-sm leading-snug ${plan.featured ? 'text-[#0a0a0a]/75' : 'text-white/65'}`}
+                  className={`text-xs md:text-sm leading-snug break-words flex-1 min-w-0 ${plan.featured ? 'text-[#0a0a0a]/75' : 'text-white/65'}`}
                 >
                   {f}
                 </span>
@@ -259,7 +259,7 @@ const PlanCard = ({ plan, index, isInView }) => {
           {/* CTA */}
           <Link
             to={plan.ctaHref}
-            className={`group/cta relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] transition-all duration-500 ${
+            className={`group/cta relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full w-full px-5 py-3.5 text-xs font-semibold uppercase tracking-[0.12em] sm:tracking-[0.2em] text-center transition-all duration-500 ${
               plan.featured
                 ? 'bg-[#0a0a0a] text-[#f5f4f1] hover:bg-[#1a1a1a]'
                 : 'bg-[#f5f4f1] text-[#0a0a0a] hover:bg-white'
@@ -292,15 +292,15 @@ const FaqItem = ({ faq, index, isOpen, onToggle, isInView }) => {
       <button
         onClick={onToggle}
         aria-expanded={isOpen}
-        className="flex w-full items-center justify-between gap-6 py-6 text-left"
+        className="flex w-full items-center justify-between gap-3 sm:gap-6 py-5 sm:py-6 text-left overflow-hidden box-border"
       >
-        <span className="flex items-center gap-4 min-w-0">
-          <span style={{ fontFamily: DISPLAY }} className="text-sm text-[#d4cfc7]/40">
+        <span className="flex items-center gap-3 sm:gap-4 min-w-0 flex-1">
+          <span style={{ fontFamily: DISPLAY }} className="text-xs sm:text-sm text-[#d4cfc7]/40 flex-shrink-0">
             {String(index + 1).padStart(2, '0')}
           </span>
           <span
             style={{ fontFamily: DISPLAY }}
-            className={`text-base sm:text-lg md:text-xl uppercase leading-tight tracking-tight transition-colors duration-300 ${
+            className={`text-sm sm:text-lg md:text-xl uppercase leading-tight tracking-tight transition-colors duration-300 break-words flex-1 ${
               isOpen ? 'text-[#d4cfc7]' : 'text-white group-hover:text-[#d4cfc7]'
             }`}
           >
@@ -310,7 +310,7 @@ const FaqItem = ({ faq, index, isOpen, onToggle, isInView }) => {
         <motion.span
           animate={{ rotate: isOpen ? 180 : 0 }}
           transition={{ duration: 0.3 }}
-          className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full border transition-colors duration-300 ${
+          className={`flex h-8 w-8 sm:h-9 sm:w-9 flex-shrink-0 items-center justify-center rounded-full border transition-colors duration-300 ${
             isOpen
               ? 'border-[#d4cfc7]/50 text-[#d4cfc7]'
               : 'border-white/15 text-white/50 group-hover:border-[#d4cfc7]/40 group-hover:text-[#d4cfc7]'
@@ -329,7 +329,7 @@ const FaqItem = ({ faq, index, isOpen, onToggle, isInView }) => {
             transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
             className="overflow-hidden"
           >
-            <p className="max-w-5xl pb-7 pl-10 text-sm sm:text-base leading-relaxed text-white/55">
+            <p className="max-w-5xl pb-6 sm:pb-7 pl-6 sm:pl-10 text-xs sm:text-sm md:text-base leading-relaxed text-white/55 break-words">
               {faq.a}
             </p>
           </motion.div>
@@ -349,7 +349,7 @@ const TarifsPage = () => {
   const reduce = useReducedMotion();
 
   return (
-    <div className="relative w-full overflow-hidden bg-[#0a0a0a]">
+    <div className="relative w-full max-w-full overflow-hidden bg-[#0a0a0a] box-border">
       {/* Styles ciblés (effets non exprimables en Tailwind seul) */}
       <style>{`
         .tp-card::before{
@@ -399,10 +399,10 @@ const TarifsPage = () => {
       />
 
       {/* ══════════ TARIFS ══════════ */}
-      <section id="tarifs" ref={ref} className="relative z-[2] w-full pt-28 md:pt-36 pb-24 md:pb-28">
-        <div className="mx-auto max-w-[1240px] px-6 sm:px-10 lg:px-16">
+      <section id="tarifs" ref={ref} className="relative z-[2] w-full max-w-full pt-28 md:pt-36 pb-24 md:pb-28 box-border overflow-hidden">
+        <div className="mx-auto w-full max-w-[1240px] px-4 sm:px-8 lg:px-16 box-border">
           {/* Header */}
-          <div className="mb-14 md:mb-20 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
+          <div className="mb-14 md:mb-20 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end w-full">
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -423,7 +423,7 @@ const TarifsPage = () => {
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.1 }}
                 style={{ fontFamily: DISPLAY }}
-                className="max-w-[13ch] text-[clamp(2.2rem,8vw,2.7rem)] uppercase leading-[0.92] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.4rem]"
+                className="max-w-full text-[clamp(2rem,7.5vw,2.7rem)] uppercase leading-[0.92] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-[4.4rem] break-words"
               >
                 Trouvez l'offre{' '}
                 <span
@@ -439,7 +439,7 @@ const TarifsPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.25 }}
-              className="max-w-[36ch] pb-1 text-[1.02rem] font-light leading-relaxed text-[#8a8279]"
+              className="max-w-full lg:max-w-[36ch] pb-1 text-sm sm:text-[1.02rem] font-light leading-relaxed text-[#8a8279] break-words"
             >
               Des formules adaptées à votre rythme et vos envies. Que vous veniez pour une séance ou pour vous entraîner toute l'année, nous avons l'offre idéale.
             </motion.p>
@@ -450,7 +450,7 @@ const TarifsPage = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative mb-16 overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] p-8 md:p-12 text-center backdrop-blur-xl"
+            className="relative mb-16 w-full max-w-full overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] p-5 sm:p-8 md:p-12 text-center backdrop-blur-xl box-border"
           >
             {/* Halos lumineux internes décoratifs */}
             <div className="pointer-events-none absolute -left-1/3 -top-1/2 h-96 w-96 rounded-full bg-[#d4cfc7]/10 blur-[80px]" />
@@ -462,20 +462,20 @@ const TarifsPage = () => {
             
             <p className="text-xs uppercase tracking-[0.2em] text-[#8a8279] mb-2">Nos formules débutent à</p>
             
-            <div className="flex flex-col items-center justify-center sm:flex-row sm:items-baseline gap-2 mb-4">
-              <span style={{ fontFamily: DISPLAY }} className="text-[clamp(3rem,10vw,3.75rem)] sm:text-7xl md:text-8xl leading-none text-white tracking-tight">
+            <div className="flex flex-col items-center justify-center sm:flex-row sm:items-baseline gap-1 sm:gap-2 mb-4 max-w-full overflow-hidden">
+              <span style={{ fontFamily: DISPLAY }} className="text-3xl xs:text-4xl sm:text-6xl md:text-8xl leading-tight sm:leading-none text-white tracking-tight break-words max-w-full">
                 À partir de 39,90 €
               </span>
-              <span className="text-lg sm:text-xl font-light text-[#b3a996]">/ mois</span>
+              <span className="text-base sm:text-xl font-light text-[#b3a996] shrink-0">/ mois</span>
             </div>
             
-            <p className="mx-auto max-w-2xl text-sm md:text-base font-light leading-relaxed text-white/70">
+            <p className="mx-auto max-w-2xl text-xs sm:text-sm md:text-base font-light leading-relaxed text-white/70 break-words">
               Accédez à nos équipements Matrix haut de gamme, à nos espaces de musculation et cardio ainsi qu'à plus de 30 cours collectifs hebdomadaires dispensés par des professionnels certifiés.
             </p>
           </motion.div>
 
           {/* Grille (pt-4 ajouté pour laisser la place au badge débordant) */}
-          <div className="grid grid-cols-1 gap-6 md:gap-7 lg:grid-cols-3 lg:items-stretch pt-4">
+          <div className="grid grid-cols-1 gap-6 md:gap-7 lg:grid-cols-3 lg:items-stretch pt-4 w-full max-w-full box-border">
             {plans.map((plan, index) => (
               <PlanCard key={plan.name} plan={plan} index={index} isInView={isInView} />
             ))}
@@ -486,22 +486,22 @@ const TarifsPage = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="mt-14 max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-6 rounded-2xl border border-white/5 bg-white/[0.01] p-6 md:p-8 backdrop-blur-md"
+            className="mt-14 w-full max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-5 sm:gap-6 rounded-2xl border border-white/5 bg-white/[0.01] p-5 sm:p-6 md:p-8 backdrop-blur-md box-border overflow-hidden"
           >
             <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#d4cfc7]/10 text-[#d4cfc7]">
               <LuInfo size={22} />
             </div>
-            <div className="flex-1 text-center md:text-left">
-              <h4 style={{ fontFamily: DISPLAY }} className="text-base md:text-lg uppercase tracking-wider text-white mb-2">
+            <div className="flex-1 min-w-0 text-center md:text-left">
+              <h4 style={{ fontFamily: DISPLAY }} className="text-sm sm:text-base md:text-lg uppercase tracking-wider text-white mb-2 break-words">
                 Détails des Tarifs & Accompagnement
               </h4>
-              <p className="text-xs md:text-sm font-light leading-relaxed text-white/60">
+              <p className="text-xs md:text-sm font-light leading-relaxed text-white/60 break-words">
                 Afin de vous orienter vers la formule la plus adaptée à vos objectifs et d'expliquer nos différentes options (frais d'inscription et de badge d'accès), l'ensemble de notre grille tarifaire détaillée vous sera communiqué directement par l'équipe CWS lors de votre visite ou sur simple demande.
               </p>
             </div>
             <Link
               to="/contact"
-              className="flex-shrink-0 group relative inline-flex items-center justify-center gap-2 rounded-full border border-white/10 hover:border-white/20 px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-white bg-[#0a0a0a] transition-all duration-300 hover:bg-[#111]"
+              className="w-full sm:w-auto flex-shrink-0 group relative inline-flex items-center justify-center gap-2 rounded-full border border-white/10 hover:border-white/20 px-5 sm:px-6 py-3.5 text-xs font-semibold uppercase tracking-wider text-white bg-[#0a0a0a] transition-all duration-300 hover:bg-[#111]"
             >
               <span>Demander les tarifs</span>
               <LuArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
@@ -512,7 +512,7 @@ const TarifsPage = () => {
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.8 }}
-            className="mt-12 text-center text-[10px] sm:text-xs italic tracking-wide text-white/30 border-t border-white/[0.06] pt-6"
+            className="mt-12 text-center text-[10px] sm:text-xs italic tracking-wide text-white/30 border-t border-white/[0.06] pt-6 break-words"
           >
             Tous nos abonnements incluent un accompagnement humain et des coachs diplômés. Pas d'amateurs.
           </motion.p>
@@ -520,9 +520,9 @@ const TarifsPage = () => {
       </section>
 
       {/* ══════════ FAQ ══════════ */}
-      <section id="faq" ref={faqRef} className="relative z-[2] w-full bg-[#0d0d0d] py-24 md:py-32">
-        <div className="mx-auto max-w-[1240px] px-6 sm:px-10 lg:px-16">
-          <div className="mb-12 md:mb-16 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
+      <section id="faq" ref={faqRef} className="relative z-[2] w-full max-w-full bg-[#0d0d0d] py-24 md:py-32 box-border overflow-hidden">
+        <div className="mx-auto w-full max-w-[1240px] px-4 sm:px-8 lg:px-16 box-border">
+          <div className="mb-12 md:mb-16 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end w-full">
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -543,7 +543,7 @@ const TarifsPage = () => {
                 animate={isFaqInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.1 }}
                 style={{ fontFamily: DISPLAY }}
-                className="text-[clamp(1.8rem,7vw,2.2rem)] uppercase leading-[0.94] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-[3.6rem]"
+                className="text-[clamp(1.6rem,6.5vw,2.2rem)] uppercase leading-[0.94] tracking-tight text-white sm:text-4xl md:text-5xl lg:text-[3.6rem] break-words"
               >
                 On répond à vos questions
               </motion.h2>
@@ -553,13 +553,13 @@ const TarifsPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isFaqInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.25 }}
-              className="max-w-[30ch] pb-1 text-[1rem] font-light leading-relaxed text-[#8a8279]"
+              className="max-w-full lg:max-w-[30ch] pb-1 text-sm sm:text-[1rem] font-light leading-relaxed text-[#8a8279] break-words"
             >
               Une question sans réponse ? Contactez-nous, on vous répond rapidement.
             </motion.p>
           </div>
 
-          <div className="border-b border-white/10">
+          <div className="border-b border-white/10 w-full">
             {faqs.map((faq, index) => (
               <FaqItem
                 key={index}
