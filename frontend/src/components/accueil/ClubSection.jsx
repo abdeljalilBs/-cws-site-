@@ -149,12 +149,12 @@ const ClubSection = () => {
 
     const initTimer = setTimeout(() => {
       const cardEls = el.querySelectorAll('[data-card]');
-      if (cardEls[MIDDLE_SET_START]) {
+      if (cardEls[MIDDLE_SET_START] && el.scrollLeft === 0) {
         const c = cardEls[MIDDLE_SET_START].offsetLeft + cardEls[MIDDLE_SET_START].offsetWidth / 2;
         el.scrollLeft = c - el.clientWidth / 2;
       }
       computeStyles();
-    }, 150);
+    }, 50);
 
     return () => {
       clearTimeout(initTimer);
@@ -164,19 +164,6 @@ const ClubSection = () => {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, [handleScroll, computeStyles, MIDDLE_SET_START]);
-
-  // ─── Auto-scroll hint ──────────────────────────────────────
-  useEffect(() => {
-    if (!isInView) return;
-    const el = scrollRef.current;
-    if (!el) return;
-    const timer = setTimeout(() => {
-      const cur = el.scrollLeft;
-      el.scrollTo({ left: cur + 120, behavior: 'smooth' });
-      setTimeout(() => el.scrollTo({ left: cur, behavior: 'smooth' }), 700);
-    }, 1500);
-    return () => clearTimeout(timer);
-  }, [isInView]);
 
   // ─── Flèches ───────────────────────────────────────────────
   const scrollToCard = (dir) => {
