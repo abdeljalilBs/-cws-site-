@@ -51,9 +51,10 @@ const Navbar = () => {
         <Link to="/" className="flex-shrink-0 mr-6 md:mr-8 flex items-center">
           <LazyImage
             publicId="cws-site/image-logo"
-            width={150}
+            width={600}
+            eager={true}
             alt="Logo CWS"
-            className="h-12 md:h-14 w-auto"
+            className="h-7 md:h-8 w-auto aspect-[3/2]"
             imgClassName="object-contain"
           />
         </Link>

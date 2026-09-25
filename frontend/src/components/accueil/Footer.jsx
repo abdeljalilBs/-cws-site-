@@ -160,9 +160,10 @@ const Footer = () => {
           <Link to="/" className="inline-block">
             <LazyImage
               publicId="cws-site/image-logo"
-              width={150}
+              width={600}
+              eager={true}
               alt="Logo CWS"
-              className="h-16 md:h-20 w-auto"
+              className="h-8 md:h-10 w-auto aspect-[3/2]"
               imgClassName="object-contain"
             />
           </Link>
