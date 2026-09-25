@@ -163,7 +163,7 @@ const Footer = () => {
               width={600}
               eager={true}
               alt="Logo CWS"
-              className="h-8 md:h-10 w-auto aspect-[3/2]"
+              className="h-10 md:h-12 w-auto aspect-[3/2]"
               imgClassName="object-contain"
             />
           </Link>
