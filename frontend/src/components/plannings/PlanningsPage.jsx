@@ -2,45 +2,10 @@ import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, useReducedMotion, AnimatePresence } from 'framer-motion';
 import { LuDownload, LuCalendarDays, LuArrowRight, LuChevronRight } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
-
-// ─── Images (noms vérifiés dans src/assets/) ─────────────────
-import planningImg from '../../assets/plannings.png';     // ✅ photo du planning
-import heroBg from '../../assets/image-5.png';            // ✅ façade CWS sunset
+import LazyImage from '../LazyImage';
 
 const DISPLAY = "'Anton', sans-serif";
 const SERIF = "'Instrument Serif', Georgia, 'Times New Roman', serif";
-
-/* ─── Composant LazyImage (fade-in + placeholder + eager/lazy) ─── */
-const LazyImage = ({ src, alt, className, imgClassName, eager = false }) => {
-  const [loaded, setLoaded] = useState(false);
-
-  return (
-    <div className={`relative overflow-hidden ${className || ''}`}>
-      {/* Placeholder crème pulsé pendant le chargement */}
-      <AnimatePresence>
-        {!loaded && (
-          <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="absolute inset-0 bg-[#d4cfc7]/15 animate-pulse"
-          />
-        )}
-      </AnimatePresence>
-
-      <img
-        src={src}
-        alt={alt}
-        loading={eager ? 'eager' : 'lazy'}   // ⭐ eager pour le hero, lazy pour le reste
-        decoding="async"                       // ⭐ décodage asynchrone
-        onLoad={() => setLoaded(true)}
-        className={`w-full h-full transition-all duration-700 ease-out ${
-          loaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-105 blur-md'
-        } ${imgClassName || ''}`}
-      />
-    </div>
-  );
-};
 
 /* ─── Page Plannings ────────────────────────────────────────── */
 const PlanningsPage = () => {
@@ -90,7 +55,8 @@ const PlanningsPage = () => {
           className="absolute inset-0 z-0"
         >
           <LazyImage
-            src={heroBg}
+            publicId="cws-site/image-5"
+            width={1600}
             alt="CWS"
             eager
             className="w-full h-full"
@@ -189,7 +155,8 @@ const PlanningsPage = () => {
               {/* Liseré lumineux haut */}
               <div className="absolute top-0 left-0 right-0 h-px z-10 bg-gradient-to-r from-transparent via-[#d4cfc7]/40 to-transparent" />
               <LazyImage
-                src={planningImg}
+                publicId="cws-site/plannings"
+                width={1200}
                 alt="Planning des cours collectifs CWS"
                 className="w-full h-auto"
                 imgClassName="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
@@ -204,7 +171,7 @@ const PlanningsPage = () => {
               className="mt-10 flex justify-center"
             >
               <a
-                href={planningImg}
+                href={`https://res.cloudinary.com/${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'qupvgw44'}/image/upload/cws-site/plannings.png`}
                 download="Planning cours collectifs CWS.png"
                 className="group/dl relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full bg-[#d4cfc7] px-9 py-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#0a0a0a] transition-all duration-500 hover:bg-white"
               >

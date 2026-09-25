@@ -6,7 +6,6 @@ import {
 } from 'react-icons/lu';
 
 import LazyImage from '../LazyImage';
-import ambianceImg from '../../assets/ambiance.png';
 
 const API_URL = 'https://cws-backend-sandy.vercel.app/api/contact';
 const DISPLAY = "'Anton', sans-serif";
@@ -261,7 +260,7 @@ const Contact = () => {
 
             {/* Image d'ambiance en fond avec overlay sombre */}
             <div className="absolute inset-0 z-0 opacity-20">
-                <LazyImage src={ambianceImg} alt="Ambiance CWS" eager className="w-full h-full" imgClassName="object-cover" />
+                <LazyImage publicId="cws-site/ambiance" width={1600} alt="Ambiance CWS" eager className="w-full h-full" imgClassName="object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/80 via-[#0a0a0a]/90 to-[#0a0a0a]" />
             </div>
 

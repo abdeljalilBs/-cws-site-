@@ -1,43 +1,10 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, useReducedMotion, AnimatePresence } from 'framer-motion';
 import { LuShieldCheck, LuGraduationCap, LuClock } from 'react-icons/lu';
-
-// ─── Images ──────────────────────────────────────────────────
-import image3 from "../../assets/image-3.png";
-import image10 from "../../assets/image-10.png";
+import LazyImage from '../LazyImage';
 
 const DISPLAY = "'Anton', sans-serif";
 const SERIF = "'Instrument Serif', Georgia, 'Times New Roman', serif";
-
-/* ─── Composant LazyImage (fade-in + placeholder au chargement) ─── */
-const LazyImage = ({ src, alt, className, imgClassName }) => {
-  const [loaded, setLoaded] = useState(false);
-
-  return (
-    <div className={`relative overflow-hidden ${className || ''}`}>
-      <AnimatePresence>
-        {!loaded && (
-          <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="absolute inset-0 bg-[#d4cfc7]/15 animate-pulse"
-          />
-        )}
-      </AnimatePresence>
-
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"
-        decoding="async"
-        onLoad={() => setLoaded(true)}
-        className={`w-full h-full transition-all duration-700 ease-out ${loaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-105 blur-md'
-          } ${imgClassName || ''}`}
-      />
-    </div>
-  );
-};
 
 const pillars = [
   {
@@ -147,7 +114,8 @@ const AboutSection = () => {
             {/* Photo arrière */}
             <div className="group absolute left-[8%] top-[6%] z-[2] h-[58%] w-[70%] overflow-hidden rounded-xl shadow-[0_22px_50px_-18px_rgba(0,0,0,0.55)]">
               <LazyImage
-                src={image3}
+                publicId="cws-site/image-3"
+                width={800}
                 alt="Coaching CWS"
                 className="h-full w-full"
                 imgClassName="object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-105"
@@ -164,7 +132,8 @@ const AboutSection = () => {
                 className="group h-full w-full overflow-hidden rounded-xl border-4 border-white shadow-[0_34px_60px_-22px_rgba(0,0,0,0.65)]"
               >
                 <LazyImage
-                  src={image10}
+                  publicId="cws-site/image-10"
+                  width={800}
                   alt="Ambiance CWS"
                   className="h-full w-full"
                   imgClassName="object-cover object-top transition-transform duration-[900ms] ease-out group-hover:scale-105"

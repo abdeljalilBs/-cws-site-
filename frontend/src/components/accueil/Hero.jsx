@@ -88,11 +88,10 @@ const Hero = () => {
         preload="auto"
         disablePictureInPicture
         controlsList="nodownload nofullscreen noremoteplayback"
+        src="https://res.cloudinary.com/qupvgw44/video/upload/f_auto,q_auto/cws-site/hero-video"
         className="absolute top-0 left-0 w-full h-full object-cover pointer-events-none"
         aria-hidden="true"
       >
-        <source src="/hero-video.mp4" type="video/mp4" />
-        <source src="/hero-video.webm" type="video/webm" />
         Ton navigateur ne supporte pas la lecture de la vidéo.
       </video>
 

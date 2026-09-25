@@ -1,11 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { LuAward, LuDumbbell, LuQuote } from 'react-icons/lu';
-
-// ⬇️ IMPORTS CORRIGÉS selon ton dossier src/assets/
-import justineImg from '../../assets/justine.png';
-import marionImg from '../../assets/marion.png';
-import bilalImg from '../../assets/bilal.png';
+import LazyImage from '../LazyImage';
 
 const DISPLAY = "'Anton', sans-serif";
 const SERIF = "'Instrument Serif', Georgia, 'Times New Roman', serif";
@@ -75,12 +71,14 @@ const CoachCard = ({ coach, index }) => {
             <div className={`relative group ${isReversed ? 'lg:order-2' : 'lg:order-1'}`}>
                 <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#111] aspect-[4/5]">
                     {/* Effet Noir & Blanc -> Couleur au survol + Zoom ou Placeholder */}
-                    {coach.image ? (
-                        <motion.img
+                    {(coach.publicId || coach.image) ? (
+                        <LazyImage
+                            publicId={coach.publicId}
                             src={coach.image}
+                            width={800}
                             alt={coach.name}
-                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out"
-                            whileHover={{ scale: 1.03 }}
+                            className="w-full h-full"
+                            imgClassName="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out"
                         />
                     ) : (
                         <div className="w-full h-full flex items-center justify-center bg-[#1a1a1a]">

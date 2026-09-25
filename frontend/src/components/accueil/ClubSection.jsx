@@ -1,45 +1,7 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { LuArrowRight, LuArrowLeft } from 'react-icons/lu';
-
-// ─── Import des images depuis assets ─────────────────────────
-import materielImg from '../../assets/materiel.png';
-import accesLibreImg from '../../assets/acces-libre.png';
-import ambianceImg from "../../assets/ambiance.png";
-import coachingImg from '../../assets/coaching-personnalise.png';
-import coursImg from '../../assets/cours-collectifs.png';
-import hygieneImg from "../../assets/hygiene.png";
-
-/* ─── Composant LazyImage (fade-in + placeholder au chargement) ─── */
-const LazyImage = ({ src, alt, className, imgClassName }) => {
-  const [loaded, setLoaded] = useState(false);
-
-  return (
-    <div className={`relative overflow-hidden ${className || ''}`}>
-      {/* Placeholder crème pulsé pendant le chargement */}
-      <AnimatePresence>
-        {!loaded && (
-          <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
-            className="absolute inset-0 bg-[#d4cfc7]/15 animate-pulse"
-          />
-        )}
-      </AnimatePresence>
-
-      <img
-        src={src}
-        alt={alt}
-        loading="lazy"          // ⭐ lazy loading natif
-        decoding="async"        // ⭐ décodage asynchrone
-        onLoad={() => setLoaded(true)}
-        className={`w-full h-full transition-all duration-700 ease-out ${loaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-105 blur-md'
-          } ${imgClassName || ''}`}
-      />
-    </div>
-  );
-};
+import LazyImage from '../LazyImage';
 
 const ClubSection = () => {
   const scrollRef = useRef(null);
@@ -52,12 +14,12 @@ const ClubSection = () => {
   const [hasInteracted, setHasInteracted] = useState(false);
 
   const realCards = [
-    { image: materielImg, title: "Le Matériel", description: "Chez CWS, le matériel est de qualité professionnelle, et de dernière génération (MATRIX)." },
-    { image: accesLibreImg, title: "Accès Libre", description: "Au parc cardio et au plateau musculation, 7 jours sur 7 avec de larges amplitudes horaires." },
-    { image: ambianceImg, title: "L'Ambiance", description: "Une ambiance conviviale, familiale, et chaleureuse pour devenir la meilleure version de soi-même." },
-    { image: coachingImg, title: "Coaching Personnalisé", description: "Les coachs CWS sont diplômés, passionnés et experts dans leur métier. Ils sauront vous motiver et vous faire atteindre vos objectifs." },
-    { image: coursImg, title: "Cours Collectifs", description: "Chez CWS, retrouvez plus de 30 cours variés avec des coachs diplômés et qualifiés pour corriger vos mouvements." },
-    { image: hygieneImg, title: "L'Hygiène", description: "Entraînez-vous dans un club quotidiennement nettoyé, avec des règles d'hygiène respectées." },
+    { publicId: "cws-site/materiel", title: "Le Matériel", description: "Chez CWS, le matériel est de qualité professionnelle, et de dernière génération (MATRIX)." },
+    { publicId: "cws-site/acces-libre", title: "Accès Libre", description: "Au parc cardio et au plateau musculation, 7 jours sur 7 avec de larges amplitudes horaires." },
+    { publicId: "cws-site/ambiance", title: "L'Ambiance", description: "Une ambiance conviviale, familiale, et chaleureuse pour devenir la meilleure version de soi-même." },
+    { publicId: "cws-site/coaching-personnalise", title: "Coaching Personnalisé", description: "Les coachs CWS sont diplômés, passionnés et experts dans leur métier. Ils sauront vous motiver et vous faire atteindre vos objectifs." },
+    { publicId: "cws-site/cours-collectifs", title: "Cours Collectifs", description: "Chez CWS, retrouvez plus de 30 cours variés avec des coachs diplômés et qualifiés pour corriger vos mouvements." },
+    { publicId: "cws-site/hygiene", title: "L'Hygiène", description: "Entraînez-vous dans un club quotidiennement nettoyé, avec des règles d'hygiène respectées." },
   ];
 
   const N = realCards.length;
@@ -356,7 +318,8 @@ const ClubSection = () => {
                 <div className="relative w-full h-52 sm:h-56 md:h-60 overflow-hidden">
                   {/* ⭐ LAZY LOADING sur l'image de la carte */}
                   <LazyImage
-                    src={card.image}
+                    publicId={card.publicId}
+                    width={800}
                     alt={card.title}
                     className="w-full h-full"
                     imgClassName={`object-cover ${isActive ? 'transition-transform duration-700 ease-out group-hover:scale-110' : ''}`}
