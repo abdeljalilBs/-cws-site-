@@ -36,8 +36,8 @@ const ClubSection = () => {
   const dragStartX = useRef(0);
   const dragScrollLeft = useRef(0);
   const isDraggingRef = useRef(false);
-  // Coupe les transitions CSS uniquement sur la frame du recadrage
   const disableTransitionRef = useRef(false);
+  const prevActiveIndexRef = useRef(-1);
 
   // ─── Largeur carte + gap ───────────────────────────────────
   const getCardStep = useCallback(() => {
@@ -48,7 +48,7 @@ const ClubSection = () => {
     return cards[1].offsetLeft - cards[0].offsetLeft;
   }, []);
 
-  // ─── Calcul des styles (PUR : aucun saut ici) ──────────────
+  // ─── Calcul des styles (Ultra fluide : Mise à jour DOM directe sans re-render React) ───
   const computeStyles = useCallback(() => {
     const el = scrollRef.current;
     if (!el) return;
@@ -59,28 +59,42 @@ const ClubSection = () => {
     const center = el.scrollLeft + clientWidth / 2;
     let closest = 0;
     let closestDist = Infinity;
-    const styles = [];
+    const isMobile = window.innerWidth < 768;
 
     cardEls.forEach((cardEl, i) => {
       const cardCenter = cardEl.offsetLeft + cardEl.offsetWidth / 2;
       const dist = center - cardCenter;
       const nd = Math.min(Math.abs(dist) / (clientWidth * 0.5), 1);
       if (Math.abs(dist) < closestDist) { closestDist = Math.abs(dist); closest = i; }
-      styles.push({
-        scale: 1 - nd * 0.18,
-        opacity: 1 - nd * 0.88,
-        blur: nd * 8,
-        brightness: 1 - nd * 0.6,
-        normalizedDist: nd,
-      });
+
+      const scale = 1 - nd * 0.18;
+      const opacity = 1 - nd * 0.88;
+      const blur = isMobile ? 0 : nd * 6; // Pas de blur lourd sur mobile pour 60fps parfait
+      const brightness = 1 - nd * 0.6;
+      const isActive = nd < 0.15;
+
+      // Application directe des styles sur le DOM (0 re-render React)
+      cardEl.style.transform = `translate3d(0,0,0) scale(${scale})`;
+      cardEl.style.opacity = opacity.toString();
+      cardEl.style.filter = isMobile
+        ? `brightness(${brightness})`
+        : `blur(${blur.toFixed(1)}px) brightness(${brightness})`;
+      cardEl.style.zIndex = isActive ? '10' : Math.round((1 - nd) * 10).toString();
+      cardEl.style.border = isActive ? '1px solid rgba(255,255,255,0.12)' : '1px solid rgba(255,255,255,0.02)';
+      cardEl.style.boxShadow = isActive ? '0 25px 60px -12px rgba(0,0,0,0.7)' : 'none';
+      cardEl.style.pointerEvents = opacity < 0.1 ? 'none' : 'auto';
+
+      cardEl.setAttribute('data-active', isActive ? 'true' : 'false');
     });
 
-    cardStylesRef.current = styles;
-    setActiveIndex(closest % N);
-    forceUpdate((n) => n + 1);
+    const newActiveIndex = closest % N;
+    if (prevActiveIndexRef.current !== newActiveIndex) {
+      prevActiveIndexRef.current = newActiveIndex;
+      setActiveIndex(newActiveIndex);
+    }
   }, [N]);
 
-  // ─── Recadrage SILENCIEUX : uniquement à l'arrêt du scroll ──
+  // ─── Recadrage SILENCIEUX : uniquement aux extrémités de la piste ──
   const recenterIfNeeded = useCallback(() => {
     const el = scrollRef.current;
     if (!el || isDraggingRef.current) return;
@@ -97,24 +111,22 @@ const ClubSection = () => {
       if (d < closestDist) { closestDist = d; closest = i; }
     });
 
-    // Carte équivalente dans le set du milieu
-    const target = MIDDLE_SET_START + (closest % N);
-    if (target !== closest && cardEls[target]) {
-      // Saut = distance EXACTE entre les 2 cartes -> offset sous-carte préservé, invisible
-      disableTransitionRef.current = true;
-      el.scrollLeft += cardEls[target].offsetLeft - cardEls[closest].offsetLeft;
-      computeStyles(); // rendu SANS transition + nouveaux styles
-
-      // Double rAF : on laisse la frame "sans transition" se peindre,
-      // PUIS on rallume. Sinon React fusionne tout et le fondu réapparaît.
-      requestAnimationFrame(() => {
+    // Ne recadrer QUE si l'utilisateur approche du début (Set 0) ou de la fin (Set 4)
+    // Pendant les sets du milieu (1, 2, 3), AUCUN saut de scroll.
+    if (closest < N || closest >= N * (SETS - 1)) {
+      const target = MIDDLE_SET_START + (closest % N);
+      if (target !== closest && cardEls[target]) {
+        disableTransitionRef.current = true;
+        el.scrollLeft += cardEls[target].offsetLeft - cardEls[closest].offsetLeft;
+        computeStyles();
         requestAnimationFrame(() => {
-          disableTransitionRef.current = false;
-          forceUpdate((n) => n + 1);
+          requestAnimationFrame(() => {
+            disableTransitionRef.current = false;
+          });
         });
-      });
+      }
     }
-  }, [computeStyles, N, MIDDLE_SET_START]);
+  }, [computeStyles, N, SETS, MIDDLE_SET_START]);
 
   // ─── Scroll : styles live (RAF) + recadrage différé (idle) ──
   const handleScroll = useCallback(() => {
@@ -125,7 +137,7 @@ const ClubSection = () => {
       });
     }
     if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
-    idleTimerRef.current = setTimeout(recenterIfNeeded, 140);
+    idleTimerRef.current = setTimeout(recenterIfNeeded, 160);
   }, [computeStyles, recenterIfNeeded]);
 
   useEffect(() => {
@@ -133,6 +145,7 @@ const ClubSection = () => {
     if (!el) return;
 
     el.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', computeStyles, { passive: true });
 
     const initTimer = setTimeout(() => {
       const cardEls = el.querySelectorAll('[data-card]');
@@ -147,11 +160,10 @@ const ClubSection = () => {
       clearTimeout(initTimer);
       if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
       el.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', computeStyles);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, [handleScroll, computeStyles, MIDDLE_SET_START]);
-
-  // ─── Molette verticale → horizontale (Désactivée à la demande de l'utilisateur) ──
 
   // ─── Auto-scroll hint ──────────────────────────────────────
   useEffect(() => {
@@ -207,13 +219,9 @@ const ClubSection = () => {
     if (!hasInteracted) setHasInteracted(true);
     isDraggingRef.current = false;
     setIsDragging(false);
-    // Recadrage IMMÉDIAT au relâchement (transitions coupées via disableTransitionRef),
-    // pas de fenêtre où le snap et les transitions se battent.
     if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
     recenterIfNeeded();
   };
-
-  const transitionsOn = !isDragging && !disableTransitionRef.current;
 
   return (
     <section
@@ -265,7 +273,7 @@ const ClubSection = () => {
         </button>
         <button
           onClick={() => scrollToCard('right')}
-          className="absolute right-4 md:right-8 lg:right-12 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#0a0a0a]/80 backdrop-blur-md border border-white/15 hover:border-white/40 flex items-center justify-center text-white/60 hover:text-white transition-all duration-300 hover:scale-110 shadow-xl"
+          className="absolute right-4 md:left-8 lg:right-12 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#0a0a0a]/80 backdrop-blur-md border border-white/15 hover:border-white/40 flex items-center justify-center text-white/60 hover:text-white transition-all duration-300 hover:scale-110 shadow-xl"
           aria-label="Suivant"
         >
           <LuArrowRight size={20} />
@@ -285,74 +293,52 @@ const ClubSection = () => {
           style={{
             scrollSnapType: isDragging ? 'none' : 'x mandatory',
             WebkitOverflowScrolling: 'touch',
+            touchAction: 'pan-x pan-y',
           }}
         >
           <div className="flex-shrink-0 w-[calc(50vw-190px)] sm:w-[calc(50vw-210px)] md:w-[calc(50vw-230px)]" />
 
           {extendedCards.map((card, index) => {
-            const s = cardStylesRef.current[index] || { scale: 1, opacity: 0, blur: 8, brightness: 0.4, normalizedDist: 1 };
-            const isActive = s.normalizedDist < 0.15;
-
             return (
               <div
                 key={`${card.title}-${index}`}
                 data-card
-                onClick={() => !isActive && goToCard(card._realIndex)}
+                data-active="false"
+                onClick={() => goToCard(card._realIndex)}
                 className="group relative flex-shrink-0 w-[80vw] max-w-[300px] sm:max-w-none sm:w-[340px] md:w-[380px] rounded-2xl overflow-hidden bg-[#111111] cursor-pointer"
                 style={{
                   scrollSnapAlign: 'center',
-                  transform: `translate3d(0,0,0) scale(${s.scale})`,
-                  opacity: s.opacity,
-                  filter: `blur(${s.blur}px) brightness(${s.brightness})`,
-                  willChange: 'transform, opacity, filter',
-                  transition: transitionsOn
-                    ? 'transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.5s ease-out, filter 0.5s ease-out'
-                    : 'none',
-                  zIndex: isActive ? 10 : Math.round((1 - s.normalizedDist) * 10),
-                  border: isActive ? '1px solid rgba(255,255,255,0.12)' : '1px solid rgba(255,255,255,0.02)',
-                  boxShadow: isActive ? '0 25px 60px -12px rgba(0,0,0,0.7)' : 'none',
-                  pointerEvents: s.opacity < 0.1 ? 'none' : 'auto',
+                  willChange: 'transform, opacity',
+                  transition: 'transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), opacity 0.4s ease-out',
                 }}
                 draggable={false}
               >
                 <div className="relative w-full h-52 sm:h-56 md:h-60 overflow-hidden">
-                  {/* ⭐ LAZY LOADING sur l'image de la carte */}
                   <LazyImage
                     publicId={card.publicId}
                     width={800}
                     alt={card.title}
                     className="w-full h-full"
-                    imgClassName={`object-cover ${isActive ? 'transition-transform duration-700 ease-out group-hover:scale-110' : ''}`}
+                    imgClassName="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#111111] via-transparent to-transparent opacity-60" />
                 </div>
                 <div className="relative p-6 md:p-7">
-                  {/* Le span du numéro a été supprimé ici */}
-
                   <h3
-                    className="font-bold uppercase tracking-[0.12em] text-sm sm:text-base mb-3"
+                    className="card-title font-bold uppercase tracking-[0.12em] text-sm sm:text-base mb-3 transition-colors duration-300"
                     style={{
-                      color: isActive ? '#ffffff' : 'rgba(255,255,255,0.4)',
                       fontFamily: "'Anton', sans-serif",
                       letterSpacing: '0.05em'
                     }}
                   >
                     {card.title}
                   </h3>
-                  <div
-                    className="h-[1px] mb-4"
-                    style={{
-                      width: isActive ? '2rem' : '1.5rem',
-                      backgroundColor: isActive ? 'rgba(212, 207, 199, 0.4)' : 'rgba(255,255,255,0.05)',
-                    }}
-                  />
-                  <p className="text-sm leading-relaxed" style={{ color: isActive ? '#b8b0a4' : 'rgba(90,85,78,0.4)' }}>
+                  <div className="card-line h-[1px] mb-4 transition-all duration-300" />
+                  <p className="card-desc text-sm leading-relaxed transition-colors duration-300">
                     {card.description}
                   </p>
                 </div>
-                {isActive && (
-                  <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#d4cfc7]/30 to-transparent" />
-                )}
+                <div className="card-border-active absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#d4cfc7]/30 to-transparent transition-opacity duration-300 opacity-0" />
               </div>
             );
           })}
@@ -397,6 +383,18 @@ const ClubSection = () => {
       <style>{`
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
+        [data-card][data-active="true"] .card-title { color: #ffffff !important; }
+        [data-card][data-active="false"] .card-title { color: rgba(255, 255, 255, 0.4) !important; }
+
+        [data-card][data-active="true"] .card-line { width: 2rem !important; background-color: rgba(212, 207, 199, 0.4) !important; }
+        [data-card][data-active="false"] .card-line { width: 1.5rem !important; background-color: rgba(255, 255, 255, 0.05) !important; }
+
+        [data-card][data-active="true"] .card-desc { color: #b8b0a4 !important; }
+        [data-card][data-active="false"] .card-desc { color: rgba(90, 85, 78, 0.4) !important; }
+
+        [data-card][data-active="true"] .card-border-active { opacity: 1 !important; }
+        [data-card][data-active="false"] .card-border-active { opacity: 0 !important; }
       `}</style>
     </section>
   );
