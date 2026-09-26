@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { motion, useInView, useReducedMotion, AnimatePresence } from 'framer-motion';
 import { LuArrowRight } from 'react-icons/lu';
+import { Link } from 'react-router-dom';
 import LazyImage from '../LazyImage';
 
 const DISPLAY = "'Anton', sans-serif";
@@ -250,8 +251,8 @@ const CoachesSection = () => {
           transition={{ duration: 0.7, delay: 0.9 }}
           className="mt-20 md:mt-28 flex justify-center md:justify-end"
         >
-          <a
-            href="#team"
+          <Link
+            to="/coachs"
             className="group relative inline-flex items-center justify-center rounded-full cursor-pointer"
           >
             {/* Couche 1 : Glow externe au hover */}
@@ -294,7 +295,7 @@ const CoachesSection = () => {
             <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#0a0a0a]/0 group-hover:bg-[#0a0a0a]/40 transition-all duration-500 delay-300" />
             <span className="absolute top-1/2 -left-1.5 -translate-y-1/2 w-1 h-1 rounded-full bg-[#0a0a0a]/0 group-hover:bg-[#0a0a0a]/40 transition-all duration-500 delay-400" />
             <span className="absolute top-1/2 -right-1.5 -translate-y-1/2 w-1 h-1 rounded-full bg-[#0a0a0a]/0 group-hover:bg-[#0a0a0a]/40 transition-all duration-500 delay-500" />
-          </a>
+          </Link>
         </motion.div>
 
       </div>
