@@ -156,15 +156,15 @@ const Footer = () => {
       <div className="relative z-[2] mx-auto max-w-[960px] px-6 pt-20 pb-10 sm:px-10 md:pt-24 lg:px-16">
 
         {/* ── LOGO seul au-dessus de la grille ── */}
-        <motion.div {...fade(0.05)} className="mb-8">
+        <motion.div {...fade(0.05)} className="mb-10">
           <Link to="/" className="inline-block">
             <LazyImage
               publicId="cws-site/image-logo"
-              width={600}
+              width={800}
               eager={true}
               alt="Logo CWS"
-              className="h-10 md:h-12 w-auto aspect-[3/2]"
-              imgClassName="object-contain"
+              className="h-16 sm:h-20 md:h-24 w-auto max-w-[280px] sm:max-w-[360px] aspect-[3/2]"
+              imgClassName="object-contain object-left"
             />
           </Link>
         </motion.div>

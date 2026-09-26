@@ -69,19 +69,19 @@ const plans = [
 /* ─── FAQ ────────────────────────────────────────────────────── */
 const faqs = [
   {
-    q: "Comment faire pour s'inscrire ?",
+    q: "Comment faire pour s'inscrire\u00A0?",
     a: "L'inscription se fait directement au club ou via notre formulaire de contact. Nous vous accueillons pour une visite, nous échangeons sur vos objectifs, puis nous mettons en place votre abonnement adapté. Aucune démarche compliquée — on s'occupe de tout.",
   },
   {
-    q: 'Comment réserver les cours collectifs ?',
+    q: 'Comment réserver les cours collectifs\u00A0?',
     a: "Une fois adhérent, réservez vos cours collectifs en quelques secondes grâce à notre application dédiée. Consultez le planning, choisissez votre cours et réservez votre place en un simple clic. Avec plus de 30 cours variés chaque semaine, trouvez facilement le créneau qui vous convient.",
   },
   {
-    q: "Quel est le tarif d'un abonnement ?",
+    q: "Quel est le tarif d'un abonnement\u00A0?",
     a: "Notre tarif d'appel débute à 39,90 € / mois (offre étudiant sous conditions d'engagement). Les tarifs de nos formules varient ensuite selon la durée choisie (1 mois, 2 mois, 6 mois ou 1 an) et les modalités de paiement (comptant ou prélèvement mensuel). Afin de vous proposer la formule la plus adaptée et vous détailler nos offres, nos prix et frais associés vous sont présentés directement par nos conseillers au club ou par e-mail sur simple demande.",
   },
   {
-    q: 'Quelle est la démarche pour un coaching personnalisé ?',
+    q: 'Quelle est la démarche pour un coaching personnalisé\u00A0?',
     a: "Prenez rendez-vous avec l'un de nos coachs diplômés. Lors d'un premier échange, nous définissons ensemble vos objectifs, votre niveau et vos disponibilités. Votre coach construit ensuite un programme sur-mesure et vous accompagne séance après séance.",
   },
 ];
@@ -131,7 +131,7 @@ const PlanCard = ({ plan, index, isInView }) => {
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.7, delay: 0.15 + index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
-      className={`relative w-full max-w-md mx-auto lg:max-w-none ${
+      className={`relative w-full max-w-md mx-auto lg:max-w-none pt-4 ${
         plan.featured ? 'z-10 lg:-my-2 drop-shadow-[0_44px_90px_rgba(0,0,0,0.55)]' : ''
       }`}
     >
@@ -140,7 +140,7 @@ const PlanCard = ({ plan, index, isInView }) => {
         onMouseMove={handleMove}
         onMouseLeave={handleLeave}
         style={{ transform: baseTransform, transformStyle: 'preserve-3d' }}
-        className={`tp-card group relative flex flex-col w-full max-w-full rounded-[22px] overflow-hidden sm:overflow-visible box-border transition-[border-color,box-shadow] duration-500 ${
+        className={`tp-card group relative flex flex-col w-full max-w-full rounded-[22px] overflow-visible box-border transition-[border-color,box-shadow] duration-500 ${
           plan.featured
             ? 'tp-featured bg-[#f5f4f1] border border-[#d4cfc7]'
             : 'bg-[#111] border border-white/[0.06] hover:border-white/15'
@@ -153,8 +153,8 @@ const PlanCard = ({ plan, index, isInView }) => {
 
         {/* BADGE */}
         {plan.badge && (
-          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 rounded-full bg-[#0a0a0a] px-3.5 py-1.5 shadow-lg shadow-black/30 whitespace-nowrap max-w-[90vw]">
-            <span className="text-[0.6rem] font-bold uppercase tracking-[0.15em] text-[#d4cfc7]">
+          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-1.5 rounded-full bg-[#0a0a0a] px-4 py-1.5 shadow-lg shadow-black/40 whitespace-nowrap max-w-[90vw] border border-white/15">
+            <span className="text-[0.65rem] font-bold uppercase tracking-[0.15em] text-[#d4cfc7]">
               {plan.badge}
             </span>
           </div>
@@ -304,7 +304,7 @@ const FaqItem = ({ faq, index, isOpen, onToggle, isInView }) => {
               isOpen ? 'text-[#d4cfc7]' : 'text-white group-hover:text-[#d4cfc7]'
             }`}
           >
-            {faq.q}
+            {faq.q.replace(/\s+\?/g, '\u00A0?')}
           </span>
         </span>
         <motion.span
@@ -474,8 +474,8 @@ const TarifsPage = () => {
             </p>
           </motion.div>
 
-          {/* Grille (pt-4 ajouté pour laisser la place au badge débordant) */}
-          <div className="grid grid-cols-1 gap-6 md:gap-7 lg:grid-cols-3 lg:items-stretch pt-4 w-full max-w-full box-border">
+          {/* Grille (pt-4 et gap-8 ajoutés pour laisser la place au badge débordant) */}
+          <div className="grid grid-cols-1 gap-8 md:gap-7 lg:grid-cols-3 lg:items-stretch pt-4 w-full max-w-full box-border">
             {plans.map((plan, index) => (
               <PlanCard key={plan.name} plan={plan} index={index} isInView={isInView} />
             ))}
@@ -555,7 +555,7 @@ const TarifsPage = () => {
               transition={{ duration: 0.6, delay: 0.25 }}
               className="max-w-full lg:max-w-[30ch] pb-1 text-sm sm:text-[1rem] font-light leading-relaxed text-[#8a8279] break-words"
             >
-              Une question sans réponse ? Contactez-nous, on vous répond rapidement.
+              Une question sans réponse&nbsp;? Contactez-nous, on vous répond rapidement.
             </motion.p>
           </div>
 
