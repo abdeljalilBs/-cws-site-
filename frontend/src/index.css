@@ -50,3 +50,34 @@ body {
   padding-bottom: env(safe-area-inset-bottom, 0px);
   box-sizing: border-box;
 }
+
+/* Mobile burger button styling (high contrast, 44px touch target, z-index 50) */
+.navbar-burger-btn {
+  min-width: 44px;
+  min-height: 44px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  cursor: pointer;
+  touch-action: manipulation;
+  z-index: 50;
+  flex-shrink: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar-burger-btn:hover,
+.navbar-burger-btn:focus-visible {
+  background-color: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.4);
+  outline: none;
+}
+
+.navbar-burger-btn:active {
+  transform: scale(0.95);
+}
