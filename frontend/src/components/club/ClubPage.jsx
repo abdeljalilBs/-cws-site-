@@ -175,7 +175,7 @@ const ClubPage = () => {
       {/* ══════════════════════════════════════════
           1. HERO CLUB
       ══════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative w-full min-h-[100dvh] flex items-center overflow-hidden">
+      <section ref={heroRef} className="relative w-full min-h-[100dvh] flex items-center overflow-hidden pt-[calc(5rem+env(safe-area-inset-top,0px))] pb-[calc(3rem+env(safe-area-inset-bottom,0px))]">
         <motion.div
           initial={{ scale: 1.12 }}
           animate={heroVisible ? { scale: 1 } : {}}

@@ -186,7 +186,7 @@ const Coachs = () => {
     const isHeaderInView = useInView(headerRef, { once: true, margin: "-50px" });
 
     return (
-        <div className="relative w-full overflow-hidden bg-[#0a0a0a] min-h-[100dvh] pt-32 pb-20">
+        <div className="relative w-full overflow-hidden bg-[#0a0a0a] min-h-[100dvh] pt-[calc(8rem+env(safe-area-inset-top,0px))] pb-[calc(5rem+env(safe-area-inset-bottom,0px))]">
             <FloatingOrbs />
 
             <div className="relative z-10 mx-auto max-w-[1400px] px-6 sm:px-10 lg:px-16">

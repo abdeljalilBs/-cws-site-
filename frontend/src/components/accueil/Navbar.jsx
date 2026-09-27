@@ -34,7 +34,10 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50 flex justify-center pt-6 px-4 pointer-events-none">
+    <div
+      className="fixed top-0 left-0 w-full z-50 flex justify-center px-4 pointer-events-none"
+      style={{ paddingTop: 'calc(1.5rem + env(safe-area-inset-top, 0px))' }}
+    >
 
       {/* LA PILULE FLOTTANTE (Style Premium / Moderne) */}
       <motion.nav
@@ -115,7 +118,8 @@ const Navbar = () => {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-24 left-4 right-4 lg:hidden bg-[#0a0a0a]/95 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-2xl pointer-events-auto"
+            style={{ top: 'calc(5.5rem + env(safe-area-inset-top, 0px))' }}
+            className="absolute left-4 right-4 lg:hidden bg-[#0a0a0a]/95 backdrop-blur-xl border border-white/10 rounded-3xl p-6 shadow-2xl pointer-events-auto"
           >
             <div className="flex flex-col space-y-4">
               {navLinks.map((link) => (

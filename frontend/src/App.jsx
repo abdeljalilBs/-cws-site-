@@ -26,7 +26,7 @@ const AdminLayout = lazy(() => import('./components/admin/AdminLayout'));
 
 // ─── Loader pendant le chargement d'une page ──────────────────────
 const PageLoader = () => (
-  <div className="flex min-h-[80vh] items-center justify-center bg-[#0a0a0a]">
+  <div className="flex min-h-[80dvh] items-center justify-center bg-[#0a0a0a]">
     <div className="flex flex-col items-center gap-4">
       <div className="h-10 w-10 animate-spin rounded-full border-2 border-[#d4cfc7]/20 border-t-[#d4cfc7]" />
       <span className="text-xs uppercase tracking-[0.2em] text-white/40">Chargement...</span>
@@ -64,7 +64,7 @@ const MainLayout = ({ children }) => {
   const isAdminRoute = location.pathname.startsWith('/admin');
 
   return (
-    <div className="bg-[#0a0a0a] min-h-[100dvh] flex flex-col overflow-x-hidden w-full max-w-[100vw]">
+    <div className="bg-[#0a0a0a] min-h-[100dvh] flex flex-col overflow-x-hidden w-full max-w-full">
       <PageTitle />
 
       {/* On n'affiche PAS la Navbar si on est sur /admin */}

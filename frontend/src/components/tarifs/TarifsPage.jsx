@@ -349,7 +349,7 @@ const TarifsPage = () => {
   const reduce = useReducedMotion();
 
   return (
-    <div className="relative w-full max-w-full overflow-hidden bg-[#0a0a0a] box-border">
+    <div className="relative w-full max-w-full min-h-[100dvh] overflow-hidden bg-[#0a0a0a] box-border pt-[calc(3rem+env(safe-area-inset-top,0px))] pb-[calc(3rem+env(safe-area-inset-bottom,0px))]">
       {/* Styles ciblés (effets non exprimables en Tailwind seul) */}
       <style>{`
         .tp-card::before{
