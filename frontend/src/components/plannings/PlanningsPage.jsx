@@ -46,7 +46,7 @@ const PlanningsPage = () => {
       {/* ══════════════════════════════════════════
           1. HERO — Façade CWS + titre
       ══════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative w-full min-h-[78vh] flex items-center justify-center overflow-hidden">
+      <section ref={heroRef} className="relative w-full min-h-[78dvh] flex items-center justify-center overflow-hidden pt-[calc(5rem+env(safe-area-inset-top,0px))] pb-[calc(2rem+env(safe-area-inset-bottom,0px))]">
         {/* Image de fond — EAGER (visible immédiatement, priorité) */}
         <motion.div
           initial={{ scale: 1.12 }}

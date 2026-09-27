@@ -244,7 +244,7 @@ const Contact = () => {
     };
 
     return (
-        <div className="relative w-full overflow-hidden bg-[#0a0a0a] min-h-[100dvh] pt-24 pb-20">
+        <div className="contact-page relative w-full overflow-hidden bg-[#0a0a0a] min-h-[100dvh] pt-[calc(6rem+env(safe-area-inset-top,0px))] pb-[calc(5rem+env(safe-area-inset-bottom,0px))]">
 
             <style>{`
                 .ct-select{appearance:none;-webkit-appearance:none;background-image:none;}

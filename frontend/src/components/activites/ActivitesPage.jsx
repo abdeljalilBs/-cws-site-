@@ -404,7 +404,7 @@ const ActivitesPage = () => {
       {/* ══════════════════════════════════════════
           1. HERO — LazyImage eager (priorité + fade-in, pas de flash)
       ══════════════════════════════════════════ */}
-      <section ref={heroRef} className="relative w-full min-h-[92vh] flex items-center justify-center overflow-hidden">
+      <section ref={heroRef} className="relative w-full min-h-[92dvh] flex items-center justify-center overflow-hidden pt-[calc(5rem+env(safe-area-inset-top,0px))] pb-[calc(2rem+env(safe-area-inset-bottom,0px))]">
         <motion.div
           initial={{ scale: 1.15 }}
           animate={heroVisible ? { scale: 1 } : {}}

@@ -153,7 +153,7 @@ const Footer = () => {
       />
       <div className="absolute top-0 left-0 right-0 z-[1] h-px bg-gradient-to-r from-transparent via-[#d4cfc7]/35 to-transparent" />
 
-      <div className="relative z-[2] mx-auto max-w-[960px] px-6 pt-20 pb-10 sm:px-10 md:pt-24 lg:px-16">
+      <div className="relative z-[2] mx-auto max-w-[960px] px-6 pt-20 pb-[calc(2.5rem+env(safe-area-inset-bottom,0px))] sm:px-10 md:pt-24 lg:px-16">
 
         {/* ── LOGO seul au-dessus de la grille ── */}
         <motion.div {...fade(0.05)} className="mb-10">

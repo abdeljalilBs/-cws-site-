@@ -71,7 +71,8 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative w-full h-[100dvh] min-h-[500px] overflow-hidden bg-[#0a0a0a]"
+      className="hero-section relative w-full h-[100dvh] min-h-[500px] max-w-full overflow-hidden bg-[#0a0a0a]"
+      style={{ height: '100dvh', minHeight: '-webkit-fill-available' }}
     >
       {/* ══════════════════════════════════════════
           VIDÉO DE FOND
@@ -101,7 +102,13 @@ const Hero = () => {
       <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-[#0a0a0a]/50 to-transparent z-[1]" />
 
       {/* Contenu */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center">
+      <div
+        className="relative z-10 flex flex-col items-center justify-center h-full px-6 text-center"
+        style={{
+          paddingTop: 'calc(4rem + env(safe-area-inset-top, 0px))',
+          paddingBottom: 'calc(2.5rem + env(safe-area-inset-bottom, 0px))',
+        }}
+      >
 
         <motion.div
           variants={fadeUp}
@@ -198,7 +205,8 @@ const Hero = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 group cursor-pointer"
+        style={{ bottom: 'calc(2rem + env(safe-area-inset-bottom, 0px))' }}
+        className="absolute left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 group cursor-pointer"
       >
         <motion.div
           animate={{ y: [0, 6, 0] }}
