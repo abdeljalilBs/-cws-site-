@@ -44,14 +44,14 @@ const Navbar = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className={`pointer-events-auto flex items-center justify-between w-full max-w-6xl px-6 py-2.5 rounded-full border transition-[background-color,border-color,box-shadow] duration-300 ${isScrolled
+        className={`pointer-events-auto flex items-center justify-between w-full max-w-6xl px-4 sm:px-6 py-2.5 rounded-full border transition-[background-color,border-color,box-shadow] duration-300 ${isScrolled
           ? 'bg-[#0a0a0a]/80 backdrop-blur-xl border-white/10 shadow-2xl'
           : 'bg-[#0a0a0a]/40 backdrop-blur-md border-white/5'
           }`}
       >
 
         {/* Logo CWS */}
-        <Link to="/" className="flex-shrink-0 mr-6 md:mr-8 flex items-center">
+        <Link to="/" className="flex-shrink-0 mr-4 sm:mr-6 md:mr-8 flex items-center">
           <LazyImage
             publicId="cws-site/image-logo"
             width={600}
@@ -98,14 +98,15 @@ const Navbar = () => {
           </Link>
         </div>
 
-        <div className="lg:hidden flex items-center gap-4 ml-auto">
-          <span className="h-5 w-px bg-white/20" />
+        {/* Toggle Menu Mobile (High contrast, flex-shrink-0, 44px min target) */}
+        <div className="lg:hidden flex items-center gap-3 flex-shrink-0 ml-auto relative z-50">
           <button
-            className="text-white focus:outline-none flex items-center justify-center p-2 -mr-2 relative z-50 cursor-pointer touch-manipulation"
+            className="navbar-burger-btn min-w-[44px] min-h-[44px] w-11 h-11 flex items-center justify-center rounded-full bg-white/15 hover:bg-white/25 border border-white/20 text-white cursor-pointer touch-manipulation z-50 flex-shrink-0 transition-all active:scale-95 shadow-md"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Menu"
+            aria-expanded={isMobileMenuOpen}
+            aria-label={isMobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
           >
-            {isMobileMenuOpen ? <LuX size={26} /> : <LuMenu size={26} />}
+            {isMobileMenuOpen ? <LuX size={24} className="text-white stroke-[2.5]" /> : <LuMenu size={24} className="text-white stroke-[2.5]" />}
           </button>
         </div>
       </motion.nav>
