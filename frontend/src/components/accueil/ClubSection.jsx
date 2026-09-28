@@ -260,7 +260,7 @@ const ClubSection = () => {
         </button>
         <button
           onClick={() => scrollToCard('right')}
-          className="absolute right-4 md:left-8 lg:right-12 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#0a0a0a]/80 backdrop-blur-md border border-white/15 hover:border-white/40 flex items-center justify-center text-white/60 hover:text-white transition-all duration-300 hover:scale-110 shadow-xl"
+          className="absolute right-4 md:right-8 lg:right-12 top-1/2 -translate-y-1/2 z-30 w-12 h-12 md:w-14 md:h-14 rounded-full bg-[#0a0a0a]/80 backdrop-blur-md border border-white/15 hover:border-white/40 flex items-center justify-center text-white/60 hover:text-white transition-all duration-300 hover:scale-110 shadow-xl"
           aria-label="Suivant"
         >
           <LuArrowRight size={20} />
