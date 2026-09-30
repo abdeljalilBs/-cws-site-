@@ -107,8 +107,6 @@ const CoachCard = ({ coach, index, isInView, reduce }) => {
           <motion.svg
             viewBox="0 0 100 100"
             className="absolute inset-0 h-full w-full"
-            animate={reduce ? {} : { rotate: 360 }}
-            transition={reduce ? {} : { duration: 22, repeat: Infinity, ease: 'linear' }}
           >
             <circle cx="50" cy="50" r="47" fill="none" stroke="#d4cfc7" strokeWidth="1.5" strokeDasharray="2 6" strokeLinecap="round" />
           </motion.svg>

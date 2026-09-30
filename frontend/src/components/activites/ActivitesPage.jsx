@@ -389,16 +389,10 @@ const ActivitesPage = () => {
   return (
     <div className="relative w-full overflow-hidden bg-[#0a0a0a]">
 
-      <style>{`
-        @keyframes ac-pulse{0%,100%{opacity:.3}50%{opacity:.6}}
-        .ac-glow{animation:ac-pulse 4s ease-in-out infinite}
-        @media (prefers-reduced-motion: reduce){.ac-glow{animation:none!important}}
-      `}</style>
-
       <motion.div
         animate={{ background: currentCategory.glow }}
         transition={{ duration: 0.8 }}
-        className="ac-glow pointer-events-none fixed top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full blur-[140px] z-0"
+        className="pointer-events-none fixed opacity-40 top-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full blur-[140px] z-0"
       />
 
       {/* ══════════════════════════════════════════
@@ -480,9 +474,7 @@ const ActivitesPage = () => {
           transition={{ delay: 1.2, duration: 1 }}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 group cursor-pointer"
         >
-          <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}>
-            <LuChevronDown size={20} className="text-white/30 group-hover:text-[#d4cfc7] transition-colors duration-500" />
-          </motion.div>
+          <LuChevronDown size={20} className="text-white/30 group-hover:text-[#d4cfc7] transition-colors duration-500" />
         </motion.a>
       </section>
 

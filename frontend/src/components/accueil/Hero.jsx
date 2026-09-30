@@ -71,8 +71,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="hero-section relative w-full h-[100dvh] min-h-[500px] max-w-full overflow-hidden bg-[#0a0a0a]"
-      style={{ height: '100dvh', minHeight: '-webkit-fill-available' }}
+      className="hero-section relative w-full h-[100svh] min-h-[500px] max-w-full overflow-hidden bg-[#0a0a0a]"
     >
       {/* ══════════════════════════════════════════
           VIDÉO DE FOND
@@ -208,31 +207,12 @@ const Hero = () => {
         style={{ bottom: 'calc(2rem + env(safe-area-inset-bottom, 0px))' }}
         className="absolute left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 group cursor-pointer"
       >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        >
-          <LuChevronDown
-            size={16}
-            className="text-white/25 group-hover:text-white/50 transition-colors duration-500"
-          />
-        </motion.div>
+        <LuChevronDown
+          size={16}
+          className="text-white/25 group-hover:text-white/50 transition-colors duration-500"
+        />
       </motion.a>
 
-      <style>{`
-        @keyframes spinSlow {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-      `}</style>
     </section>
   );
 };

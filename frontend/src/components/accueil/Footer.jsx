@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { LuInstagram, LuFacebook, LuArrowRight } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
 import LazyImage from '../LazyImage';
@@ -7,9 +7,6 @@ import LazyImage from '../LazyImage';
 const DISPLAY = "'Anton', sans-serif";
 
 const Footer = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-60px' });
-
   // --- STATES NEWSLETTER ---
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
@@ -36,12 +33,6 @@ const Footer = () => {
     { label: 'Politique de confidentialité', href: '/politique-confidentialite', isRoute: true },
     { label: 'Cookies', href: '/cookies', isRoute: true },
   ];
-
-  const fade = (delay) => ({
-    initial: { opacity: 0, y: 25 },
-    animate: isInView ? { opacity: 1, y: 0 } : {},
-    transition: { duration: 0.6, delay },
-  });
 
   // --- FONCTION D'ENVOI NEWSLETTER ---
   const handleSubscribe = async (e) => {
@@ -114,7 +105,6 @@ const Footer = () => {
 
   return (
     <footer
-      ref={ref}
       className="relative w-full overflow-hidden bg-gradient-to-b from-[#1a1a1a] to-[#111]"
     >
       <style>{`
@@ -132,14 +122,7 @@ const Footer = () => {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center overflow-hidden"
       >
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-          className="foot-watermark select-none"
-        >
-          CWS
-        </motion.span>
+        <span className="foot-watermark select-none">CWS</span>
       </div>
 
       {/* halo taupe + grain + liseré haut */}
@@ -156,7 +139,7 @@ const Footer = () => {
       <div className="relative z-[2] mx-auto max-w-[960px] px-6 pt-20 pb-[calc(2.5rem+env(safe-area-inset-bottom,0px))] sm:px-10 md:pt-24 lg:px-16">
 
         {/* ── LOGO seul au-dessus de la grille ── */}
-        <motion.div {...fade(0.05)} className="mb-10">
+        <div className="mb-10">
           <Link to="/" className="inline-block">
             <LazyImage
               publicId="cws-site/image-logo"
@@ -167,13 +150,13 @@ const Footer = () => {
               imgClassName="object-contain object-left"
             />
           </Link>
-        </motion.div>
+        </div>
 
         {/* ── GRILLE 4 colonnes ── */}
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-[3fr_2fr_3fr_4fr] lg:gap-8">
 
           {/* Col 1 : Marque */}
-          <motion.div {...fade(0.1)}>
+          <div>
             {/* En-tête aligné avec "Navigation", "Informations", "Contact" */}
             <div className="mb-4 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[#b3a996]">
               Coach Wellness Sports
@@ -183,10 +166,10 @@ const Footer = () => {
               Un club à taille humaine, du matériel MATRIX et des coachs diplômés pour vous
               accompagner, séance après séance.
             </p>
-          </motion.div>
+          </div>
 
           {/* Col 2 : Navigation */}
-          <motion.div {...fade(0.14)}>
+          <div>
             <div className="mb-4 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[#b3a996]">
               Navigation
             </div>
@@ -195,10 +178,10 @@ const Footer = () => {
                 <NavLink key={l.label} link={l} />
               ))}
             </nav>
-          </motion.div>
+          </div>
 
           {/* Col 3 : Informations */}
-          <motion.div {...fade(0.18)}>
+          <div>
             <div className="mb-4 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[#b3a996]">
               Informations
             </div>
@@ -207,10 +190,10 @@ const Footer = () => {
                 <NavLink key={l.label} link={l} />
               ))}
             </nav>
-          </motion.div>
+          </div>
 
           {/* Col 4 : Contact + newsletter */}
-          <motion.div {...fade(0.22)} className="flex flex-col gap-5">
+          <div className="flex flex-col gap-5">
             <div>
               <div className="mb-4 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-[#b3a996]">
                 Contact
@@ -289,11 +272,11 @@ const Footer = () => {
                 </motion.p>
               )}
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* ══════════ RÉSEAUX ══════════ */}
-        <motion.div {...fade(0.32)} className="mt-14 flex items-center gap-3 md:mt-16">
+        <div className="mt-14 flex items-center gap-3 md:mt-16">
           <a
             href={instagram}
             target="_blank"
@@ -312,13 +295,10 @@ const Footer = () => {
           >
             <LuFacebook size={19} />
           </a>
-        </motion.div>
+        </div>
 
         {/* ══════════ BAS DE PAGE ══════════ */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
+        <div
           className="mt-12 flex flex-col items-start justify-between gap-2 border-t border-white/10 pt-7 sm:flex-row sm:items-center"
         >
           <p className="text-[0.68rem] uppercase tracking-[0.12em] text-white/40">
@@ -327,7 +307,7 @@ const Footer = () => {
           <p className="text-[0.68rem] uppercase tracking-[0.12em] text-white/40">
             La Ville aux Dames <span className="text-[#b3a996]">·</span> 37
           </p>
-        </motion.div>
+        </div>
       </div>
     </footer>
   );

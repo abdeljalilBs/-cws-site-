@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from 'react';
-import { motion, useInView, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { LuChevronLeft, LuChevronRight, LuQuote, LuStar } from 'react-icons/lu';
 
 const DISPLAY = "'Anton', sans-serif";
@@ -8,7 +8,6 @@ const SERIF = "'Instrument Serif', Georgia, 'Times New Roman', serif";
 const TestimonialsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-80px' });
-  const reduce = useReducedMotion();
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [isPaused, setIsPaused] = useState(false);
@@ -314,8 +313,6 @@ const TestimonialsSection = () => {
                         <motion.svg
                           viewBox="0 0 100 100"
                           className="absolute -inset-1.5 w-[calc(100%+12px)] h-[calc(100%+12px)]"
-                          animate={reduce ? {} : { rotate: 360 }}
-                          transition={reduce ? {} : { duration: 22, repeat: Infinity, ease: 'linear' }}
                         >
                           <circle
                             cx="50" cy="50" r="47"

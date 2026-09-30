@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { motion, useInView, useReducedMotion, AnimatePresence } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { LuDownload, LuCalendarDays, LuArrowRight, LuChevronRight } from 'react-icons/lu';
 import { Link } from 'react-router-dom';
 import LazyImage from '../LazyImage';
@@ -28,19 +28,13 @@ const PlanningsPage = () => {
   const visualVisible = isVisualInView || mounted;
   const ctaVisible = isCtaInView || mounted;
 
-  const reduce = useReducedMotion();
-  const float = reduce ? {} : { y: [0, -14, 0], transition: { duration: 6, repeat: Infinity, ease: 'easeInOut' } };
+  const float = {};
 
   return (
     <div className="relative w-full overflow-hidden bg-[#0a0a0a]">
 
       <style>{`
-        @keyframes pl-drift1{to{transform:translate(-50%,70px) scale(1.15)}}
-        @keyframes pl-drift2{to{transform:translate(80px,-60px) scale(1.2)}}
-        .pl-a1{animation:pl-drift1 24s cubic-bezier(.25,.46,.45,.94) infinite alternate}
-        .pl-a2{animation:pl-drift2 28s cubic-bezier(.25,.46,.45,.94) infinite alternate}
         .pl-stroke{color:transparent;-webkit-text-stroke:1.5px rgba(212,207,199,.5)}
-        @media (prefers-reduced-motion: reduce){.pl-a1,.pl-a2{animation:none!important}}
       `}</style>
 
       {/* ══════════════════════════════════════════

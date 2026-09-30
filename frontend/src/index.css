@@ -7,48 +7,49 @@
   --sar: env(safe-area-inset-right, 0px);
 }
 
+/*
+  - `overflow-x: clip` (au lieu de hidden) : évite que html ET body deviennent
+    chacun un conteneur de scroll (double scroll, bas de page coupé / saccadé sur iOS).
+  - Fond sombre sur html/body : plus de bande blanche sous le footer
+    (rebond iOS/macOS, zone safe-area de l'iPhone).
+  - Pas de padding safe-area sur body : chaque page / le footer le gère déjà,
+    sinon il est appliqué deux fois.
+*/
 html {
-  overflow-x: hidden;
-  max-width: 100%;
   width: 100%;
-  height: -webkit-fill-available;
+  max-width: 100%;
+  overflow-x: hidden; /* fallback anciens navigateurs */
+  overflow-x: clip;
+  background-color: #0a0a0a;
 }
 
 body {
-  overflow-x: hidden;
-  max-width: 100%;
   width: 100%;
+  max-width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
-  min-height: -webkit-fill-available;
-  padding-top: env(safe-area-inset-top, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-  padding-left: env(safe-area-inset-left, 0px);
-  padding-right: env(safe-area-inset-right, 0px);
-  box-sizing: border-box;
+  margin: 0;
+  overflow-x: clip;
+  background-color: #0a0a0a;
 }
 
 #root {
-  overflow-x: hidden;
-  max-width: 100%;
   width: 100%;
+  max-width: 100%;
   min-height: 100vh;
   min-height: 100dvh;
-  min-height: -webkit-fill-available;
 }
 
-/* Specific safe area & dynamic viewport height containers */
-.opening-intro,
-.contact-page,
-.hero-section {
-  min-height: 100vh;
-  min-height: 100dvh;
-  min-height: -webkit-fill-available;
-  max-width: 100%;
-  overflow-x: hidden;
-  padding-top: env(safe-area-inset-top, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
-  box-sizing: border-box;
+/* Réduction des animations si l'utilisateur l'a demandé dans son système */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Mobile burger button styling (high contrast, 44px touch target, z-index 50) */

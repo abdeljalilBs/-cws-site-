@@ -346,7 +346,6 @@ const TarifsPage = () => {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
   const isFaqInView = useInView(faqRef, { once: true, margin: '-80px' });
   const [openFaq, setOpenFaq] = useState(0);
-  const reduce = useReducedMotion();
 
   return (
     <div className="relative w-full max-w-full min-h-[100dvh] overflow-hidden bg-[#0a0a0a] box-border pt-[calc(3rem+env(safe-area-inset-top,0px))] pb-[calc(3rem+env(safe-area-inset-bottom,0px))]">
@@ -363,15 +362,8 @@ const TarifsPage = () => {
         }
         .tp-halo{
           background:radial-gradient(closest-side,rgba(212,207,199,.16),transparent 72%);
-          animation:tp-pulse 5.5s ease-in-out infinite;
+          opacity:.4;
         }
-        @keyframes tp-pulse{0%,100%{opacity:.28}50%{opacity:.55}}
-        @keyframes tp-drift1{to{transform:translate(-50%,60px) scale(1.15)}}
-        @keyframes tp-drift2{to{transform:translate(90px,-50px) scale(1.2)}}
-        @keyframes tp-drift3{to{transform:translate(-70px,40px) scale(1.1)}}
-        .tp-a1{animation:tp-drift1 22s cubic-bezier(.25,.46,.45,.94) infinite alternate}
-        .tp-a2{animation:tp-drift2 26s cubic-bezier(.25,.46,.45,.94) infinite alternate}
-        .tp-a3{animation:tp-drift3 30s cubic-bezier(.25,.46,.45,.94) infinite alternate}
         @keyframes tp-scroll{to{transform:translateX(-50%)}}
         .tp-marquee{display:flex;width:max-content;animation:tp-scroll 34s linear infinite}
         .tp-band:hover .tp-marquee{animation-play-state:paused}
@@ -379,7 +371,7 @@ const TarifsPage = () => {
           color:transparent;-webkit-text-stroke:1px rgba(212,207,199,.38);
         }
         @media (prefers-reduced-motion: reduce){
-          .tp-a1,.tp-a2,.tp-a3,.tp-marquee,.tp-halo{animation:none!important}
+          .tp-marquee{animation:none!important}
         }
       `}</style>
 

@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { motion, useInView, useReducedMotion, AnimatePresence } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { LuShieldCheck, LuGraduationCap, LuClock } from 'react-icons/lu';
 import LazyImage from '../LazyImage';
 
@@ -30,7 +30,6 @@ const pillars = [
 const AboutSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
-  const reduce = useReducedMotion();
 
   // Compteur 0 → 100 %
   const [count, setCount] = useState(0);
@@ -45,7 +44,7 @@ const AboutSection = () => {
     return () => clearInterval(t);
   }, [isInView]);
 
-  const float = reduce ? {} : { y: [0, -16, 0], transition: { duration: 6, repeat: Infinity, ease: 'easeInOut' } };
+  const float = {};
 
   return (
     <section id="about" ref={ref} className="relative w-full overflow-hidden bg-[#f8f7f5] py-24 md:py-32">
@@ -150,8 +149,6 @@ const AboutSection = () => {
             >
               <motion.svg
                 viewBox="0 0 100 100" className="absolute inset-0 h-full w-full"
-                animate={reduce ? {} : { rotate: 360 }}
-                transition={reduce ? {} : { duration: 22, repeat: Infinity, ease: 'linear' }}
               >
                 <circle cx="50" cy="50" r="47" fill="none" stroke="#d4cfc7" strokeWidth="1.5" strokeDasharray="2 6" strokeLinecap="round" />
               </motion.svg>

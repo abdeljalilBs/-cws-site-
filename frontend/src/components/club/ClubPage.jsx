@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { motion, useInView, useReducedMotion, AnimatePresence } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import {
   LuClock, LuCalendarCheck, LuArrowRight, LuMapPin, LuChevronRight
 } from 'react-icons/lu';
@@ -157,19 +157,13 @@ const ClubPage = () => {
   const engageVisible = isEngageInView || mounted;
   const infoVisible = isInfoInView || mounted;
 
-  const reduce = useReducedMotion();
-  const float = reduce ? {} : { y: [0, -18, 0], transition: { duration: 6, repeat: Infinity, ease: 'easeInOut' } };
+  const float = {};
 
   return (
     <div className="relative w-full overflow-hidden bg-[#0a0a0a]">
 
       <style>{`
-        @keyframes cp-drift1{to{transform:translate(-50%,70px) scale(1.15)}}
-        @keyframes cp-drift2{to{transform:translate(80px,-60px) scale(1.2)}}
-        .cp-a1{animation:cp-drift1 24s cubic-bezier(.25,.46,.45,.94) infinite alternate}
-        .cp-a2{animation:cp-drift2 28s cubic-bezier(.25,.46,.45,.94) infinite alternate}
         .cp-stroke{color:transparent;-webkit-text-stroke:1.5px rgba(212,207,199,.5)}
-        @media (prefers-reduced-motion: reduce){.cp-a1,.cp-a2{animation:none!important}}
       `}</style>
 
       {/* ══════════════════════════════════════════

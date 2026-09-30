@@ -37,14 +37,10 @@ const coachesData = [
 /* ─── Orbes flottantes animées (fond dynamique) ─────────────── */
 const FloatingOrbs = () => (
     <>
-        <motion.span
-            animate={{ x: [0, 60, -30, 0], y: [0, -50, 40, 0], scale: [1, 1.2, 0.9, 1] }}
-            transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+        <span
             className="pointer-events-none absolute top-[20%] left-[5%] h-72 w-72 rounded-full bg-[#d4cfc7]/[0.03] blur-[100px]"
         />
-        <motion.span
-            animate={{ x: [0, -50, 40, 0], y: [0, 60, -30, 0], scale: [1, 0.9, 1.15, 1] }}
-            transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
+        <span
             className="pointer-events-none absolute bottom-[10%] right-[5%] h-80 w-80 rounded-full bg-[#b3a996]/[0.03] blur-[110px]"
         />
     </>
