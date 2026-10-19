@@ -7,7 +7,8 @@ import {
 
 import LazyImage from '../LazyImage';
 
-const API_URL = 'https://cws-backend-sandy.vercel.app/api/contact';
+const API_BASE = import.meta.env.VITE_API_URL || (import.meta.env.DEV ? 'http://localhost:5001' : 'https://cws-backend-sandy.vercel.app');
+const API_URL = `${API_BASE}/api/contact`;
 const DISPLAY = "'Anton', sans-serif";
 const SERIF = "'Instrument Serif', Georgia, 'Times New Roman', serif";
 
@@ -197,7 +198,7 @@ const Contact = () => {
             setIsOtpModalOpen(true);
         } catch (error) {
             console.error(error);
-            setFormError("Une erreur est survenue lors de l'envoi du code. Veuillez vérifier votre connexion ou réessayer.");
+            setFormError(error.message || "Une erreur est survenue lors de l'envoi du code. Veuillez vérifier votre connexion ou réessayer.");
             setStatus('idle');
         }
     };
