@@ -22,6 +22,8 @@ if (process.env.MONGODB_URI) {
 
 const allowedOrigins = [
   'https://cws-site.vercel.app',
+  'https://coach-wellness-sports.com',
+  'https://www.coach-wellness-sports.com',
   'http://localhost:5173',
   'http://localhost:3000',
 ];
